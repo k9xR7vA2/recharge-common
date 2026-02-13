@@ -1,4 +1,4 @@
-module recharge-common
+module github.com/small-cat1/recharge-common
 
 go 1.23.0
 

@@ -95,5 +95,10 @@ func (d *PaymentTypeDict) GetOptions() []types.DictOption {
 			Value: int(constant.CUPPayment),
 			Code:  constant.UPayPayment.Code(),
 		},
+		{
+			Label: constant.UPIPayment.String(),
+			Value: int(constant.UPIPayment),
+			Code:  constant.UPIPayment.Code(),
+		},
 	}
 }

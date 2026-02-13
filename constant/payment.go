@@ -38,6 +38,8 @@ func (p PaymentType) Code() string {
 		return "upay"
 	case CUPPayment:
 		return "cup"
+	case UPIPayment:
+		return "upi"
 	default:
 		return "unknown"
 	}
@@ -45,5 +47,5 @@ func (p PaymentType) Code() string {
 
 // IsValid 方法用于验证支付类型是否有效
 func (p PaymentType) IsValid() bool {
-	return p >= AliPayPayment && p <= CUPPayment
+	return p >= AliPayPayment && p <= UPIPayment
 }

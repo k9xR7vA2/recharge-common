@@ -1,8 +1,8 @@
 package adapters
 
 import (
-	"recharge-common/constant"
-	"recharge-common/dict/types"
+	"github.com/small-cat1/recharge-common/constant"
+	"github.com/small-cat1/recharge-common/dict/types"
 )
 
 // ChargeSpeedDict 充值速度字典

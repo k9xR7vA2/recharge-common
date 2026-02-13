@@ -1,6 +1,6 @@
 package dict
 
-import "recharge-common/dict/types"
+import "github.com/small-cat1/recharge-common/dict/types"
 
 // DictItem 字典项接口，所有字典类型都需要实现
 type DictItem interface {

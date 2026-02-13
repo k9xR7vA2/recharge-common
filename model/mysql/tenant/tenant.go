@@ -2,8 +2,8 @@ package tenant
 
 import (
 	"github.com/shopspring/decimal"
+	"github.com/small-cat1/recharge-common/model/mysql"
 	"gorm.io/datatypes"
-	"recharge-common/model/mysql"
 	"time"
 )
 

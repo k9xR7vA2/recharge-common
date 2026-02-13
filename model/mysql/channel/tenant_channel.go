@@ -1,8 +1,8 @@
 package channel
 
 import (
-	constant "SaasAdmin/internal/common/constant"
-	"SaasAdmin/internal/infrastructure/model/mysql/tenant"
+	constant "github.com/small-cat1/recharge-common/constant"
+	"github.com/small-cat1/recharge-common/model/mysql/tenant"
 	"time"
 )
 

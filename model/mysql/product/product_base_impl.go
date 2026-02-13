@@ -1,8 +1,8 @@
 package product
 
 import (
-	constant "SaasAdmin/internal/common/constant"
 	"encoding/json"
+	constant "github.com/small-cat1/recharge-common/constant"
 	"gorm.io/datatypes"
 	"time"
 )

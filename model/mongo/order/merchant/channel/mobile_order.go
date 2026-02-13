@@ -1,7 +1,7 @@
 package channel
 
 import (
-	"SaasAdmin/internal/infrastructure/model/mongo/order/merchant"
+	"github.com/small-cat1/recharge-common/model/mongo/order/merchant"
 )
 
 // MerchantMobileOrder 商户基础订单

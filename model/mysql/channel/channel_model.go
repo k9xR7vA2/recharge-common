@@ -1,9 +1,9 @@
 package channel
 
 import (
-	"SaasAdmin/internal/common/constant"
-	"SaasAdmin/internal/infrastructure/model/mysql/external_api"
-	"SaasAdmin/internal/infrastructure/model/mysql/tenant"
+	"github.com/small-cat1/recharge-common/constant"
+	"github.com/small-cat1/recharge-common/model/mysql/external_api"
+	"github.com/small-cat1/recharge-common/model/mysql/tenant"
 	"gorm.io/datatypes"
 	"time"
 )

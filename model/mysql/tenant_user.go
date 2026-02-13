@@ -1,8 +1,8 @@
 package mysql
 
 import (
-	"SaasAdmin/internal/common/constant"
 	"github.com/gofrs/uuid/v5"
+	"github.com/small-cat1/recharge-common/constant"
 )
 
 type Login interface {

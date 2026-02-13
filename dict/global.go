@@ -1,8 +1,8 @@
 package dict
 
 import (
-	"recharge-common/dict/adapters"
-	"recharge-common/dict/types"
+	"github.com/small-cat1/recharge-common/dict/adapters"
+	"github.com/small-cat1/recharge-common/dict/types"
 	"sync"
 )
 

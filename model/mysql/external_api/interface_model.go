@@ -1,7 +1,7 @@
 package external_api
 
 import (
-	"SaasAdmin/internal/common/constant"
+	"github.com/small-cat1/recharge-common/constant"
 	"gorm.io/datatypes"
 	"time"
 )

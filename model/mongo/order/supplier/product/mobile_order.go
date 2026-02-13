@@ -1,8 +1,8 @@
 package product
 
 import (
-	"SaasAdmin/internal/common/constant"
-	"SaasAdmin/internal/infrastructure/model/mongo/order/supplier"
+	"github.com/small-cat1/recharge-common/constant"
+	"github.com/small-cat1/recharge-common/model/mongo/order/supplier"
 )
 
 // 供货商话费订单

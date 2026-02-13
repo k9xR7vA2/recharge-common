@@ -1,9 +1,9 @@
 package merchant
 
 import (
-	"SaasAdmin/internal/common/constant"
-	"SaasAdmin/internal/infrastructure/model/mongo/order"
 	"github.com/gin-gonic/gin"
+	"github.com/small-cat1/recharge-common/constant"
+	"github.com/small-cat1/recharge-common/model/mongo/order"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"time"
 )

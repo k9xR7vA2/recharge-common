@@ -1,8 +1,8 @@
 package mysql
 
 import (
-	"SaasAdmin/pkg/constant"
 	"github.com/shopspring/decimal"
+	"github.com/small-cat1/recharge-common/constant"
 	"time"
 )
 

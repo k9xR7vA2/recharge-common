@@ -1,8 +1,12 @@
 package constant
 
 const (
-	SystemConfigs = "system:db:configs" //系统配置
-	PaymentHost   = "payment_host"      //系统配置
+	SystemName         = "SaasAdmin"
+	GoogleVerifyAction = "view-wallet-address" // 谷歌验证器操作
+
+	PhoneRegexChinaStrict = `^1(3[0-9]|4[01456879]|5[0-35-9]|6[2567]|7[0-8]|8[0-9]|9[0-35-9])\d{8}$`
+	SystemConfigs         = "system:db:configs" //系统配置
+	PaymentHost           = "payment_host"      //系统配置
 
 	SystemQueueEventLog   = "system_queue_event_log" //系统队列异常错误日志
 	ExtraRetentionSeconds = 5 * 60                   // 订单过期后的额外保留时间 5分钟 (秒)

@@ -1,7 +1,7 @@
 package account_log
 
 import (
-	"SaasAdmin/internal/common/constant"
+	"github.com/small-cat1/recharge-common/constant"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"time"
 )

@@ -1,7 +1,7 @@
 package account
 
 import (
-	"SaasAdmin/internal/infrastructure/model/mysql/tenant"
+	"github.com/small-cat1/recharge-common/model/mysql/tenant"
 	"gorm.io/gorm"
 	"time"
 )

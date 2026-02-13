@@ -1,8 +1,8 @@
 package account
 
 import (
-	"SaasAdmin/internal/common/constant"
 	"github.com/shopspring/decimal"
+	"github.com/small-cat1/recharge-common/constant"
 	"gorm.io/gorm"
 	"time"
 )

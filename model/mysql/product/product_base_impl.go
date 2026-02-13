@@ -21,6 +21,7 @@ type Product struct {
 	UpdatedAt    time.Time                     `json:"updated_at"`
 
 	TenantProducts []TenantProduct `json:"tenant_products,omitempty" gorm:"foreignKey:ProductID;references:ID"`
+	ProductSkus    []ProductSku    `json:"product_skus,omitempty" gorm:"foreignKey:ProductID;references:ID"`
 }
 
 func (Product) TableName() string {

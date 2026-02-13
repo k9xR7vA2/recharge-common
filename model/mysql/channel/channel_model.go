@@ -15,7 +15,6 @@ type Channel struct {
 	ChannelName   string                        `json:"channel_name" gorm:"column:channel_name;type:varchar(100);not null;comment:通道名称"`
 	BusinessType  constant.BusinessType         `json:"business_type" gorm:"column:business_type;type:varchar(100);not null;comment:业务类型"` // 业务类型：话费/游戏等
 	Status        constant.TenantBusinessStatus `json:"status" gorm:"column:status;type:tinyint;not null;default:1;comment:状态: 1-启用2-禁用"`
-	ClientLogin   uint                          `json:"client_login" gorm:"column:client_login;type:tinyint;not null;default:2;comment:客户端登录: 1-开启2-关闭"`
 	Payment       constant.PaymentType          `json:"payment" gorm:"column:payment;type:tinyint;not null;default:1;comment:支付方式"`
 	Device        constant.DeviceType           `json:"device" gorm:"column:device;type:tinyint;not null;default:1;comment:设备"`
 	Amount        datatypes.JSON                `json:"amount" gorm:"column:amount;type:json;not null;comment:金额"`

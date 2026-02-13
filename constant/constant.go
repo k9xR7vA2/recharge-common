@@ -1,0 +1,35 @@
+package constant
+
+const (
+	SystemConfigs = "system:db:configs" //系统配置
+	PaymentHost   = "payment_host"      //系统配置
+
+	SystemQueueEventLog   = "system_queue_event_log" //系统队列异常错误日志
+	ExtraRetentionSeconds = 5 * 60                   // 订单过期后的额外保留时间 5分钟 (秒)
+
+	TenantDefaultPasswd = "tenantHub@123"
+	TraceIdContent      = "trace_id" //上下文的trace_id
+	TraceIDKey          = "X-Trace-ID"
+	// google
+	GoogleIssuer      = "WuKong"
+	GoogleAccountName = "WuKong@gmail.com"
+
+	SupplierMobileOrderTablePrefix = "supplier_order_mobile" // 供货商话费订单表前缀
+	MerchantMobileOrderTablePrefix = "merchant_order_mobile" // 商户话费订单表前缀
+
+	SupplierOrderCachePrefix = "supplier:orders:cache"
+
+	// AgentAccountLogs 日志
+	AgentAccountLogs  = "agent_account_logs"
+	TenantAccountLogs = "tenant_account_logs"
+
+	PlatformRule = "platform_rules"
+	Cookies      = "cookies"
+
+	// ProductCodeRegRule 产品编码验证规则
+	ProductCodeRegRule = "^[a-zA-Z][a-zA-Z_]*$"
+	// AccountRegRule 账户验证规则
+	AccountRegRule = "[A-Za-z]+"
+	// RebateRegRule 费率验证规则
+	RebateRegRule = "^(0?\\.[1-9]\\d?|[1-9]\\d?(\\.\\d{1,2})?|100(\\.00?)?)$$"
+)

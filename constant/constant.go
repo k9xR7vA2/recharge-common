@@ -39,25 +39,3 @@ const (
 	// RebateRegRule 费率验证规则
 	RebateRegRule = "^(0?\\.[1-9]\\d?|[1-9]\\d?(\\.\\d{1,2})?|100(\\.00?)?)$$"
 )
-
-const (
-	SupplierTotalOrder   = "supplier_total_order"
-	SupplierSuccessOrder = "supplier_success_order"
-	MerchantTotalOrder   = "merchant_total_order"
-	MerchantSuccessOrder = "merchant_success_order"
-
-	OrderTypeMerchant = 1 // 商户订单
-	OrderTypeSupplier = 2 // 供货商订单
-
-	EntityTypeAllMerchants    = "all_merchants"
-	EntityTypeMerchant        = "merchant"
-	EntityTypeMerchantChannel = "merchant_channel"
-	EntityTypeAllChannels     = "all_channels"
-	EntityTypeChannel         = "channel"
-
-	EntityTypeAllSuppliers    = "all_suppliers"
-	EntityTypeSupplier        = "supplier"
-	EntityTypeAllProducts     = "all_products"
-	EntityTypeProduct         = "product"
-	EntityTypeSupplierProduct = "supplier_product"
-)

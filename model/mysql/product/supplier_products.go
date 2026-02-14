@@ -1,6 +1,7 @@
 package product
 
 import (
+	"encoding/json"
 	"github.com/shopspring/decimal"
 	"github.com/small-cat1/recharge-common/constant"
 	"github.com/small-cat1/recharge-common/model/mysql/account"
@@ -28,4 +29,10 @@ type SupplierProduct struct {
 // TableName get sql table name.获取数据库表名
 func (SupplierProduct) TableName() string {
 	return "as_supplier_products"
+}
+
+func (s SupplierProduct) GetAmounts() []uint {
+	var amounts []uint
+	_ = json.Unmarshal(s.Amounts, &amounts)
+	return amounts
 }

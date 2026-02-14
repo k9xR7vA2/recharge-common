@@ -32,6 +32,7 @@ type TenantUser struct {
 	GoogleAuthStatus bool                         `json:"googleAuthStatus" gorm:"default:0;comment:用户是否绑定谷歌验证器 0未绑定 1绑定"`                                                                                                     //  用户是否绑定谷歌验证器 0未绑定 1绑定
 	IsTenant         int                          `json:"is_tenant" gorm:"column:is_tenant;type:tinyint;not null;default:1;comment:'是否是租户'" `                                                                                 // 是否是租户1不是，2是
 	Authorities      []TenantAuthority            `json:"authorities" gorm:"many2many:tenant_user_authority;foreignKey:ID;joinForeignKey:tenant_user_id;References:AuthorityId;joinReferences:tenant_authority_authority_id"` // 多角色
+	Tenant           *TenantView                  `json:"tenant,omitempty" gorm:"foreignKey:TenantID"`
 }
 
 func (TenantUser) TableName() string {
@@ -68,15 +69,4 @@ func (s *TenantUser) GetUserInfo() any {
 
 func (s *TenantUser) IsTenantAdmin() bool {
 	return s.IsTenant == 2
-}
-
-type TenantView struct {
-	TenantID      uint   `json:"tenant_id,omitempty" gorm:"autoIncrement:true;primaryKey;column:tenant_id;type:int unsigned;not null" `   // 租户ID
-	TenantName    string `json:"tenant_name,omitempty" gorm:"column:tenant_name;type:varchar(255);not null;comment:'租户名称'" `              // 租户名称
-	TenantAccount string `json:"tenant_account,omitempty" gorm:"column:tenant_account;unique;type:varchar(255);not null;comment:'租户账号'" ` // 租户账号
-}
-
-// TableName get sql table name.获取数据库表名
-func (TenantView) TableName() string {
-	return "as_tenants"
 }

@@ -20,18 +20,18 @@ var _ Login = new(TenantUser)
 
 type TenantUser struct {
 	BaseModel
-	UUID             uuid.UUID                     `json:"uuid" gorm:"index;comment:用户UUID"`                             // 用户UUID
-	TenantID         uint                          `gorm:"column:tenant_id;type:int unsigned;not null" json:"tenant_id"` //租户ID
-	Username         string                        `json:"userName" gorm:"index;comment:用户登录名"`                          // 用户登录名
-	Password         string                        `json:"-"  gorm:"comment:用户登录密码"`                                     // 用户登录密码
-	NickName         string                        `json:"nickName" gorm:"default:系统用户;comment:用户昵称"`                    // 用户昵称
-	AuthorityId      uint                          `json:"authorityId" gorm:"default:888;comment:用户角色ID"`                // 用户角色ID
-	Authority        TenantAuthority               `json:"authority" gorm:"foreignKey:AuthorityId;References:AuthorityId;comment:用户角色"`
-	Enable           constant.TenantBusinessStatus `json:"enable" gorm:"default:1;comment:用户是否被冻结 1正常 2冻结"` //用户是否被冻结 1正常 2冻结
-	GoogleAuthKey    string                        `json:"-" gorm:"column:google_auth_key;comment:google_auth_key;"`
-	GoogleAuthStatus bool                          `json:"googleAuthStatus" gorm:"default:0;comment:用户是否绑定谷歌验证器 0未绑定 1绑定"`                                                                                                     //  用户是否绑定谷歌验证器 0未绑定 1绑定
-	IsTenant         int                           `json:"is_tenant" gorm:"column:is_tenant;type:tinyint;not null;default:1;comment:'是否是租户'" `                                                                                 // 是否是租户1不是，2是
-	Authorities      []TenantAuthority             `json:"authorities" gorm:"many2many:tenant_user_authority;foreignKey:ID;joinForeignKey:tenant_user_id;References:AuthorityId;joinReferences:tenant_authority_authority_id"` // 多角色
+	UUID             uuid.UUID                    `json:"uuid" gorm:"index;comment:用户UUID"`                             // 用户UUID
+	TenantID         uint                         `gorm:"column:tenant_id;type:int unsigned;not null" json:"tenant_id"` //租户ID
+	Username         string                       `json:"userName" gorm:"index;comment:用户登录名"`                          // 用户登录名
+	Password         string                       `json:"-"  gorm:"comment:用户登录密码"`                                     // 用户登录密码
+	NickName         string                       `json:"nickName" gorm:"default:系统用户;comment:用户昵称"`                    // 用户昵称
+	AuthorityId      uint                         `json:"authorityId" gorm:"default:888;comment:用户角色ID"`                // 用户角色ID
+	Authority        TenantAuthority              `json:"authority" gorm:"foreignKey:AuthorityId;References:AuthorityId;comment:用户角色"`
+	Enable           constant.GlobalAccountStatus `json:"enable" gorm:"default:1;comment:用户是否被冻结 1正常 2冻结"` //用户是否被冻结 1正常 2冻结
+	GoogleAuthKey    string                       `json:"-" gorm:"column:google_auth_key;comment:google_auth_key;"`
+	GoogleAuthStatus bool                         `json:"googleAuthStatus" gorm:"default:0;comment:用户是否绑定谷歌验证器 0未绑定 1绑定"`                                                                                                     //  用户是否绑定谷歌验证器 0未绑定 1绑定
+	IsTenant         int                          `json:"is_tenant" gorm:"column:is_tenant;type:tinyint;not null;default:1;comment:'是否是租户'" `                                                                                 // 是否是租户1不是，2是
+	Authorities      []TenantAuthority            `json:"authorities" gorm:"many2many:tenant_user_authority;foreignKey:ID;joinForeignKey:tenant_user_id;References:AuthorityId;joinReferences:tenant_authority_authority_id"` // 多角色
 }
 
 func (TenantUser) TableName() string {

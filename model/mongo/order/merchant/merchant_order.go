@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/small-cat1/recharge-common/constant"
 	"github.com/small-cat1/recharge-common/model/mongo/order"
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"time"
 )
@@ -16,9 +17,20 @@ type MerchantOrder struct {
 	MerchantName    string `bson:"merchant_name" json:"merchant_name"`         // 商户名称
 	MerchantOrderSn string `bson:"merchant_order_sn" json:"merchant_order_sn"` // 商户订单号
 
-	ChannelID   uint   `bson:"channel_id" json:"channel_id"`     // 通道ID
-	ChannelCode int    `bson:"channel_code" json:"channel_code"` // 通道编码
-	ChannelName string `bson:"channel_name" json:"channel_name"` // 通道名称
+	// ===== 主通道信息（商户选择的通道） =====
+	ChannelID   uint                 `bson:"channel_id" json:"channel_id"`     // 901(混合) 或 301(基础)
+	ChannelCode string               `bson:"channel_code" json:"channel_code"` // "901" 或 "301"
+	ChannelName string               `bson:"channel_name" json:"channel_name"` // "混合通道A" 或 "基础通道B"
+	ChannelType constant.ChannelType `bson:"channel_type" json:"channel_type"` // 1-基础通道 2-混合通道
+
+	// ===== 实际执行通道信息（路由后的子通道） =====
+	ActualChannelID   uint   `bson:"actual_channel_id" json:"actual_channel_id"`     // 实际执行的子通道ID (301)
+	ActualChannelCode string `bson:"actual_channel_code" json:"actual_channel_code"` // "301"
+	ActualChannelName string `bson:"actual_channel_name" json:"actual_channel_name"` // "Airtel-UPI"
+
+	// ===== 路由信息（可选，用于问题追溯） =====
+	RoutingRule     constant.ChannelMatchRule `bson:"routing_rule,omitempty" json:"routing_rule,omitempty"`         // "WEIGHT" / "AMOUNT_MAPPING" / "MIXED"
+	RoutingSnapshot bson.M                    `bson:"routing_snapshot,omitempty" json:"routing_snapshot,omitempty"` // 路由规则快照
 
 	OrderStatus    constant.MerOrderMainStat `bson:"order_status" json:"order_status"`         // 订单主状态(1等待支付，2支付中，3支付成功，4支付失败)
 	OrderSubStatus constant.MerOrderSubStat  `bson:"order_sub_status" json:"order_sub_status"` // 订单子状态

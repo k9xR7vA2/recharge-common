@@ -4,6 +4,7 @@ import (
 	"github.com/small-cat1/recharge-common/constant"
 	"github.com/small-cat1/recharge-common/model/mysql/tenant"
 	"gorm.io/datatypes"
+	"gorm.io/gorm"
 	"time"
 )
 
@@ -20,6 +21,7 @@ type TenantCompositeChannel struct {
 	Remark      string                        `json:"remark" gorm:"column:remark;type:varchar(255);comment:备注说明"`
 	CreatedAt   time.Time                     `json:"created_at"`
 	UpdatedAt   time.Time                     `json:"updated_at"`
+	DeletedAt   gorm.DeletedAt                `gorm:"index" json:"-"` // 删除时间
 
 	Tenant tenant.Tenant `gorm:"foreignKey:TenantID;references:TenantID" json:"tenant,omitempty"`
 }

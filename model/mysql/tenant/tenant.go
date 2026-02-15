@@ -4,6 +4,7 @@ import (
 	"github.com/shopspring/decimal"
 	"github.com/small-cat1/recharge-common/model/mysql"
 	"gorm.io/datatypes"
+	"gorm.io/gorm"
 	"time"
 )
 
@@ -21,6 +22,7 @@ type Tenant struct {
 	BusinessType  datatypes.JSON     `json:"business_type,omitempty" gorm:"column:business_type;type:json;default:null;comment:'业务类型'"  `                    //业务类型
 	CreatedAt     time.Time          `json:"created_at"`                                                                                                     // 创建时间
 	UpdatedAt     time.Time          `json:"updated_at"`                                                                                                     // 更新时间
+	DeletedAt     gorm.DeletedAt     `gorm:"index" json:"-"`                                                                                                 // 删除时间
 	IsTest        int                `json:"is_test,omitempty" gorm:"column:is_test;type:tinyint;not null;default:1;comment:'状态1是，2不是'" `                    // 是否是测试账户1是，2不是
 	Users         []mysql.TenantUser `json:"users,omitempty" gorm:"foreignKey:TenantID;references:TenantID" `                                                // 关联到租户的用户
 	User          mysql.TenantUser   `json:"user,omitempty" gorm:"foreignKey:TenantID;references:TenantID;comment:租户信息"  `                                   // 租户信息

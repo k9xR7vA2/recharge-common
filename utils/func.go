@@ -1,9 +1,13 @@
 package utils
 
 import (
+	"bytes"
 	"errors"
 	"fmt"
+	"golang.org/x/text/encoding/simplifiedchinese"
+	"golang.org/x/text/transform"
 	"gorm.io/gorm"
+	"io"
 	"reflect"
 	"strconv"
 	"strings"
@@ -20,6 +24,15 @@ func HandleDBResult(result *gorm.DB, notFoundErr error) error {
 	}
 
 	return result.Error // 返回原始数据库错误
+}
+
+func GbkToUtf8(s []byte) ([]byte, error) {
+	reader := transform.NewReader(bytes.NewReader(s), simplifiedchinese.GBK.NewDecoder())
+	d, e := io.ReadAll(reader)
+	if e != nil {
+		return nil, e
+	}
+	return d, nil
 }
 
 // IsZeroValue  检查一个值是否为其类型的"零值"或空值

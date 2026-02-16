@@ -4,7 +4,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/shopspring/decimal"
 	"github.com/small-cat1/recharge-common/constant"
-	"github.com/small-cat1/recharge-common/model/mysql/tenant"
 	"gorm.io/gorm"
 	"time"
 )
@@ -59,7 +58,7 @@ func (s *Supplier) GetStatus() constant.GlobalAccountStatus {
 type SupplierContext struct {
 	*gin.Context
 	SupplierInfo *Supplier
-	TenantInfo   *tenant.Tenant
+	TenantInfo   *TenantView
 }
 
 // GetSupplier 获取供应商信息的辅助方法
@@ -67,6 +66,6 @@ func (sc *SupplierContext) GetSupplier() *Supplier {
 	return sc.SupplierInfo
 }
 
-func (sc *SupplierContext) GetTenantInfo() *tenant.Tenant {
+func (sc *SupplierContext) GetTenantInfo() *TenantView {
 	return sc.TenantInfo
 }

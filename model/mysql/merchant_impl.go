@@ -3,7 +3,6 @@ package mysql
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/small-cat1/recharge-common/constant"
-	"github.com/small-cat1/recharge-common/model/mysql/tenant"
 	"gorm.io/gorm"
 	"time"
 )
@@ -54,7 +53,7 @@ func (m *Merchant) GetStatus() constant.GlobalAccountStatus {
 type MerchantContext struct {
 	*gin.Context
 	MerchantInfo *Merchant
-	TenantInfo   *tenant.Tenant
+	TenantInfo   *TenantView
 }
 
 // GetMerchant 获取供应商信息的辅助方法
@@ -62,6 +61,6 @@ func (mc *MerchantContext) GetMerchant() *Merchant {
 	return mc.MerchantInfo
 }
 
-func (mc *MerchantContext) GetTenantInfo() *tenant.Tenant {
+func (mc *MerchantContext) GetTenantInfo() *TenantView {
 	return mc.TenantInfo
 }

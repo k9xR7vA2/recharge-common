@@ -34,18 +34,6 @@ func ParseMobileProductAttrs(data datatypes.JSON) (*MobileAttributes, error) {
 		return nil, errors.New("区域参数不正确")
 	}
 	if attr.AreaCode == Province {
-		var ProvinceCodeSlice []string
-		for _, v := range ProvinceList {
-			code := strconv.Itoa(v.Value)
-			ProvinceCodeSlice = append(ProvinceCodeSlice, code)
-		}
-		for _, v := range attr.ProvinceCode {
-			if !IsInSlice(v, ProvinceCodeSlice) {
-				return nil, fmt.Errorf("省份编码不正确，%d", v)
-			}
-		}
-	}
-	if attr.AreaCode == Province {
 		err = ValidateProvince(attr.ProvinceCode)
 		if err != nil {
 			return nil, err

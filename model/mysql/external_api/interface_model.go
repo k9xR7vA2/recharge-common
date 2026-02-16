@@ -16,7 +16,7 @@ type AsInterface struct {
 	ClientLogin   uint                          `json:"client_login" gorm:"column:client_login;type:tinyint;not null;default:2;comment:客户端登录: 1-开启2-关闭"`
 	Rate          int64                         `json:"rate,omitempty" gorm:"column:rate;NOT NULL;comment:'费率'"`
 	Status        constant.TenantBusinessStatus `json:"status,omitempty" gorm:"column:status;type:tinyint;not null;comment:'状态1开启，2关闭'" `                           // 状态1开启，2关闭
-	NeedCK        int                           `json:"need_ck" gorm:"column:need_ck;type:tinyint;not null;comment:'下单CK1需要，2不需要'" `                                // 下单CK1需要，2不需要
+	NeedCK        constant.NeedCkStatus         `json:"need_ck" gorm:"column:need_ck;type:tinyint;not null;comment:'下单CK1需要，2不需要'" `                                // 下单CK1需要，2不需要
 	Host          string                        `json:"host,omitempty" gorm:"column:host;type:varchar(255);not null;comment:'下单host'" `                             // 下单host
 	ConfigParams  datatypes.JSON                `json:"config_params,omitempty" gorm:"column:config_params;type:json;default:null;comment:'配置参数'" `                 // 配置参数
 	PaySeconds    int                           `json:"pay_seconds,omitempty" gorm:"column:pay_seconds;type:int;not null;default:90;comment:'支付秒数'" `               // 支付秒数

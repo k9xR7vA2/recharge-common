@@ -1,10 +1,8 @@
-package channel
+package mysql
 
 import (
 	"encoding/json"
 	"github.com/small-cat1/recharge-common/constant"
-	"github.com/small-cat1/recharge-common/model/mysql/external_api"
-	"github.com/small-cat1/recharge-common/model/mysql/tenant"
 	"gorm.io/datatypes"
 	"time"
 )
@@ -22,12 +20,12 @@ type Channel struct {
 	PaymentMethod string                        `json:"payment_method" gorm:"column:payment_method;type:varchar(100);not null;comment:支付方法"`
 	Attributes    datatypes.JSON                `json:"attributes" gorm:"column:attributes;type:json;not null;comment:JSON格式的特定属性"` // JSON格式的特定属性
 
-	CreatedAt time.Time                `json:"created_at"`
-	UpdatedAt time.Time                `json:"updated_at"`
-	Interface external_api.AsInterface `json:"interface,omitempty" gorm:"foreignKey:InterfaceID;references:InterfaceID" `
+	CreatedAt time.Time   `json:"created_at"`
+	UpdatedAt time.Time   `json:"updated_at"`
+	Interface AsInterface `json:"interface,omitempty" gorm:"foreignKey:InterfaceID;references:InterfaceID" `
 
 	// 添加多对多关系
-	Tenants []tenant.Tenant `json:"tenants,omitempty" gorm:"many2many:as_tenant_channels;foreignKey:ID;joinForeignKey:ChannelID;References:TenantID;joinReferences:TenantID"`
+	Tenants []Tenant `json:"tenants,omitempty" gorm:"many2many:as_tenant_channels;foreignKey:ID;joinForeignKey:ChannelID;References:TenantID;joinReferences:TenantID"`
 
 	TenantChannels []TenantChannel `json:"tenant_channels,omitempty" gorm:"foreignKey:ChannelID;references:ID"`
 }

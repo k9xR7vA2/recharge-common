@@ -1,4 +1,4 @@
-package account
+package mysql
 
 import (
 	"github.com/shopspring/decimal"

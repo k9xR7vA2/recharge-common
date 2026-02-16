@@ -1,4 +1,4 @@
-package external_api
+package mysql
 
 import (
 	"github.com/small-cat1/recharge-common/constant"

@@ -32,7 +32,7 @@ type TenantUser struct {
 	GoogleAuthStatus bool                         `json:"googleAuthStatus" gorm:"default:0;comment:用户是否绑定谷歌验证器 0未绑定 1绑定"`                                                                                                     //  用户是否绑定谷歌验证器 0未绑定 1绑定
 	IsTenant         int                          `json:"is_tenant" gorm:"column:is_tenant;type:tinyint;not null;default:1;comment:'是否是租户'" `                                                                                 // 是否是租户1不是，2是
 	Authorities      []TenantAuthority            `json:"authorities" gorm:"many2many:tenant_user_authority;foreignKey:ID;joinForeignKey:tenant_user_id;References:AuthorityId;joinReferences:tenant_authority_authority_id"` // 多角色
-	Tenant           *TenantView                  `json:"tenant,omitempty" gorm:"foreignKey:TenantID"`
+	Tenant           *Tenant                      `json:"tenant,omitempty" gorm:"foreignKey:TenantID"`
 }
 
 func (TenantUser) TableName() string {

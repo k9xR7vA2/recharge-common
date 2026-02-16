@@ -1,11 +1,9 @@
-package product
+package mysql
 
 import (
 	"encoding/json"
 	"github.com/shopspring/decimal"
 	"github.com/small-cat1/recharge-common/constant"
-	"github.com/small-cat1/recharge-common/model/mysql/account"
-	"github.com/small-cat1/recharge-common/model/mysql/tenant"
 	"gorm.io/datatypes"
 	"time"
 )
@@ -22,8 +20,8 @@ type SupplierProduct struct {
 	CreatedAt      *time.Time                    `json:"created_at"`
 	UpdatedAt      *time.Time                    `json:"updated_at"`
 
-	Tenant   tenant.Tenant    `gorm:"-;foreignKey:TenantID;references:TenantID" json:"tenant,omitempty"`
-	Supplier account.Supplier `gorm:"-;foreignKey:SupplierID;references:TenantID" json:"supplier,omitempty"`
+	Tenant   Tenant   `gorm:"-;foreignKey:TenantID;references:TenantID" json:"tenant,omitempty"`
+	Supplier Supplier `gorm:"-;foreignKey:SupplierID;references:TenantID" json:"supplier,omitempty"`
 }
 
 // TableName get sql table name.获取数据库表名

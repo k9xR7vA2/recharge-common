@@ -23,7 +23,7 @@ type PaymentOrder struct {
 
 	//Use
 	TenantUse TenantUser `json:"user,omitempty" gorm:"foreignKey:ID;references:UserID"`
-	Tenant    TenantView `json:"tenant,omitempty" gorm:"foreignKey:TenantID;references:TenantID"`
+	Tenant    Tenant     `json:"tenant,omitempty" gorm:"foreignKey:TenantID;references:TenantID"`
 }
 
 func (PaymentOrder) TableName() string {

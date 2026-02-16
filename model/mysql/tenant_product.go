@@ -1,8 +1,7 @@
-package product
+package mysql
 
 import (
 	"github.com/small-cat1/recharge-common/constant"
-	"github.com/small-cat1/recharge-common/model/mysql/tenant"
 	"time"
 )
 
@@ -17,7 +16,7 @@ type TenantProduct struct {
 	UpdatedAt    time.Time                     `json:"updated_at"`
 
 	// 关联字段
-	Tenant tenant.Tenant `gorm:"foreignKey:TenantID;references:TenantID" json:"tenant,omitempty"`
+	Tenant Tenant `gorm:"foreignKey:TenantID;references:TenantID" json:"tenant,omitempty"`
 
 	Product Product `gorm:"foreignKey:ID;references:ProductID" json:"product,omitempty"`
 }

@@ -1,4 +1,4 @@
-package tenant
+package mysql
 
 import (
 	"database/sql"

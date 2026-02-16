@@ -1,9 +1,8 @@
-package account
+package mysql
 
 import (
 	"github.com/shopspring/decimal"
 	"github.com/small-cat1/recharge-common/constant"
-	"github.com/small-cat1/recharge-common/model/mysql/tenant"
 	"gorm.io/gorm"
 	"time"
 )
@@ -23,10 +22,30 @@ type Merchant struct {
 	CreatedAt       time.Time                    `json:"created_at"`                                                                                       // 创建时间
 	UpdatedAt       time.Time                    `json:"updated_at"`                                                                                       // 更新时间
 	DeletedAt       gorm.DeletedAt               `gorm:"index" json:"-"`                                                                                   // 删除时间
-	Tenant          tenant.Tenant                `gorm:"foreignKey:tenant_id;references:tenant_id"`
+	Tenant          Tenant                       `gorm:"foreignKey:tenant_id;references:tenant_id"`
 }
 
 // TableName get sql table name.获取数据库表名
 func (Merchant) TableName() string {
 	return "as_merchants"
+}
+
+func (m Merchant) GetTenantID() uint {
+	return m.TenantID
+}
+
+func (m *Merchant) GetID() uint {
+	return m.MerchantID
+}
+
+func (m *Merchant) GetAppID() string {
+	return m.AppID
+}
+
+func (m *Merchant) GetName() string {
+	return m.MerchantName
+}
+
+func (m *Merchant) GetStatus() constant.GlobalAccountStatus {
+	return m.Status
 }

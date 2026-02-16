@@ -1,8 +1,7 @@
-package channel
+package mysql
 
 import (
 	constant "github.com/small-cat1/recharge-common/constant"
-	"github.com/small-cat1/recharge-common/model/mysql/tenant"
 	"time"
 )
 
@@ -19,7 +18,7 @@ type TenantChannel struct {
 	UpdatedAt    time.Time                     `json:"updated_at" `
 
 	// 关联字段
-	Tenant tenant.Tenant `gorm:"foreignKey:TenantID;references:TenantID" json:"tenant,omitempty"`
+	Tenant Tenant `gorm:"foreignKey:TenantID;references:TenantID" json:"tenant,omitempty"`
 
 	Channel Channel `gorm:"foreignKey:ID;references:ChannelID" json:"channel,omitempty"`
 }

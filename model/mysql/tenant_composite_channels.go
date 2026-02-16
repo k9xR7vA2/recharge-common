@@ -1,8 +1,7 @@
-package channel
+package mysql
 
 import (
 	"github.com/small-cat1/recharge-common/constant"
-	"github.com/small-cat1/recharge-common/model/mysql/tenant"
 	"gorm.io/datatypes"
 	"gorm.io/gorm"
 	"time"
@@ -23,7 +22,7 @@ type TenantCompositeChannel struct {
 	UpdatedAt   time.Time                     `json:"updated_at"`
 	DeletedAt   gorm.DeletedAt                `gorm:"index" json:"-"` // 删除时间
 
-	Tenant tenant.Tenant `gorm:"foreignKey:TenantID;references:TenantID" json:"tenant,omitempty"`
+	Tenant Tenant `gorm:"foreignKey:TenantID;references:TenantID" json:"tenant,omitempty"`
 }
 
 // TableName 表名

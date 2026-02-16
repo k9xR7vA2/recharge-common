@@ -153,6 +153,11 @@ func (s MerOrderSubStat) String() string {
 	}
 }
 
+// Int 返回商户订单子状态的编码
+func (s MerOrderSubStat) Int() int {
+	return int(s)
+}
+
 // Code 返回商户订单子状态的编码
 func (s MerOrderSubStat) Code() string {
 	switch s {

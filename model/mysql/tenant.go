@@ -1,6 +1,7 @@
 package mysql
 
 import (
+	"encoding/json"
 	"github.com/shopspring/decimal"
 	"gorm.io/datatypes"
 	"time"
@@ -30,4 +31,20 @@ type Tenant struct {
 // TableName get sql table name.获取数据库表名
 func (Tenant) TableName() string {
 	return "as_tenants"
+}
+
+func (t *Tenant) IsBusinessEnabled(businessType string) bool {
+	if t.BusinessType == nil {
+		return false
+	}
+	var types []string
+	if err := json.Unmarshal(t.BusinessType, &types); err != nil {
+		return false
+	}
+	for _, bt := range types {
+		if bt == businessType {
+			return true
+		}
+	}
+	return false
 }

@@ -23,15 +23,6 @@ const (
 	SupplierMobileOrderTablePrefix = "supplier_order_mobile" // 供货商话费订单表前缀
 	MerchantMobileOrderTablePrefix = "merchant_order_mobile" // 商户话费订单表前缀
 
-	SupplierOrderCachePrefix = "supplier:orders:cache"
-
-	// AgentAccountLogs 日志
-	AgentAccountLogs  = "agent_account_logs"
-	TenantAccountLogs = "tenant_account_logs"
-
-	PlatformRule = "platform_rules"
-	Cookies      = "cookies"
-
 	// ProductCodeRegRule 产品编码验证规则
 	ProductCodeRegRule = "^[a-zA-Z][a-zA-Z_]*$"
 	// AccountRegRule 账户验证规则

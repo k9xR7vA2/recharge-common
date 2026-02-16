@@ -13,21 +13,6 @@ const (
 	MerchantTotalOrder   = "merchant_total_order"
 	MerchantSuccessOrder = "merchant_success_order"
 
-	OrderTypeMerchant = 1 // 商户订单
-	OrderTypeSupplier = 2 // 供货商订单
-
-	EntityTypeAllMerchants    = "all_merchants"
-	EntityTypeMerchant        = "merchant"
-	EntityTypeMerchantChannel = "merchant_channel"
-	EntityTypeAllChannels     = "all_channels"
-	EntityTypeChannel         = "channel"
-
-	EntityTypeAllSuppliers    = "all_suppliers"
-	EntityTypeSupplier        = "supplier"
-	EntityTypeAllProducts     = "all_products"
-	EntityTypeProduct         = "product"
-	EntityTypeSupplierProduct = "supplier_product"
-
 	// 业务类型
 	BusinessTypeDeposit       = 1 // 预付账户加款
 	BusinessTypePrepaidDeduct = 2 // 预付账户扣款
@@ -75,4 +60,40 @@ const (
 	SupplierCreditChangeTypeInit     = 1 // 初始化
 	SupplierCreditChangeTypeIncrease = 2 // 提额
 	SupplierCreditChangeTypeDecrease = 3 // 降额
+)
+
+const (
+
+	// google
+
+	SecretKey = "YourSecretKey2025!@#"
+
+	// redis
+	MerchantOrderPrefix      = "merchant:order:" // 单个订单下单缓存前缀
+	SupplierOrderCachePrefix = "supplier:orders:cache"
+	MerchantOrderCachePrefix = "merchant:orders:cache"
+	SystemConfigHashKey      = "system:configs" // 系统配置Hash键
+
+	OrderTypeMerchant = 1 // 商户订单
+	OrderTypeSupplier = 2 // 供货商订单
+
+	EntityTypeAllMerchants    = "all_merchants"
+	EntityTypeMerchant        = "merchant"
+	EntityTypeMerchantChannel = "merchant_channel"
+	EntityTypeAllChannels     = "all_channels"
+	EntityTypeChannel         = "channel"
+
+	EntityTypeAllSuppliers    = "all_suppliers"
+	EntityTypeSupplier        = "supplier"
+	EntityTypeAllProducts     = "all_products"
+	EntityTypeProduct         = "product"
+	EntityTypeSupplierProduct = "supplier_product"
+
+	//mongo coll
+	AgentAccountLogs         = "agent_account_logs"
+	TenantAccountLogs        = "tenant_account_logs"
+	SupplierOrderTablePrefix = "supplier_order_" // 供货商订单表前缀
+	MerchantOrderTablePrefix = "merchant_order_" // 商户订单表前缀
+	PlatformRule             = "platform_rules"
+	Cookies                  = "cookies"
 )

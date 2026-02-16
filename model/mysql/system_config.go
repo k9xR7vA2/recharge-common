@@ -48,3 +48,11 @@ func (j JSONConfigValue) Value() (driver.Value, error) {
 	}
 	return json.Marshal(j)
 }
+
+// 或者你可以封装成专门的 getter
+func (sc *SystemConfig) BoolValue() (bool, error) {
+	if sc.ValueType != "boolean" {
+		return false, errors.New("not a boolean type")
+	}
+	return sc.ConfigValue == "true" || sc.ConfigValue == "1", nil
+}

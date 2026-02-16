@@ -1,14 +1,11 @@
 package utils
 
 import (
-	"SaasApi/pkg/constant/constant"
 	"encoding/json"
-	"errors"
 	"fmt"
-	"github.com/shopspring/decimal"
+	"github.com/small-cat1/recharge-common/constant"
 	"math/rand"
 	"reflect"
-	"strconv"
 	"strings"
 	"time"
 )
@@ -62,10 +59,6 @@ func StringMapToString(data map[string]string) string {
 		parts = append(parts, fmt.Sprintf("%s=%s", k, v))
 	}
 	return "{" + strings.Join(parts, ", ") + "}"
-}
-
-func Pointer[T any](in T) (out *T) {
-	return &in
 }
 
 func FirstUpper(s string) string {
@@ -129,30 +122,4 @@ func GetProvinceLabel(code int) (string, bool) {
 
 func IsProvinceMatch(area, provinceLabel string) bool {
 	return strings.Contains(area, provinceLabel) || strings.Contains(provinceLabel, area)
-}
-
-func FormatAmount(amountStr string) decimal.Decimal {
-	amount, _ := decimal.NewFromString(amountStr)
-	return amount
-}
-
-func FormatTime(timestamp int64) time.Time {
-	if timestamp == 0 {
-		return time.Time{} // 返回 time.Time 的零值
-	}
-	if timestamp > 1000000000000 { // 大于1万亿，可能是毫秒级时间戳
-		return time.UnixMilli(timestamp)
-	}
-	return time.Unix(timestamp, 0)
-}
-
-func ParseUint(s string) (uint, error) {
-	if s == "" {
-		return 0, errors.New("empty string")
-	}
-	val, err := strconv.ParseUint(s, 10, 64)
-	if err != nil {
-		return 0, err
-	}
-	return uint(val), nil
 }

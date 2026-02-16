@@ -1,6 +1,7 @@
 package channel
 
 import (
+	"encoding/json"
 	"github.com/small-cat1/recharge-common/constant"
 	"github.com/small-cat1/recharge-common/model/mysql/external_api"
 	"github.com/small-cat1/recharge-common/model/mysql/tenant"
@@ -34,4 +35,40 @@ type Channel struct {
 // TableName 指定表名
 func (Channel) TableName() string {
 	return "as_channels"
+}
+
+func (g Channel) GetAmounts() []int {
+	var amounts []int
+	_ = json.Unmarshal(g.Amount, &amounts)
+	return amounts
+}
+
+type MobileAttrs struct {
+	Carrier      constant.CarrierType `json:"carrier"`
+	AreaCode     constant.AreaScope   `json:"area_code"`
+	ProvinceCode int                  `json:"province_code"`
+	ChargeSpeed  constant.ChargeSpeed `json:"charge_speed"`
+}
+
+func (g Channel) GetMobileAttrs() (*MobileAttrs, error) {
+	var attr MobileAttrs
+	err := json.Unmarshal(g.Attributes, &attr)
+	if err != nil {
+		return nil, err
+	}
+	return &attr, nil
+}
+
+type IndiaMobileAttrs struct {
+	Carrier     constant.IndiaCarrierType `json:"carrier"`
+	ChargeSpeed constant.ChargeSpeed      `json:"charge_speed"`
+}
+
+func (g Channel) GetIndiaMobileAttrs() (*IndiaMobileAttrs, error) {
+	var attr IndiaMobileAttrs
+	err := json.Unmarshal(g.Attributes, &attr)
+	if err != nil {
+		return nil, err
+	}
+	return &attr, nil
 }

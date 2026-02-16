@@ -35,9 +35,11 @@ type MerchantOrder struct {
 	OrderStatus    constant.MerOrderMainStat `bson:"order_status" json:"order_status"`         // 订单主状态(1等待支付，2支付中，3支付成功，4支付失败)
 	OrderSubStatus constant.MerOrderSubStat  `bson:"order_sub_status" json:"order_sub_status"` // 订单子状态
 
-	ClientIP string `bson:"client_ip" json:"client_ip"` // 客户ip
-	Device   int    `bson:"device" json:"device"`       // 设备,1ios,2Android,3双端
-	Payment  int    `bson:"payment" json:"payment"`     // 支付方式 1支付宝2微信
+	ClientIP      string               `bson:"client_ip" json:"client_ip"`           // 客户ip
+	Device        int                  `bson:"device" json:"device"`                 // 设备,1ios,2Android,3双端
+	Payment       constant.PaymentType `bson:"payment" json:"payment"`               // 支付方式 1支付宝2微信
+	PaymentMethod string               `bson:"payment_method" json:"payment_method"` // 支付方法 1h5
+	CashUrl       string               `bson:"cash_url" json:"cash_url"`             // 收银地址
 
 	MatchAt        string `bson:"match_at" json:"match_at"`                 // 配单成功时间
 	MakeCodeNumber uint   `bson:"make_code_number" json:"make_code_number"` // 产码次数

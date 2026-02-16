@@ -9,7 +9,7 @@ import (
 type SupplierMobileOrder struct {
 	supplier.SupplierOrderBase `bson:",inline"`
 	Carrier                    constant.CarrierType `bson:"carrier" json:"carrier"`               //运营商
-	ChargeType                 constant.ChargeSpeed `bson:"charge_type" json:"charge_type"`       // 充值类型
+	ChargeSpeed                constant.ChargeSpeed `bson:"charge_speed" json:"charge_speed"`     // 充值速度
 	IsPortability              uint                 `bson:"is_portability" json:"is_portability"` // 是否携号转网
 	Area                       constant.AreaScope   `bson:"area" json:"area"`                     //地区
 	Province                   uint                 `bson:"province" json:"province"`             //省份
@@ -21,7 +21,7 @@ func (o SupplierMobileOrder) GetCarrier() constant.CarrierType {
 }
 
 func (o SupplierMobileOrder) GetChargeSpeed() constant.ChargeSpeed {
-	return o.ChargeType
+	return o.ChargeSpeed
 }
 
 func (o SupplierMobileOrder) GetIsPortability() uint {

@@ -271,6 +271,16 @@ func (o OrderStatus) IsProcessing() bool {
 	}
 }
 
+func IsProcessingSubStat(subStat int) bool {
+	switch MerOrderSubStat(subStat) {
+	case MerOrderSubStatMatching, MerOrderSubStatAuthorizing, MerOrderSubStatPayMatching,
+		MerOrderSubStatPaying, MerOrderSubStatQuerying:
+		return true
+	default:
+		return false
+	}
+}
+
 // CanCancel 检查是否可以取消
 func (o OrderStatus) CanCancel() bool {
 	// 只有在下单成功和支付中的某些阶段才能取消

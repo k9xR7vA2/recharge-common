@@ -43,39 +43,6 @@ func ParseMobileProductAttrs(data datatypes.JSON) (*MobileAttributes, error) {
 	return &attr, err
 }
 
-type IndiaMobileAttributes struct {
-	IsCheckIsp  int              `json:"is_check_isp"`
-	ChargeSpeed ChargeSpeed      `json:"charge_speed"`
-	Carrier     IndiaCarrierType `json:"carrier"`
-	HasSku      int              `json:"has_sku"`
-}
-
-func ParseIndiaMobileProductAttrs(data datatypes.JSON) (*IndiaMobileAttributes, error) {
-	var attr IndiaMobileAttributes
-	err := json.Unmarshal(data, &attr)
-	if err != nil {
-		return nil, err
-	}
-	if !attr.Carrier.IsValid() {
-		return nil, errors.New("运营商类型不正确")
-	}
-	if !attr.ChargeSpeed.IsValid() {
-		return nil, errors.New("充值速度不正确！")
-	}
-	skuFlag := []int{1, 2}
-	flg := false
-	for _, v := range skuFlag {
-		if v == attr.HasSku {
-			flg = true
-			break
-		}
-	}
-	if flg == false {
-		return nil, errors.New("sku参数错误")
-	}
-	return &attr, err
-}
-
 func ValidateProvince(ProvinceCode []int) error {
 	var ProvinceCodeSlice []string
 	for _, v := range ProvinceList {
@@ -134,4 +101,37 @@ func IsInSlice(ele interface{}, slice []string) bool {
 	}
 
 	return false
+}
+
+type IndiaMobileAttributes struct {
+	IsCheckIsp  int              `json:"is_check_isp"`
+	ChargeSpeed ChargeSpeed      `json:"charge_speed"`
+	Carrier     IndiaCarrierType `json:"carrier"`
+	HasSku      int              `json:"has_sku"`
+}
+
+func ParseIndiaMobileProductAttrs(data datatypes.JSON) (*IndiaMobileAttributes, error) {
+	var attr IndiaMobileAttributes
+	err := json.Unmarshal(data, &attr)
+	if err != nil {
+		return nil, err
+	}
+	if !attr.Carrier.IsValid() {
+		return nil, errors.New("运营商类型不正确")
+	}
+	if !attr.ChargeSpeed.IsValid() {
+		return nil, errors.New("充值速度不正确！")
+	}
+	skuFlag := []int{1, 2}
+	flg := false
+	for _, v := range skuFlag {
+		if v == attr.HasSku {
+			flg = true
+			break
+		}
+	}
+	if flg == false {
+		return nil, errors.New("sku参数错误")
+	}
+	return &attr, err
 }

@@ -1,10 +1,12 @@
 package constant
 
-type IndiaCarrierType int //运营商类型1联通，2移动，3电信
+type IndiaCarrierType int
 
 const (
-	Airtel IndiaCarrierType = iota + 1 //中国联通
-	Jio                                // 中国移动
+	Airtel IndiaCarrierType = iota + 1
+	Jio
+
+	VI
 )
 
 // String 实现 Stringer 接口，返回运营商名称的字符串描述
@@ -37,11 +39,26 @@ func (s IndiaCarrierType) Code() string {
 		return "airtel"
 	case Jio:
 		return "jio"
+	case VI:
+		return "vi"
 	default:
 		return "Unknown"
 	}
 }
 
 func (s IndiaCarrierType) IsValid() bool {
-	return s >= Airtel && s <= Jio
+	return s >= Airtel && s <= VI
+}
+
+func IndiaCarrierTypeFromLookup(ct string) (IndiaCarrierType, bool) {
+	switch ct {
+	case "airtel":
+		return Airtel, true
+	case "jio":
+		return Jio, true
+	case "vi":
+		return VI, true
+	default:
+		return 0, false
+	}
 }

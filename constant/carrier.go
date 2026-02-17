@@ -81,3 +81,16 @@ func ParseCarrier(s string) (CarrierType, error) {
 		return 0, fmt.Errorf("invalid carrier code: %s", s)
 	}
 }
+
+func CarrierTypeFromLookup(ct string) (CarrierType, bool) {
+	switch ct {
+	case "cucc":
+		return CUCC, true
+	case "cmcc":
+		return CMCC, true
+	case "ctcc":
+		return CTCC, true
+	default:
+		return 0, false
+	}
+}

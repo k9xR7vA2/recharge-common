@@ -31,7 +31,7 @@ func GenerateSecret(plainText, appID string) (string, error) {
 }
 
 // GenerateSignature 签名算法
-func GenerateSignature(params map[string]string, secret string) (string, error) {
+func GenerateSignature(params map[string]string, secret string) string {
 	var keys []string
 	for key := range params {
 		if key != "signature" { // Exclude the signature itself from the sorted keys
@@ -51,16 +51,13 @@ func GenerateSignature(params map[string]string, secret string) (string, error) 
 	h.Write([]byte(dataToSign))
 	signature := hex.EncodeToString(h.Sum(nil))
 
-	return signature, nil
+	return signature
 }
 
 // VerifySignature 验证签名
-func VerifySignature(params map[string]string, providedSignature, secret string) (bool, error) {
+func VerifySignature(params map[string]string, providedSignature, secret string) bool {
 	// Generate a new signature from the received parameters (excluding the provided signature itself)
-	calculatedSignature, err := GenerateSignature(params, secret)
-	if err != nil {
-		return false, err
-	}
+	calculatedSignature := GenerateSignature(params, secret)
 	// Compare the calculated signature with the provided one
-	return calculatedSignature == providedSignature, nil
+	return calculatedSignature == providedSignature
 }

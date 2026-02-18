@@ -30,6 +30,11 @@ func (s GlobalNotifyStatus) String() string {
 }
 
 // Code 返回通知状态的编码
+func (s GlobalNotifyStatus) Int() int {
+	return int(s)
+}
+
+// Code 返回通知状态的编码
 func (s GlobalNotifyStatus) Code() string {
 	switch s {
 	case NotifyStatusPreparing:

@@ -117,7 +117,7 @@ func (m *MobileOrderPool) AddOrderToPool(ctx context.Context, opts options.IMobi
 		Priority:      opts.GetPriority(),
 		SystemOrderSn: opts.GetSystemOrderSnArg(),
 	}
-	return m.executeNonCoreOperations(ctx, params, "created", eventDetails, 1)
+	return m.executeNonCoreOperations(ctx, params, EventTypeCreated, eventDetails, 1)
 }
 
 // FetchOrder 取出订单 - 使用Lua脚本实现核心逻辑
@@ -266,7 +266,7 @@ func (m *MobileOrderPool) FetchOrder(ctx context.Context, opts options.IFetchMob
 			"type":          "expired_cleanup",
 			"expired_count": highExpired,
 		}
-		_ = m.executeNonCoreOperations(ctx, params, "expired", eventDetails, -highExpired)
+		_ = m.executeNonCoreOperations(ctx, params, EventTypeExpired, eventDetails, -highExpired)
 	}
 
 	if normalExpired > 0 {
@@ -285,7 +285,7 @@ func (m *MobileOrderPool) FetchOrder(ctx context.Context, opts options.IFetchMob
 			"type":          "expired_cleanup",
 			"expired_count": normalExpired,
 		}
-		_ = m.executeNonCoreOperations(ctx, params, "expired", eventDetails, -normalExpired)
+		_ = m.executeNonCoreOperations(ctx, params, EventTypeExpired, eventDetails, -normalExpired)
 	}
 
 	// 再处理正常取出的订单
@@ -320,7 +320,7 @@ func (m *MobileOrderPool) FetchOrder(ctx context.Context, opts options.IFetchMob
 		Priority:      priority,
 		SystemOrderSn: systemOrderSn,
 	}
-	err = m.executeNonCoreOperations(ctx, params, "processing", eventDetails, -1)
+	err = m.executeNonCoreOperations(ctx, params, EventTypeProcessing, eventDetails, -1)
 	if err != nil {
 		return "", "", err
 	}
@@ -329,8 +329,7 @@ func (m *MobileOrderPool) FetchOrder(ctx context.Context, opts options.IFetchMob
 }
 
 // CancelOrRemoveOrder  撤销/删除订单
-// CancelOrRemoveOrder 撤销/删除订单
-func (m *MobileOrderPool) CancelOrRemoveOrder(ctx context.Context, opts options.IMobileHandlerOptions, event string) error {
+func (m *MobileOrderPool) CancelOrRemoveOrder(ctx context.Context, opts options.IMobileHandlerOptions, event EventType) error {
 	cancelScript := `
 		local orderKey = KEYS[1]
 		-- 获取订单信息
@@ -436,7 +435,7 @@ func (m *MobileOrderPool) GetOrderInfo(ctx context.Context, orderKey string) (ma
 // 执行非核心操作（统计更新和事件记录）
 func (m *MobileOrderPool) executeNonCoreOperations(ctx context.Context,
 	params NonCoreOpParams,
-	eventType string,
+	eventType EventType,
 	eventDetails interface{},
 	incr int64) error {
 
@@ -476,7 +475,6 @@ func (m *MobileOrderPool) executeNonCoreOperations(ctx context.Context,
         
         return 'OK'
     `
-
 	// 序列化事件详情
 	var detailsStr string
 	switch v := eventDetails.(type) {

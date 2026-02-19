@@ -501,7 +501,7 @@ func (m *MobileOrderPool) executeNonCoreOperations(ctx context.Context,
 		params.Province,      // ARGV[5] - 省份
 		params.Priority,      // ARGV[6] - 优先级
 		params.SystemOrderSn, // ARGV[7] - 系统订单号
-		eventType,            // ARGV[8] - 事件类型
+		eventType.String(),   // ARGV[8] - 事件类型
 		now,                  // ARGV[9] - 当前时间戳
 		detailsStr,           // ARGV[10] - 事件详情
 		incr,                 // ARGV[11] - 统计值增减

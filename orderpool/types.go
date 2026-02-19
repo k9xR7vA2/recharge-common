@@ -8,3 +8,7 @@ const (
 	EventTypeProcessing EventType = "processing"
 	EventTypeRemove     EventType = "remove"
 )
+
+func (s EventType) String() string {
+	return string(s)
+}

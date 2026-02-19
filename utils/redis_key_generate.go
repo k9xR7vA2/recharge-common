@@ -29,7 +29,7 @@ func NewRedisKeyGenerator() *RedisKeyGenerator {
 
 // FormatDate 格式化日期为YYYY-MM-DD
 func (g *RedisKeyGenerator) FormatDate(date time.Time) string {
-	return date.Format("2006-01-02")
+	return date.Format("20060102")
 }
 
 // GenerateBaseKey 生成基础统计键
@@ -69,11 +69,7 @@ func (g *RedisKeyGenerator) GenerateChannelTypeKey(baseKey string, channelType c
 // entityID: 实体ID
 // businessType: 业务类型ID
 // relatedID: 关联实体ID（可选，适用于merchant_channel或supplier_product）
-func (g *RedisKeyGenerator) GenerateBusinessTypeKey(entityType, dateStr string, tenantID, entityID uint, businessType constant.BusinessType, relatedID ...uint) string {
-	if entityType == "" || !businessType.IsValid() {
-		return ""
-	}
-
+func (g *RedisKeyGenerator) GenerateBusinessTypeKey(entityType, dateStr string, tenantID, entityID uint, businessType string, relatedID ...uint) string {
 	// 添加_business后缀标识业务类型统计
 	businessEntityType := fmt.Sprintf("%s_business", entityType)
 
@@ -87,7 +83,7 @@ func (g *RedisKeyGenerator) GenerateBusinessTypeKey(entityType, dateStr string, 
 	}
 
 	// 添加业务类型
-	parts = append(parts, fmt.Sprintf("%d", businessType))
+	parts = append(parts, fmt.Sprintf("%s", businessType))
 
 	return strings.Join(parts, ":")
 }
@@ -185,7 +181,7 @@ func (g *RedisKeyGenerator) GenerateBusinessTypeAmountKey(
 	if !businessType.IsValid() || amount == 0 {
 		return ""
 	}
-	businessKey := g.GenerateBusinessTypeKey(entityType, dateStr, tenantID, entityID, businessType)
+	businessKey := g.GenerateBusinessTypeKey(entityType, dateStr, tenantID, entityID, businessType.String())
 	return g.GenerateAmountKey(businessKey, amount)
 }
 

@@ -12,14 +12,8 @@ func FormatAmount(amountStr string) decimal.Decimal {
 	return amount
 }
 
-func FormatTime(timestamp int64) time.Time {
-	if timestamp == 0 {
-		return time.Time{} // 返回 time.Time 的零值
-	}
-	if timestamp > 1000000000000 { // 大于1万亿，可能是毫秒级时间戳
-		return time.UnixMilli(timestamp)
-	}
-	return time.Unix(timestamp, 0)
+func FromMillis(ts int64) time.Time {
+	return time.UnixMilli(ts)
 }
 
 func ParseUint(s string) (uint, error) {

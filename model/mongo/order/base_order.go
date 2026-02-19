@@ -53,7 +53,6 @@ type CallbackLogEntry struct {
 
 // 基础方法
 func (o OrderBase) GetID() primitive.ObjectID              { return o.ID }
-func (o OrderBase) GetCreatedAt() time.Time                { return utils.FormatTime(o.CreatedAt) }
 func (o OrderBase) GetTenantID() uint                      { return o.TenantID }
 func (o OrderBase) GetTenantName() string                  { return o.TenantName }
 func (o OrderBase) GetAppId() string                       { return o.AppID }
@@ -71,19 +70,20 @@ func (o OrderBase) GetHandingFees() decimal.Decimal { return utils.FormatAmount(
 func (o OrderBase) GetRechargeURL() string          { return o.RechargeURL }
 func (o OrderBase) GetQueryUrl() string             { return o.QueryUrl }
 func (o OrderBase) GetRechargeTimes() uint          { return o.RechargeTimes }
-func (o OrderBase) GetPullAt() time.Time {
-	return utils.FormatTime(o.PullAt)
-}
-func (o OrderBase) GetSuccessAt() time.Time {
-	return utils.FormatTime(o.SuccessAt)
-}
 
 // 回调相关
 func (o OrderBase) GetNotifyURL() string                         { return o.NotifyURL }                  //回调地址
-func (o OrderBase) GetNotifyAt() time.Time                       { return utils.FormatTime(o.NotifyAt) } //回调时间
+func (o OrderBase) GetNotifyAt() time.Time                       { return utils.FromMillis(o.NotifyAt) } //回调时间
 func (o OrderBase) GetNotifyNumbers() uint                       { return o.NotifyNumbers }              //回调次数
 func (o OrderBase) GetNotifyStatus() constant.GlobalNotifyStatus { return o.NotifyStatus }               //回调状态
 
 // 其他信息
-func (o OrderBase) GetRemark() string       { return o.Remark }                      //订单备注
-func (o OrderBase) GetUpdatedAt() time.Time { return utils.FormatTime(o.UpdatedAt) } // 更新时间
+func (o OrderBase) GetRemark() string       { return o.Remark } //订单备注
+func (o OrderBase) GetCreatedAt() time.Time { return utils.FromMillis(o.CreatedAt) }
+func (o OrderBase) GetPullAt() time.Time {
+	return utils.FromMillis(o.PullAt)
+}
+func (o OrderBase) GetSuccessAt() time.Time {
+	return utils.FromMillis(o.SuccessAt)
+}
+func (o OrderBase) GetUpdatedAt() time.Time { return utils.FromMillis(o.UpdatedAt) } // 更新时间

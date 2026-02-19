@@ -47,6 +47,7 @@ type CallbackLogEntry struct {
 	RetryCount   int    `bson:"retry_count"`
 	RequestBody  string `bson:"request_body"`
 	ResponseBody string `bson:"response_body"`
+	ErrorMsg     string `bson:"error_msg,omitempty"`
 	CreatedAt    int64  `bson:"created_at"`
 }
 

@@ -126,7 +126,7 @@ func (g *RedisKeyGenerator) GenerateRelationBusinessKey(relationType, dateStr st
 
 	parts := []string{g.prefix, businessRelationType, dateStr, fmt.Sprintf("%d", tenantID),
 		fmt.Sprintf("%d", primaryID), fmt.Sprintf("%d", secondaryID),
-		fmt.Sprintf("%d", businessType)}
+		fmt.Sprintf("%s", businessType)}
 
 	return strings.Join(parts, ":")
 }

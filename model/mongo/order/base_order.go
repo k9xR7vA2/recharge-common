@@ -34,9 +34,20 @@ type OrderBase struct {
 	NotifyNumbers uint                        `bson:"notify_numbers" json:"notify_numbers"` // 回调次数
 	NotifyStatus  constant.GlobalNotifyStatus `bson:"notify_status" json:"notify_status"`   // 回调状态1准备通知，2通知中，3通知成功，4通知异常，5通知超时
 	Remark        string                      `bson:"remark" json:"remark"`                 // 备注
+	CallbackLogs  []CallbackLogEntry          `bson:"callback_logs,omitempty"`
 
 	CreatedAt int64 `bson:"created_at" json:"created_at"` // 创建时间
 	UpdatedAt int64 `bson:"updated_at" json:"updated_at"` // 更新时间
+}
+
+type CallbackLogEntry struct {
+	URL          string `bson:"url"`
+	Status       int    `bson:"status"`
+	StatusCode   int    `bson:"status_code"`
+	RetryCount   int    `bson:"retry_count"`
+	RequestBody  string `bson:"request_body"`
+	ResponseBody string `bson:"response_body"`
+	CreatedAt    int64  `bson:"created_at"`
 }
 
 // 基础方法

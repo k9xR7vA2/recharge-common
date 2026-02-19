@@ -69,12 +69,10 @@ func (g *RedisKeyGenerator) GenerateChannelTypeKey(baseKey string, channelType c
 // entityID: 实体ID
 // businessType: 业务类型ID
 // relatedID: 关联实体ID（可选，适用于merchant_channel或supplier_product）
-func (g *RedisKeyGenerator) GenerateBusinessTypeKey(entityType, dateStr string, tenantID, entityID uint, businessType string, relatedID ...uint) string {
+func (g *RedisKeyGenerator) GenerateBusinessTypeKey(entityType, dateStr string, tenantID, entityID uint, businessType constant.BusinessType, relatedID ...uint) string {
 	// 添加_business后缀标识业务类型统计
 	businessEntityType := fmt.Sprintf("%s_business", entityType)
-
 	parts := []string{g.prefix, businessEntityType, dateStr, fmt.Sprintf("%d", tenantID)}
-
 	// 对于关联类型，先添加主实体ID，再添加次级实体ID
 	if len(relatedID) > 0 && relatedID[0] > 0 {
 		parts = append(parts, fmt.Sprintf("%d", relatedID[0]), fmt.Sprintf("%d", entityID))
@@ -181,7 +179,7 @@ func (g *RedisKeyGenerator) GenerateBusinessTypeAmountKey(
 	if !businessType.IsValid() || amount == 0 {
 		return ""
 	}
-	businessKey := g.GenerateBusinessTypeKey(entityType, dateStr, tenantID, entityID, businessType.String())
+	businessKey := g.GenerateBusinessTypeKey(entityType, dateStr, tenantID, entityID, businessType)
 	return g.GenerateAmountKey(businessKey, amount)
 }
 

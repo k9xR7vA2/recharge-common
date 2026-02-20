@@ -20,9 +20,6 @@ const (
 	GoogleIssuer      = "WuKong"
 	GoogleAccountName = "WuKong@gmail.com"
 
-	SupplierMobileOrderTablePrefix = "supplier_order_mobile" // 供货商话费订单表前缀
-	MerchantMobileOrderTablePrefix = "merchant_order_mobile" // 商户话费订单表前缀
-
 	// ProductCodeRegRule 产品编码验证规则
 	ProductCodeRegRule = "^[a-zA-Z][a-zA-Z_]*$"
 	// AccountRegRule 账户验证规则

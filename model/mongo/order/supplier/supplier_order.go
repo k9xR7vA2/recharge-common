@@ -19,6 +19,18 @@ type SupplierOrderBase struct {
 	RechargeStatus constant.SupOrderStatus `bson:"recharge_status" json:"recharge_status"` // 订单状态(1等待充值，2充值中，3成功，4失败，5未使用，6账户黑名单,7撤单
 	ExpiredAt      int64                   `bson:"expired_at" json:"expired_at"`           // 过期时间
 	ValidTime      uint                    `bson:"valid_time" json:"valid_time"`           // 订单有效期时长（秒）
+	RechargeLogs   []RechargeLog           `json:"RechargeLogs" bson:"recharge_logs"`
+}
+
+// 充值日志结构
+type RechargeLog struct {
+	Operation   string `json:"operation" bson:"operation"`     // 操作类型：create/match/recharge/query/success/fail
+	Message     string `json:"message" bson:"message"`         // 描述信息
+	Status      int    `json:"status" bson:"status"`           // 1-进行中 2-成功 3-失败
+	RequestURL  string `json:"request_url" bson:"request_url"` // 请求地址
+	RequestBody string `json:"request_body" bson:"request_body"`
+	Response    string `json:"response" bson:"response"`
+	CreatedAt   int64  `json:"created_at" bson:"created_at"`
 }
 
 func (o SupplierOrderBase) GetSupplierID() uint     { return o.SupplierID }   // 供货商ID

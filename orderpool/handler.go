@@ -447,20 +447,30 @@ func (m *MobileOrderPool) executeNonCoreOperations(ctx context.Context,
 
         redis.call('HINCRBY', statsKey, 'amount:'..ARGV[1], incrValue)
         redis.call('HINCRBY', statsKey, 'carrier:'..ARGV[2], incrValue)
-        redis.call('HINCRBY', statsKey, 'charge_type:'..ARGV[3], incrValue)
+        redis.call('HINCRBY', statsKey, 'charge_speed:'..ARGV[3], incrValue)
         redis.call('HINCRBY', statsKey, 'area:'..ARGV[4], incrValue)
         redis.call('HINCRBY', statsKey, 'province:'..ARGV[5], incrValue)
         redis.call('HINCRBY', statsKey, 'pool_orders', incrValue)
         redis.call('HINCRBY', statsKey, 'priority:'..ARGV[6], incrValue)
-         -- 交叉维度统计 - 充值类型 x 运营商
-        redis.call('HINCRBY', statsKey, 'charge_type:'..ARGV[3]..':carrier:'..ARGV[2], incrValue)
-        -- 交叉维度统计 - 充值类型 x 金额
-        redis.call('HINCRBY', statsKey, 'charge_type:'..ARGV[3]..':amount:'..ARGV[1], incrValue)
+         -- 交叉维度统计 - 充值速度 x 运营商
+        redis.call('HINCRBY', statsKey, 'charge_speed:'..ARGV[3]..':carrier:'..ARGV[2], incrValue)
+        -- 交叉维度统计 - 充值速度 x 金额
+        redis.call('HINCRBY', statsKey, 'charge_speed:'..ARGV[3]..':amount:'..ARGV[1], incrValue)
         -- 交叉维度统计 - 运营商 x 金额
         redis.call('HINCRBY', statsKey, 'carrier:'..ARGV[2]..':amount:'..ARGV[1], incrValue)
-        -- 三维交叉统计 - 充值类型 x 运营商 x 金额（用于前端交叉表）
-        redis.call('HINCRBY', statsKey, 'charge_type:'..ARGV[3]..':carrier:'..ARGV[2]..':amount:'..ARGV[1], incrValue)
-        
+        -- 三维交叉统计 - 充值速度 x 运营商 x 金额（用于前端交叉表）
+        redis.call('HINCRBY', statsKey, 'charge_speed:'..ARGV[3]..':carrier:'..ARGV[2]..':amount:'..ARGV[1], incrValue)
+
+        -- 新增：处理中订单数
+		local eventType = ARGV[8]
+		if eventType == 'processing' then
+			-- 取出订单：pool -1 已经做了，processing +1
+			redis.call('HINCRBY', statsKey, 'processing_orders', 1)
+		elseif eventType == 'completed' then
+			-- 订单结束：processing -1
+			redis.call('HINCRBY', statsKey, 'processing_orders', -1)
+		end
+
         -- 记录事件
         local eventsKey = KEYS[2]
         redis.call('XADD', eventsKey, '*', 

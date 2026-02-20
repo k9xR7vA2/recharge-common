@@ -8,6 +8,7 @@ const (
 	GenerationQueue        = "generation-queue"
 	TracingQueue           = "tracing-queue"
 	DefaultExpirationQueue = "default-expiration-queue"
+	ExpiredBuffer          = 10 // 过期队列提前处理时间(秒)
 
 	GlobalQueueMaxRetry        = 3
 	ProcessingSupplierOrderSet = "processing_supplier_orders"

@@ -1,7 +1,5 @@
 package payloads
 
-import "github.com/small-cat1/recharge-common/queue/payload"
-
 type APIOperation string
 
 const (
@@ -13,7 +11,6 @@ const (
 )
 
 type TenantSystemPermissionUpdateTask struct {
-	payload.BasePayload
 	Operation  APIOperation `json:"operation"`
 	OperatorID uint         `json:"operator_id,omitempty"`
 	Remark     string       `json:"remark,omitempty"`

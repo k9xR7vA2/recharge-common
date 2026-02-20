@@ -3,18 +3,14 @@ package constants
 import "github.com/small-cat1/recharge-common/constant"
 
 const (
-	CallbackHighQueue = "callback-high-queue"
-	QueryHighQueue    = "query-high-queue"
-	GenerationQueue   = "generation-queue"
-	TracingQueue      = "tracing-queue"
-	ExpirationQueue   = "expiration-queue"
+	CallbackHighQueue      = "callback-high-queue"
+	QueryHighQueue         = "query-high-queue"
+	GenerationQueue        = "generation-queue"
+	TracingQueue           = "tracing-queue"
+	DefaultExpirationQueue = "default-expiration-queue"
 
 	GlobalQueueMaxRetry        = 3
 	ProcessingSupplierOrderSet = "processing_supplier_orders"
-
-	SupplierOrderCallbackTask    = "supplier:order:callback"  // 供货商订单回调
-	TenantSystemPermissionUpdate = "tenant:permission:update" //租户系统权限更新队列
-	PaymentOrderExpiredTask      = "payment:order:expired"    //系统充值订单过期队列
 )
 
 // GetBaseQueueConfig 固定队列权重，业务项目按需追加动态队列

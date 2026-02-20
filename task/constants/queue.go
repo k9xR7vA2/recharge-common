@@ -7,6 +7,7 @@ const (
 	QueryHighQueue    = "query-high-queue"
 	GenerationQueue   = "generation-queue"
 	TracingQueue      = "tracing-queue"
+	ExpirationQueue   = "expiration-queue"
 
 	GlobalQueueMaxRetry        = 3
 	ProcessingSupplierOrderSet = "processing_supplier_orders"

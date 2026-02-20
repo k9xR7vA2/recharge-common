@@ -26,4 +26,7 @@ const (
 	AccountRegRule = "[A-Za-z]+"
 	// RebateRegRule 费率验证规则
 	RebateRegRule = "^(0?\\.[1-9]\\d?|[1-9]\\d?(\\.\\d{1,2})?|100(\\.00?)?)$$"
+
+	SupplierOrderSnPrefix = "SUP"
+	MerchantOrderSnPrefix = "MER"
 )

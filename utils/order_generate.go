@@ -19,7 +19,7 @@ type OrderIDGenerator struct {
 	counterExpires time.Duration
 }
 
-// NewOrderIDGenerator 创建新的订单号生成器
+// NewOrderIDGenerator 创建新的订单号生成器 admin_server,tenant_server使用
 func NewOrderIDGenerator(prefix string, counterDigits int) *OrderIDGenerator {
 	return &OrderIDGenerator{
 		counters:       make(map[string]int),

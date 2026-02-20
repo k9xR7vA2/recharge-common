@@ -23,3 +23,13 @@ func GenerateOrderIDWithRedis(ctx context.Context, redisClient redis.UniversalCl
 	orderID := fmt.Sprintf("%s%s%08d", prefix, timestamp, counter)
 	return orderID, nil
 }
+
+// utils/order.go
+func ParseOrderDate(systemOrderSn string, prefixLen int) (string, error) {
+	// 订单号格式: prefix(prefixLen位) + 20060102150405(14位) + counter(8位)
+	if len(systemOrderSn) < prefixLen+14 {
+		return "", fmt.Errorf("invalid order sn: %s", systemOrderSn)
+	}
+	// 取日期部分 yyyyMMdd
+	return systemOrderSn[prefixLen : prefixLen+8], nil
+}

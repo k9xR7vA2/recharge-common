@@ -4,6 +4,7 @@ import "fmt"
 
 const (
 	SupplierOrderCallbackTask    = "supplier:order:callback"  // 供货商订单回调
+	MerchantOrderCallbackTask    = "merchant:order:callback"  // 商户订单回调
 	TenantSystemPermissionUpdate = "tenant:permission:update" //租户系统权限更新队列
 	PaymentOrderExpiredTask      = "payment:order:expired"    //系统充值订单过期队列
 

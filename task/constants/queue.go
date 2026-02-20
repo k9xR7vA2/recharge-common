@@ -10,6 +10,10 @@ const (
 
 	GlobalQueueMaxRetry        = 3
 	ProcessingSupplierOrderSet = "processing_supplier_orders"
+
+	SupplierOrderCallbackTask    = "supplier:order:callback"  // 供货商订单回调
+	TenantSystemPermissionUpdate = "tenant:permission:update" //租户系统权限更新队列
+	PaymentOrderExpiredTask      = "payment:order:expired"    //系统充值订单过期队列
 )
 
 // GetBaseQueueConfig 固定队列权重，业务项目按需追加动态队列

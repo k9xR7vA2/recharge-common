@@ -95,3 +95,7 @@ const (
 	PlatformRule             = "platform_rules"
 	Cookies                  = "cookies"
 )
+
+func MerchantOrderCacheKey(orderSn string) string {
+	return MerchantOrderPrefix + orderSn
+}

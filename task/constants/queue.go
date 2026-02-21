@@ -28,7 +28,7 @@ func GetBaseQueueConfig() map[string]int {
 func GetQueueConfigWithExpiration() map[string]int {
 	queues := GetBaseQueueConfig()
 	for _, biz := range constant.GetAllBusinessTypes() {
-		queues["expiration:"+biz.Value.String()] = 5
+		queues[ExpirationQueue(biz.Value.String())] = 5
 	}
 	return queues
 }

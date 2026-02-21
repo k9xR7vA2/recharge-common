@@ -3,6 +3,7 @@ package processor
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/small-cat1/recharge-common/constant"
 	"math/rand"
 	"sort"
@@ -14,7 +15,6 @@ import (
 type WeightRuleConfig struct {
 	ChannelWeights constant.WeightRuleConfig // 直接映射原始数据结构
 	// 权重模式不依赖于金额，但在后端可能会配置允许的金额列表
-	AllowedAmounts []int
 }
 
 func (c *WeightRuleConfig) UnmarshalJSON(data []byte) error {
@@ -50,31 +50,10 @@ func (c *WeightRuleConfig) Validate() error {
 
 // 根据权重随机选择通道
 func (c *WeightRuleConfig) ExtractChannelID(amount string) (uint, error) {
-	// 检查金额是否在允许列表中
-	if len(c.AllowedAmounts) > 0 {
-		amountInt, err := strconv.Atoi(amount)
-		if err != nil {
-			return 0, errors.New("invalid amount format")
-		}
-
-		found := false
-		for _, allowed := range c.AllowedAmounts {
-			if allowed == amountInt {
-				found = true
-				break
-			}
-		}
-
-		if !found {
-			return 0, errors.New("amount not allowed in this strategy")
-		}
-	}
-
 	if len(c.ChannelWeights) == 0 {
 		return 0, errors.New("empty weight rule config")
 	}
 
-	// 计算总权重
 	totalWeight := 0
 	for _, weight := range c.ChannelWeights {
 		totalWeight += weight
@@ -82,27 +61,32 @@ func (c *WeightRuleConfig) ExtractChannelID(amount string) (uint, error) {
 	if totalWeight <= 0 {
 		return 0, errors.New("total weight must be positive")
 	}
-	// 随机数在总权重范围内
+
+	// 排序保证遍历顺序一致
+	keys := make([]string, 0, len(c.ChannelWeights))
+	for k := range c.ChannelWeights {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+
 	randomNum := rand.Intn(totalWeight)
-	// 根据权重区间选择通道
 	currentWeight := 0
-	for channelID, weight := range c.ChannelWeights {
-		currentWeight += weight
+	for _, channelID := range keys {
+		currentWeight += c.ChannelWeights[channelID]
 		if randomNum < currentWeight {
-			cid, _ := strconv.Atoi(channelID)
+			cid, err := strconv.Atoi(channelID)
+			if err != nil {
+				return 0, fmt.Errorf("无效的通道ID: %s", channelID)
+			}
 			return uint(cid), nil
 		}
 	}
-	// 理论上不应该到这里
 	return 0, errors.New("failed to select channel based on weight")
 }
 
 // GetSupportedAmounts 获取策略支持的所有金额
 func (c *WeightRuleConfig) GetSupportedAmounts() []int {
-	result := make([]int, len(c.AllowedAmounts))
-	copy(result, c.AllowedAmounts)
-	sort.Ints(result) // 排序
-	return result
+	return nil
 }
 
 // GetAllChannelIDs 提取所有通道ID

@@ -95,7 +95,8 @@ const (
 	PlatformRule             = "platform_rules"
 	Cookies                  = "cookies"
 
-	MerchantOrderCacheFiled = "order_json" //商户缓存订单在hash里的字段
+	MerchantOrderCacheFiled       = "order_json"       //商户缓存订单在hash里的字段
+	MerchantOrderCacheStatusFiled = "order_sub_status" //商户缓存订单 状态在hash里的字段
 )
 
 func MerchantOrderCacheKey(orderSn string) string {

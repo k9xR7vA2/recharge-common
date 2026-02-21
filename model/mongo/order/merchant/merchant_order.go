@@ -11,8 +11,7 @@ import (
 
 // 商户话费订单
 type MerchantOrder struct {
-	order.OrderBase
-
+	order.OrderBase `bson:",inline"`
 	MerchantID      uint   `bson:"merchant_id" json:"merchant_id"`             // 商户ID
 	MerchantName    string `bson:"merchant_name" json:"merchant_name"`         // 商户名称
 	MerchantOrderSn string `bson:"merchant_order_sn" json:"merchant_order_sn"` // 商户订单号

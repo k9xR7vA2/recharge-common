@@ -10,7 +10,7 @@ const (
 
 	// SupplierOrderExpireTask 过期处理任务
 	supplierOrderExpirePattern = "supplier:order:%s:expire"
-	expirationQueuePattern     = "%s:expiration"
+	expirationQueuePattern     = "expiration:%s"
 )
 
 func SupplierOrderExpireTask(bizType string) string {

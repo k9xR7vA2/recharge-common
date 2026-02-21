@@ -66,8 +66,6 @@ const (
 
 	// google
 
-	SecretKey = "YourSecretKey2025!@#"
-
 	// redis
 	MerchantOrderPrefix      = "merchant:order:" // 单个订单下单缓存前缀
 	SupplierOrderCachePrefix = "supplier:orders:cache"

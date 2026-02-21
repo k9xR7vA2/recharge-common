@@ -94,6 +94,8 @@ const (
 	MerchantOrderTablePrefix = "merchant_order_" // 商户订单表前缀
 	PlatformRule             = "platform_rules"
 	Cookies                  = "cookies"
+
+	MerchantOrderCacheFiled = "order_json" //商户缓存订单在hash里的字段
 )
 
 func MerchantOrderCacheKey(orderSn string) string {

@@ -18,7 +18,7 @@ type Channel struct {
 	Payment       constant.PaymentType          `json:"payment" gorm:"column:payment;type:tinyint;not null;default:1;comment:支付方式"`
 	Device        constant.DeviceType           `json:"device" gorm:"column:device;type:tinyint;not null;default:1;comment:设备"`
 	Amount        datatypes.JSON                `json:"amount" gorm:"column:amount;type:json;not null;comment:金额"`
-	PaymentMethod string                        `json:"payment_method" gorm:"column:payment_method;type:varchar(100);not null;comment:支付方法"`
+	PaymentMethod constant.PaymentMethod        `json:"payment_method" gorm:"column:payment_method;type:varchar(100);not null;comment:支付方法"`
 	Attributes    datatypes.JSON                `json:"attributes" gorm:"column:attributes;type:json;not null;comment:JSON格式的特定属性"` // JSON格式的特定属性
 
 	CreatedAt time.Time   `json:"created_at"`

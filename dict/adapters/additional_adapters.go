@@ -102,3 +102,35 @@ func (d *PaymentTypeDict) GetOptions() []types.DictOption {
 		},
 	}
 }
+
+// PaymentMethodDict  支付类型字典
+type PaymentMethodDict struct{}
+
+func (d *PaymentMethodDict) GetKey() string {
+	return "payment_method"
+}
+
+func (d *PaymentMethodDict) GetName() string {
+	return "支付方法"
+}
+
+func (d *PaymentMethodDict) GetOptions() []types.DictOption {
+	methods := []constant.PaymentMethod{
+		constant.PaymentMethodH5,
+		constant.PaymentMethodUpiIntent,
+		constant.PaymentMethodUpiCollect,
+		constant.PaymentMethodQrCode,
+		constant.PaymentMethodJsApi,
+	}
+
+	options := make([]types.DictOption, 0, len(methods))
+	for _, m := range methods {
+		options = append(options, types.DictOption{
+			Label:     m.Label(),
+			Value:     string(m),
+			Code:      m.Code(),
+			ExtParams: m.ExtParamKeys(),
+		})
+	}
+	return options
+}

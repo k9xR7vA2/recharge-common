@@ -37,6 +37,8 @@ func registerAllDicts() {
 	GlobalManager.Register(&adapters.DeviceTypeDict{})
 	//支付方式
 	GlobalManager.Register(&adapters.PaymentTypeDict{})
+	//支付方法
+	GlobalManager.Register(&adapters.PaymentMethodDict{})
 	//费率类型
 	GlobalManager.Register(&adapters.RateTypeDict{})
 	//地区

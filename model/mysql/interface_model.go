@@ -1,6 +1,8 @@
 package mysql
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/small-cat1/recharge-common/constant"
 	"gorm.io/datatypes"
 	"time"
@@ -29,4 +31,19 @@ type AsInterface struct {
 // TableName get sql table name.获取数据库表名
 func (AsInterface) TableName() string {
 	return "as_interfaces"
+}
+
+type InterfaceConfigParams struct {
+	ApiKey    string `json:"api_key"`
+	ApiSecret string `json:"api_secret"`
+	ApiUrl    string `json:"api_url"` // 完整路径，如 /api/order/create
+}
+
+// 在 Interface 模型上加个方法
+func (i *AsInterface) GetConfigParams() (*InterfaceConfigParams, error) {
+	var params InterfaceConfigParams
+	if err := json.Unmarshal(i.ConfigParams, &params); err != nil {
+		return nil, fmt.Errorf("解析接口配置参数失败: %w", err)
+	}
+	return &params, nil
 }

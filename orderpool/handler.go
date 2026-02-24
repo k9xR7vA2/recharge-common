@@ -228,7 +228,26 @@ func (m *MobileOrderPool) FetchOrder(ctx context.Context, opts options.IFetchMob
 		opts.GetBusinessType(), // ARGV[3]
 	}
 
+	// === 调试开始 ===
+	fmt.Printf("[DEBUG FetchOrder] scriptKeys: %v\n", scriptKeys)
+	fmt.Printf("[DEBUG FetchOrder] args: %v\n", args)
+
+	// 查 Stream 长度
+	highLen, _ := m.redisClient.XLen(ctx, highPriorityPoolKey).Result()
+	normalLen, _ := m.redisClient.XLen(ctx, normalPriorityPoolKey).Result()
+	fmt.Printf("[DEBUG FetchOrder] highPool XLEN: %d, normalPool XLEN: %d\n", highLen, normalLen)
+
+	// 查订单 Hash 是否存在（用最新那条消息的 order_sn）
+	normalMsgs, _ := m.redisClient.XRange(ctx, normalPriorityPoolKey, "-", "+").Result()
+	for _, msg := range normalMsgs {
+		orderSn := msg.Values["order_sn"]
+		orderKey := fmt.Sprintf("tenant:%s:%s:%s:order:%s", tenantIdStr, opts.GetRoleType(), opts.GetBusinessType(), orderSn)
+		exists, _ := m.redisClient.Exists(ctx, orderKey).Result()
+		orderInfo, _ := m.redisClient.HGetAll(ctx, orderKey).Result()
+		fmt.Printf("[DEBUG FetchOrder] orderKey: %s, exists: %d, info: %v\n", orderKey, exists, orderInfo)
+	}
 	result, err := m.redisClient.Eval(ctx, fetchScript, scriptKeys, args).Result()
+	fmt.Printf("[DEBUG FetchOrder] Eval result: %+v, err: %v\n", result, err)
 	if err != nil {
 		if err == redis.Nil {
 			return "", "", fmt.Errorf("no orders available")

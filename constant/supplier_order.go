@@ -28,9 +28,9 @@ func (s SupOrderStatus) String() string {
 	case SupOrderStatusProcessing:
 		return "充值中"
 	case SupOrderStatusSuccess:
-		return "成功"
+		return "充值成功"
 	case SupOrderStatusFailed:
-		return "失败"
+		return "充值失败"
 	case SupOrderStatusUnused:
 		return "未使用"
 	case SupOrderStatusBlacklisted:

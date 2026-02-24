@@ -37,6 +37,14 @@ func NewMobileOrderPool(redisClient redis.UniversalClient) *MobileOrderPool {
 
 // AddOrderToPool 订单入池，这里会根据池子的key进入不同的订单池优先级高和优先级低的池子,订单再次入池也是这个逻辑
 func (m *MobileOrderPool) AddOrderToPool(ctx context.Context, opts options.IMobileHandlerOptions) error {
+	// === 调试开始 ===
+	fmt.Printf("[DEBUG AddOrderToPool] PoolKey: %s\n", opts.GetPoolKey())
+	fmt.Printf("[DEBUG AddOrderToPool] OrderKey: %s\n", opts.GetOrderKey())
+	fmt.Printf("[DEBUG AddOrderToPool] SystemOrderSn: %s\n", opts.GetSystemOrderSnArg())
+	fmt.Printf("[DEBUG AddOrderToPool] ValidTime: %d\n", opts.GetValidTimeArg())
+	fmt.Printf("[DEBUG AddOrderToPool] ExpiredAt: %d\n", opts.GetExpiredAtArg())
+	fmt.Printf("[DEBUG AddOrderToPool] Priority: %s\n", opts.GetPriority())
+	// === 调试结束 ===
 	// 1. 准备Lua脚本和参数（确保核心操作原子性）
 	script := `
 		-- 修改Lua脚本，先检查，再写入

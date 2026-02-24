@@ -34,11 +34,12 @@ type RechargeLog struct {
 	CreatedAt   int64  `json:"created_at" bson:"created_at"`
 }
 
-func (o SupplierOrderBase) GetSupplierID() uint     { return o.SupplierID }   // 供货商ID
-func (o SupplierOrderBase) GetSupplierName() string { return o.SupplierName } // 供货商名称
-func (o SupplierOrderBase) GetProductID() uint      { return o.ProductID }    //产品ID
-func (o SupplierOrderBase) GetProductName() string  { return o.ProductName }  //产品名称
-func (o SupplierOrderBase) GetProductCode() string  { return o.ProductCode }  //产品编码
+func (o SupplierOrderBase) GetSupplierID() uint        { return o.SupplierID }      // 供货商ID
+func (o SupplierOrderBase) GetSupplierName() string    { return o.SupplierName }    // 供货商名称
+func (o SupplierOrderBase) GetSupplierOrderSn() string { return o.SupplierOrderSn } // 供货商订单号
+func (o SupplierOrderBase) GetProductID() uint         { return o.ProductID }       //产品ID
+func (o SupplierOrderBase) GetProductName() string     { return o.ProductName }     //产品名称
+func (o SupplierOrderBase) GetProductCode() string     { return o.ProductCode }     //产品编码
 func (o SupplierOrderBase) GetRechargeStatus() constant.SupOrderStatus {
 	return o.RechargeStatus
 } //供货商订单充值状态

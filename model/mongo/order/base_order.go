@@ -57,7 +57,7 @@ func (o OrderBase) GetTenantID() uint                      { return o.TenantID }
 func (o OrderBase) GetTenantName() string                  { return o.TenantName }
 func (o OrderBase) GetAppId() string                       { return o.AppID }
 func (o OrderBase) GetSystemOrderSn() string               { return o.SystemOrderSn }
-func (o OrderBase) GetAmount() decimal.Decimal             { return utils.FormatAmount(o.Amount) }
+func (o OrderBase) GetAmount() string                      { return o.Amount }
 func (o OrderBase) GetBusinessType() constant.BusinessType { return o.BusinessType }
 
 // 追踪相关

@@ -45,3 +45,13 @@ func (o SupplierMobileOrder) GetAreaCode() constant.AreaScope {
 func (o SupplierMobileOrder) GetProvinceCode() uint {
 	return o.Province
 }
+
+func (o *SupplierMobileOrder) GetTenantID() uint                      { return o.TenantID }
+func (o *SupplierMobileOrder) GetBusinessType() constant.BusinessType { return o.BusinessType }
+func (o *SupplierMobileOrder) GetSupplierOrderSn() string             { return o.SupplierOrderSn }
+func (o *SupplierMobileOrder) GetSystemOrderSn() string               { return o.SystemOrderSn }
+func (o *SupplierMobileOrder) GetAmount() string                      { return o.Amount }
+func (o *SupplierMobileOrder) GetRechargeAccount() string             { return o.RechargeAccount }
+func (o *SupplierMobileOrder) GetAppID() string                       { return o.AppID }
+func (o *SupplierMobileOrder) GetNotifyURL() string                   { return o.NotifyURL }
+func (o *SupplierMobileOrder) GetPlanID() string                      { return "" } // 国内没有PlanID

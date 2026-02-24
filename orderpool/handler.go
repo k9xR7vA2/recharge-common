@@ -36,14 +36,14 @@ func NewMobileOrderPool(redisClient redis.UniversalClient) *MobileOrderPool {
 
 // AddOrderToPool 订单入池，这里会根据池子的key进入不同的订单池优先级高和优先级低的池子,订单再次入池也是这个逻辑
 func (m *MobileOrderPool) AddOrderToPool(ctx context.Context, opts options.IMobileHandlerOptions) error {
-	// === 调试开始 ===
-	fmt.Printf("[DEBUG AddOrderToPool] PoolKey: %s\n", opts.GetPoolKey())
-	fmt.Printf("[DEBUG AddOrderToPool] OrderKey: %s\n", opts.GetOrderKey())
-	fmt.Printf("[DEBUG AddOrderToPool] SystemOrderSn: %s\n", opts.GetSystemOrderSnArg())
-	fmt.Printf("[DEBUG AddOrderToPool] ValidTime: %d\n", opts.GetValidTimeArg())
-	fmt.Printf("[DEBUG AddOrderToPool] ExpiredAt: %d\n", opts.GetExpiredAtArg())
-	fmt.Printf("[DEBUG AddOrderToPool] Priority: %s\n", opts.GetPriority())
-	// === 调试结束 ===
+	//// === 调试开始 ===
+	//fmt.Printf("[DEBUG AddOrderToPool] PoolKey: %s\n", opts.GetPoolKey())
+	//fmt.Printf("[DEBUG AddOrderToPool] OrderKey: %s\n", opts.GetOrderKey())
+	//fmt.Printf("[DEBUG AddOrderToPool] SystemOrderSn: %s\n", opts.GetSystemOrderSnArg())
+	//fmt.Printf("[DEBUG AddOrderToPool] ValidTime: %d\n", opts.GetValidTimeArg())
+	//fmt.Printf("[DEBUG AddOrderToPool] ExpiredAt: %d\n", opts.GetExpiredAtArg())
+	//fmt.Printf("[DEBUG AddOrderToPool] Priority: %s\n", opts.GetPriority())
+	//// === 调试结束 ===
 	// 1. 准备Lua脚本和参数（确保核心操作原子性）
 	script := `
 		-- 修改Lua脚本，先检查，再写入
@@ -234,26 +234,26 @@ func (m *MobileOrderPool) FetchOrder(ctx context.Context, opts options.IFetchMob
 	}
 
 	// === 调试开始 ===
-	fmt.Printf("[DEBUG FetchOrder] scriptKeys: %v\n", scriptKeys)
-	fmt.Printf("[DEBUG FetchOrder] args: %v\n", args)
-	fmt.Printf("[DEBUG FetchOrder] orderKeyPrefix: %s\n", orderKeyPrefix)
-
-	highLen, _ := m.redisClient.XLen(ctx, highPriorityPoolKey).Result()
-	normalLen, _ := m.redisClient.XLen(ctx, normalPriorityPoolKey).Result()
-	fmt.Printf("[DEBUG FetchOrder] highPool XLEN: %d, normalPool XLEN: %d\n", highLen, normalLen)
-
-	normalMsgs, _ := m.redisClient.XRange(ctx, normalPriorityPoolKey, "-", "+").Result()
-	for _, msg := range normalMsgs {
-		orderSn := msg.Values["order_sn"]
-		orderKey := fmt.Sprintf("%s%s", orderKeyPrefix, orderSn)
-		exists, _ := m.redisClient.Exists(ctx, orderKey).Result()
-		orderInfo, _ := m.redisClient.HGetAll(ctx, orderKey).Result()
-		fmt.Printf("[DEBUG FetchOrder] orderKey: %s, exists: %d, info: %v\n", orderKey, exists, orderInfo)
-	}
+	//fmt.Printf("[DEBUG FetchOrder] scriptKeys: %v\n", scriptKeys)
+	//fmt.Printf("[DEBUG FetchOrder] args: %v\n", args)
+	//fmt.Printf("[DEBUG FetchOrder] orderKeyPrefix: %s\n", orderKeyPrefix)
+	//
+	//highLen, _ := m.redisClient.XLen(ctx, highPriorityPoolKey).Result()
+	//normalLen, _ := m.redisClient.XLen(ctx, normalPriorityPoolKey).Result()
+	//fmt.Printf("[DEBUG FetchOrder] highPool XLEN: %d, normalPool XLEN: %d\n", highLen, normalLen)
+	//
+	//normalMsgs, _ := m.redisClient.XRange(ctx, normalPriorityPoolKey, "-", "+").Result()
+	//for _, msg := range normalMsgs {
+	//	orderSn := msg.Values["order_sn"]
+	//	orderKey := fmt.Sprintf("%s%s", orderKeyPrefix, orderSn)
+	//	exists, _ := m.redisClient.Exists(ctx, orderKey).Result()
+	//	orderInfo, _ := m.redisClient.HGetAll(ctx, orderKey).Result()
+	//	fmt.Printf("[DEBUG FetchOrder] orderKey: %s, exists: %d, info: %v\n", orderKey, exists, orderInfo)
+	//}
 	// === 调试结束 ===
 
 	result, err := m.redisClient.Eval(ctx, fetchScript, scriptKeys, args).Result()
-	fmt.Printf("[DEBUG FetchOrder] Eval result: %+v, err: %v\n", result, err)
+	//fmt.Printf("[DEBUG FetchOrder] Eval result: %+v, err: %v\n", result, err)
 
 	if err != nil {
 		if err == redis.Nil {

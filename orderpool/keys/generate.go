@@ -65,6 +65,14 @@ func (rg *RedisKeysGenerate) GenerateMobilePoolKey(Priority string, poolArgs ent
 	return kb.Build()
 }
 
+// OrderKeyPrefix 订单信息key前缀
+// 格式: tenant_{tenantID}:{role}:{businessType}:order:
+func (rg *RedisKeysGenerate) OrderKeyPrefix() string {
+	return rg.baseBuilder().
+		Add(TypeOrder).
+		Build() + KeySeparator
+}
+
 // OrderKey  订单信息 (Hash)
 // Key: tenant:{tenantID}:{role}:{businessType}:order:{orderSN}
 // Fields:

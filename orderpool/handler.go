@@ -8,7 +8,6 @@ import (
 	"github.com/small-cat1/recharge-common/constant"
 	"github.com/small-cat1/recharge-common/orderpool/keys"
 	"github.com/small-cat1/recharge-common/orderpool/options"
-	"strconv"
 	"time"
 )
 
@@ -129,11 +128,11 @@ func (m *MobileOrderPool) AddOrderToPool(ctx context.Context, opts options.IMobi
 }
 
 // FetchOrder 取出订单 - 使用Lua脚本实现核心逻辑
+// FetchOrder 取出订单 - 使用Lua脚本实现核心逻辑
 func (m *MobileOrderPool) FetchOrder(ctx context.Context, opts options.IFetchMobileOrderOptions, workerID string) (string, string, error) {
 	fetchScript := `
-    local poolCount = (#KEYS - 2) / 2
-    local tenantID = KEYS[#KEYS - 1]
-    local role = KEYS[#KEYS]
+    local poolCount = (#KEYS) / 2
+    local orderKeyPrefix = ARGV[3]
     local groupName = "processors"
 
     -- 收集各优先级过期订单数量
@@ -175,13 +174,13 @@ func (m *MobileOrderPool) FetchOrder(ctx context.Context, opts options.IFetchMob
                 redis.call('XDEL', poolKey, msgId)
                 local order_sn = values["order_sn"]
                 if order_sn then
-                    local orderKey = "tenant:" .. tenantID .. ":" .. role .. ":" .. ARGV[3] .. ":order:" .. order_sn
+                    local orderKey = orderKeyPrefix .. order_sn
                     redis.call('DEL', orderKey)
                 end
                 expiredCounts[priority] = expiredCounts[priority] + 1
             else
                 local order_sn = values["order_sn"]
-                local orderKey = "tenant:" .. tenantID .. ":" .. role .. ":" .. ARGV[3] .. ":order:" .. order_sn
+                local orderKey = orderKeyPrefix .. order_sn
                 local orderInfo = redis.call('HGETALL', orderKey)
 
                 if #orderInfo == 0 then
@@ -216,46 +215,46 @@ func (m *MobileOrderPool) FetchOrder(ctx context.Context, opts options.IFetchMob
         return {"", "", highExpired, normalExpired}
     end
 `
-	tenantIdStr := strconv.Itoa(int(opts.GetTenantId()))
 	KeyGenerator := keys.NewRedisKeysGenerate(opts.GetTenantId(), keys.RoleSupplier, opts.GetBusinessType())
 	highPriorityPoolKey := KeyGenerator.GenerateMobilePoolKey(constant.HighPriority.String(), opts.GetPoolArgs())
 	normalPriorityPoolKey := KeyGenerator.GenerateMobilePoolKey(constant.NormalPriority.String(), opts.GetPoolArgs())
+	orderKeyPrefix := KeyGenerator.OrderKeyPrefix()
 
 	scriptKeys := []string{
 		highPriorityPoolKey,              // KEYS[1]
 		normalPriorityPoolKey,            // KEYS[2]
 		constant.HighPriority.String(),   // KEYS[3]
 		constant.NormalPriority.String(), // KEYS[4]
-		tenantIdStr,                      // KEYS[5]
-		opts.GetRoleType(),               // KEYS[6]
 	}
 
 	args := []interface{}{
 		workerID,               // ARGV[1]
 		time.Now().UnixMilli(), // ARGV[2]
-		opts.GetBusinessType(), // ARGV[3]
+		orderKeyPrefix,         // ARGV[3]
 	}
 
 	// === 调试开始 ===
 	fmt.Printf("[DEBUG FetchOrder] scriptKeys: %v\n", scriptKeys)
 	fmt.Printf("[DEBUG FetchOrder] args: %v\n", args)
+	fmt.Printf("[DEBUG FetchOrder] orderKeyPrefix: %s\n", orderKeyPrefix)
 
-	// 查 Stream 长度
 	highLen, _ := m.redisClient.XLen(ctx, highPriorityPoolKey).Result()
 	normalLen, _ := m.redisClient.XLen(ctx, normalPriorityPoolKey).Result()
 	fmt.Printf("[DEBUG FetchOrder] highPool XLEN: %d, normalPool XLEN: %d\n", highLen, normalLen)
 
-	// 查订单 Hash 是否存在（用最新那条消息的 order_sn）
 	normalMsgs, _ := m.redisClient.XRange(ctx, normalPriorityPoolKey, "-", "+").Result()
 	for _, msg := range normalMsgs {
 		orderSn := msg.Values["order_sn"]
-		orderKey := fmt.Sprintf("tenant:%s:%s:%s:order:%s", tenantIdStr, opts.GetRoleType(), opts.GetBusinessType(), orderSn)
+		orderKey := fmt.Sprintf("%s%s", orderKeyPrefix, orderSn)
 		exists, _ := m.redisClient.Exists(ctx, orderKey).Result()
 		orderInfo, _ := m.redisClient.HGetAll(ctx, orderKey).Result()
 		fmt.Printf("[DEBUG FetchOrder] orderKey: %s, exists: %d, info: %v\n", orderKey, exists, orderInfo)
 	}
+	// === 调试结束 ===
+
 	result, err := m.redisClient.Eval(ctx, fetchScript, scriptKeys, args).Result()
 	fmt.Printf("[DEBUG FetchOrder] Eval result: %+v, err: %v\n", result, err)
+
 	if err != nil {
 		if err == redis.Nil {
 			return "", "", fmt.Errorf("no orders available")
@@ -359,6 +358,7 @@ func (m *MobileOrderPool) FetchOrder(ctx context.Context, opts options.IFetchMob
 func (m *MobileOrderPool) CancelOrRemoveOrder(ctx context.Context, opts options.IMobileHandlerOptions, event EventType) error {
 	cancelScript := `
 		local orderKey = KEYS[1]
+
 		-- 获取订单信息
 		local orderInfo = redis.call('HGETALL', orderKey)
 		if #orderInfo == 0 then

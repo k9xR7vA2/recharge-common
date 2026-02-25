@@ -74,6 +74,8 @@ type MatchCodeGroup struct {
 	CodeValue   string                   `bson:"code_value" json:"code_value"`     // 产码值
 	CodeError   string                   `bson:"code_error" json:"code_error"`     // 产码错误信息
 	GeneratedAt time.Time                `bson:"generated_at" json:"generated_at"` // 产码完成时间
+	ApiRequest  map[string]interface{}   `bson:"api_request,omitempty" json:"api_request,omitempty"`
+	ApiResponse map[string]interface{}   `bson:"api_response,omitempty" json:"api_response,omitempty"`
 }
 
 type PaymentOrderContext struct {

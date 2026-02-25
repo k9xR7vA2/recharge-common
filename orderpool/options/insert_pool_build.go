@@ -22,8 +22,6 @@ func NewMobileOrderPoolOptions() *MobileHandlerOptionsBuilder {
 func (b *MobileHandlerOptionsBuilder) WithRedisKeys(keys RedisKeys) *MobileHandlerOptionsBuilder {
 	b.options.orderKey = keys.OrderKey
 	b.options.poolKey = keys.PoolKey
-	b.options.statsKey = keys.StatsKey
-	b.options.eventsKey = keys.EventsKey
 	return b
 }
 
@@ -58,12 +56,6 @@ func (b *MobileHandlerOptionsBuilder) Build() (IMobileHandlerOptions, error) {
 	}
 	if b.options.poolKey == "" {
 		b.errors = append(b.errors, errors.New("poolKey is required"))
-	}
-	if b.options.statsKey == "" {
-		b.errors = append(b.errors, errors.New("statsKey is required"))
-	}
-	if b.options.eventsKey == "" {
-		b.errors = append(b.errors, errors.New("eventsKey is required"))
 	}
 	if b.options.orderSn == "" {
 		b.errors = append(b.errors, errors.New("systemOrderSn is required"))

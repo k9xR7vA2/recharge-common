@@ -6,10 +6,8 @@ import "github.com/small-cat1/recharge-common/orderpool/entities"
 
 // RedisKeys 所有 Redis key 归为一组
 type RedisKeys struct {
-	OrderKey  string
-	PoolKey   string
-	StatsKey  string
-	EventsKey string
+	OrderKey string
+	PoolKey  string
 }
 
 // OrderInfo 订单标识信息归为一组
@@ -27,11 +25,9 @@ type TimeArgs struct {
 
 // MobileHandlerOptions 处理器选项
 type MobileHandlerOptions struct {
-	priority  string //池子优先级
-	orderKey  string //订单信息的key
-	statsKey  string //统计key
-	poolKey   string //订单池的key
-	eventsKey string //订单事件stream的key
+	priority string //池子优先级
+	orderKey string //订单信息的key
+	poolKey  string //订单池的key
 
 	orderData       string // ARGV[1] 订单数据(JSON)
 	validTime       int    // ARGV[2] 订单有效期(秒)
@@ -54,14 +50,6 @@ func (h MobileHandlerOptions) GetPoolKey() string {
 
 func (h MobileHandlerOptions) GetOrderKey() string {
 	return h.orderKey
-}
-
-func (h MobileHandlerOptions) GetStatsKey() string {
-	return h.statsKey
-}
-
-func (h MobileHandlerOptions) GetEventsKey() string {
-	return h.eventsKey
 }
 
 func (h MobileHandlerOptions) GetOrderDataArg() string {

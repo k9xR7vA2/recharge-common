@@ -99,20 +99,6 @@ func (rg *RedisKeysGenerate) PoolKeyPattern() string {
 		Build()
 }
 
-// EventKey 事件流 (Stream)
-// Key: tenant:{tenantID}:{role}:{businessType}:order:{orderSN}:events
-// Entry:
-//   - order_sn: 订单编号
-//   - event: 事件类型 (created, processing, completed, failed, expired, canceled)
-//   - timestamp: 时间戳
-//   - details: 事件详情（JSON）
-func (rg *RedisKeysGenerate) EventKey(orderSn string) string {
-	return rg.baseBuilder().
-		Add(orderSn).
-		Add(TypeEvents).
-		Build()
-}
-
 // PaymentKey 生成支付参数的 key
 // 格式: tenant_{id}:merchant:mobile:payment:{order_sn}
 func (rg *RedisKeysGenerate) PaymentKey(orderSn string) string {

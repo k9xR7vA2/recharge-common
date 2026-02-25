@@ -26,7 +26,6 @@ func (b *FetchMobileHandlerOptionsBuilder) WithTenantInfo(info TenantInfo) *Fetc
 }
 
 func (b *FetchMobileHandlerOptionsBuilder) WithFetchRedisKeys(keys FetchRedisKeys) *FetchMobileHandlerOptionsBuilder {
-	b.options.statsKey = keys.StatsKey
 	b.options.highPriorityPoolKey = keys.HighPriorityPoolKey
 	b.options.normalPriorityPoolKey = keys.NormalPriorityPoolKey
 	return b
@@ -50,9 +49,7 @@ func (b *FetchMobileHandlerOptionsBuilder) Build() (IFetchMobileOrderOptions, er
 	if b.options.businessType == "" {
 		b.errors = append(b.errors, errors.New("businessType is required"))
 	}
-	if b.options.statsKey == "" {
-		b.errors = append(b.errors, errors.New("statsKey is required"))
-	}
+
 	if b.options.highPriorityPoolKey == "" {
 		b.errors = append(b.errors, errors.New("highPriorityPoolKey is required"))
 	}

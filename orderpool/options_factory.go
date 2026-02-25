@@ -28,14 +28,10 @@ func (f *OrderPoolOptionsFactory) BuildMobileOrderOptions(ctx context.Context,
 	keysGen := keys.NewRedisKeysGenerate(mobilePoolArgs.TenantID, keys.RoleSupplier, businessType)
 	orderKey := keysGen.OrderKey(mobilePoolArgs.SystemOrderSn)
 	poolKey := keysGen.GenerateMobilePoolKey(mobilePoolArgs.Priority, mobilePoolArgs.MobilePoolArgs)
-	statsKey := keysGen.StatsKey()
-	eventsKey := keysGen.EventKey(mobilePoolArgs.SystemOrderSn)
 	return options.NewMobileOrderPoolOptions().
 		WithRedisKeys(options.RedisKeys{
-			OrderKey:  orderKey,
-			PoolKey:   poolKey,
-			StatsKey:  statsKey,
-			EventsKey: eventsKey,
+			OrderKey: orderKey,
+			PoolKey:  poolKey,
 		}).
 		WithOrderInfo(options.OrderInfo{
 			OrderSn:         mobilePoolArgs.SystemOrderSn,
@@ -55,7 +51,6 @@ func (f *OrderPoolOptionsFactory) BuildMobileOrderFetchOptions(ctx context.Conte
 	businessType string,
 	mobilePoolArgs entities.MobileMatchmakingArgs) (options.IFetchMobileOrderOptions, error) {
 	keysGen := keys.NewRedisKeysGenerate(mobilePoolArgs.TenantID, keys.RoleSupplier, businessType)
-	statsKey := keysGen.StatsKey()
 	// 生成两个优先级的 poolKey
 	highPriorityPoolKey := keysGen.GenerateMobilePoolKey(constant.HighPriority.String(), mobilePoolArgs.MobilePoolArgs)
 	normalPriorityPoolKey := keysGen.GenerateMobilePoolKey(constant.NormalPriority.String(), mobilePoolArgs.MobilePoolArgs)
@@ -66,7 +61,6 @@ func (f *OrderPoolOptionsFactory) BuildMobileOrderFetchOptions(ctx context.Conte
 			BusinessType: businessType,
 		}).
 		WithFetchRedisKeys(options.FetchRedisKeys{
-			StatsKey:              statsKey,
 			HighPriorityPoolKey:   highPriorityPoolKey,
 			NormalPriorityPoolKey: normalPriorityPoolKey,
 		}).

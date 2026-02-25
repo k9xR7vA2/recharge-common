@@ -2,7 +2,6 @@ package options
 
 import (
 	"github.com/small-cat1/recharge-common/orderpool/entities"
-	"strconv"
 )
 
 // ---------- Fetch 专属分组结构体 ----------
@@ -16,7 +15,6 @@ type TenantInfo struct {
 
 // FetchRedisKeys Fetch 场景下的 Redis key 分组
 type FetchRedisKeys struct {
-	StatsKey              string
 	HighPriorityPoolKey   string
 	NormalPriorityPoolKey string
 }
@@ -25,7 +23,6 @@ type FetchRedisKeys struct {
 type FetchMobileHandlerOptions struct {
 	tenantID              uint
 	roleType              string
-	statsKey              string
 	businessType          string
 	poolKey               string //订单池的key
 	poolArgs              entities.MobilePoolArgs
@@ -48,17 +45,10 @@ func (o FetchMobileHandlerOptions) GetPoolKey() string {
 func (o FetchMobileHandlerOptions) GetPoolArgs() entities.MobilePoolArgs {
 	return o.poolArgs
 }
-func (o FetchMobileHandlerOptions) GetStatsKey() string {
-	return o.statsKey
-}
+
 func (o FetchMobileHandlerOptions) GetHighPriorityPoolKey() string {
 	return o.highPriorityPoolKey
 }
 func (o FetchMobileHandlerOptions) GetNormalPriorityPoolKey() string {
 	return o.normalPriorityPoolKey
-}
-
-func (o FetchMobileHandlerOptions) GetEventsKey(orderSn string) string {
-	tenantIdStr := strconv.Itoa(int(o.GetTenantId()))
-	return "tenant:" + tenantIdStr + ":" + o.GetRoleType() + ":" + o.GetBusinessType() + ":order:" + orderSn + ":events"
 }

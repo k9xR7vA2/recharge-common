@@ -19,7 +19,6 @@ type AsInterface struct {
 	Rate          int64                         `json:"rate,omitempty" gorm:"column:rate;NOT NULL;comment:'费率'"`
 	Status        constant.TenantBusinessStatus `json:"status,omitempty" gorm:"column:status;type:tinyint;not null;comment:'状态1开启，2关闭'" `                           // 状态1开启，2关闭
 	NeedCK        constant.NeedCkStatus         `json:"need_ck" gorm:"column:need_ck;type:tinyint;not null;comment:'下单CK1需要，2不需要'" `                                // 下单CK1需要，2不需要
-	Host          string                        `json:"host,omitempty" gorm:"column:host;type:varchar(255);not null;comment:'下单host'" `                             // 下单host
 	ConfigParams  datatypes.JSON                `json:"config_params,omitempty" gorm:"column:config_params;type:json;default:null;comment:'配置参数'" `                 // 配置参数
 	PaySeconds    int                           `json:"pay_seconds,omitempty" gorm:"column:pay_seconds;type:int;not null;default:90;comment:'支付秒数'" `               // 支付秒数
 	QuerySeconds  int                           `json:"query_seconds,omitempty" gorm:"column:query_seconds;type:int unsigned;not null;default:140;comment:'查单秒数'" ` // 查单秒数
@@ -34,9 +33,11 @@ func (AsInterface) TableName() string {
 }
 
 type InterfaceConfigParams struct {
-	ApiKey    string `json:"api_key"`
-	ApiSecret string `json:"api_secret"`
-	ApiUrl    string `json:"api_url"` // 完整路径，如 /api/order/create
+	ApiKey        string `json:"api_key"`
+	ApiSecret     string `json:"api_secret"`
+	PayUrl        string `json:"pay_url"`        // 下单完整URL
+	QueryUrl      string `json:"query_url"`      // 查单完整URL
+	QueryInterval int    `json:"query_interval"` // 查单频率（秒）
 }
 
 // 在 Interface 模型上加个方法

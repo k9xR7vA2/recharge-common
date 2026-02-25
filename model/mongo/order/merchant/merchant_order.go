@@ -68,7 +68,7 @@ type MatchCodeGroup struct {
 	SupplierOrderCreateAt time.Time                `bson:"supplier_order_create_at" json:"supplier_order_create_at"` // 供应商订单创建时间
 	MatchError            string                   `bson:"match_error" json:"match_error"`                           // 配单错误信息
 	MatchedAt             time.Time                `bson:"matched_at" json:"matched_at"`                             // 配单完成时间
-
+	TradeNo               string                   `bson:"trade_no" json:"trade_no"`                                 // 三方请求交易号
 	// 产码信息
 	CodeStatus  constant.MerOrderSubStat `bson:"code_status" json:"code_status"`   // 产码状态
 	CodeValue   string                   `bson:"code_value" json:"code_value"`     // 产码值

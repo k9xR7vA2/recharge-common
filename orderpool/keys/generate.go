@@ -90,21 +90,12 @@ func (rg *RedisKeysGenerate) OrderKey(orderSn string) string {
 		Build()
 }
 
-// StatsKey 统计信息 (Hash)
-// Key: tenant:{tenantID}:{role}:{businessType}:stats
-// Fields:
-//   - amount:{value}: 金额维度计数
-//   - carrier:{value}: 运营商维度计数
-//   - charge_type:{value}: 充值类型维度计数
-//   - area:{value}: 区域维度计数
-//   - total_orders: 总订单数
-//   - processing_orders: 处理中订单数
-//   - pool_orders: 池中订单数
-//   - priority:high: 高优先级订单数
-//   - priority:normal: 普通优先级订单数
-func (rg *RedisKeysGenerate) StatsKey() string {
+// PoolKeyPattern 匹配当前租户+业务类型下所有池子 key
+// 格式: tenant:{tenantID}:{role}:{businessType}:pool:*
+func (rg *RedisKeysGenerate) PoolKeyPattern() string {
 	return rg.baseBuilder().
-		Add(TypeStats).
+		Add(TypePool).
+		Add("*").
 		Build()
 }
 

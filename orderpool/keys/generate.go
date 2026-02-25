@@ -51,16 +51,18 @@ func (rg *RedisKeysGenerate) baseBuilder() *KeyBuilder {
 // - expire_at: 过期时间戳
 // - retry_count: 重试次数
 // - create_time: 入池时间
-func (rg *RedisKeysGenerate) GenerateMobilePoolKey(Priority string, poolArgs entities.MobilePoolArgs) string {
+func (rg *RedisKeysGenerate) GenerateMobilePoolKey(Priority string, orderInfo entities.MobilePoolArgs) string {
 	kb := rg.baseBuilder().
 		Add(TypePool).
 		Add(Priority).
-		Add(poolArgs.Amount).
-		Add(poolArgs.Carrier).
-		Add(poolArgs.ChargeSpeed).
-		Add(poolArgs.Region)
-	if poolArgs.Region == constant.Province.Code() {
-		kb.Add(poolArgs.Province)
+		Add(orderInfo.Amount).
+		Add(orderInfo.Carrier).
+		Add(orderInfo.ChargeSpeed)
+	if orderInfo.Region != "" {
+		kb.Add(orderInfo.Region)
+	}
+	if orderInfo.Region == constant.Province.Code() && orderInfo.Province != "" {
+		kb.Add(orderInfo.Province)
 	}
 	return kb.Build()
 }

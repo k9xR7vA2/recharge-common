@@ -5,7 +5,6 @@ import (
 	"github.com/small-cat1/recharge-common/constant"
 	"github.com/small-cat1/recharge-common/utils"
 	"go.mongodb.org/mongo-driver/bson/primitive"
-	"time"
 )
 
 type OrderBase struct {
@@ -72,18 +71,18 @@ func (o OrderBase) GetQueryUrl() string             { return o.QueryUrl }
 func (o OrderBase) GetRechargeTimes() uint          { return o.RechargeTimes }
 
 // 回调相关
-func (o OrderBase) GetNotifyURL() string                         { return o.NotifyURL }                  //回调地址
-func (o OrderBase) GetNotifyAt() time.Time                       { return utils.FromMillis(o.NotifyAt) } //回调时间
-func (o OrderBase) GetNotifyNumbers() uint                       { return o.NotifyNumbers }              //回调次数
-func (o OrderBase) GetNotifyStatus() constant.GlobalNotifyStatus { return o.NotifyStatus }               //回调状态
+func (o OrderBase) GetNotifyURL() string                         { return o.NotifyURL }     //回调地址
+func (o OrderBase) GetNotifyAt() int64                           { return o.NotifyAt }      //回调时间
+func (o OrderBase) GetNotifyNumbers() uint                       { return o.NotifyNumbers } //回调次数
+func (o OrderBase) GetNotifyStatus() constant.GlobalNotifyStatus { return o.NotifyStatus }  //回调状态
 
 // 其他信息
-func (o OrderBase) GetRemark() string       { return o.Remark } //订单备注
-func (o OrderBase) GetCreatedAt() time.Time { return utils.FromMillis(o.CreatedAt) }
-func (o OrderBase) GetPullAt() time.Time {
-	return utils.FromMillis(o.PullAt)
+func (o OrderBase) GetRemark() string   { return o.Remark } //订单备注
+func (o OrderBase) GetCreatedAt() int64 { return o.CreatedAt }
+func (o OrderBase) GetPullAt() int64 {
+	return o.PullAt
 }
-func (o OrderBase) GetSuccessAt() time.Time {
-	return utils.FromMillis(o.SuccessAt)
+func (o OrderBase) GetSuccessAt() int64 {
+	return o.SuccessAt
 }
-func (o OrderBase) GetUpdatedAt() time.Time { return utils.FromMillis(o.UpdatedAt) } // 更新时间
+func (o OrderBase) GetUpdatedAt() int64 { return o.UpdatedAt } // 更新时间

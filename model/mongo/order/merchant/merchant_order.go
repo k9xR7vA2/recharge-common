@@ -6,7 +6,6 @@ import (
 	"github.com/small-cat1/recharge-common/model/mongo/order"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
-	"time"
 )
 
 // 商户话费订单
@@ -41,9 +40,9 @@ type MerchantOrder struct {
 	CashUrl       string                 `bson:"cash_url" json:"cash_url"`             // 收银地址
 
 	UpstreamOrderSn string `bson:"upstream_order_sn" json:"upstream_order_sn"` //三方网关订单号
-	MatchAt         string `bson:"match_at" json:"match_at"`                   // 配单成功时间
+	MatchAt         int64  `bson:"match_at" json:"match_at"`                   // 配单成功时间
 	MakeCodeNumber  uint   `bson:"make_code_number" json:"make_code_number"`   // 产码次数
-	MakeCodeAt      string `bson:"make_code_at" json:"make_code_at"`           // 产码成功时间
+	MakeCodeAt      int64  `bson:"make_code_at" json:"make_code_at"`           // 产码成功时间
 
 	// 配单产码历史记录，按时间倒序
 	MatchCodeHistory []*MatchCodeGroup `bson:"match_code_history" json:"match_code_history"`
@@ -57,8 +56,8 @@ type MerchantOrder struct {
 // MatchCodeGroup 配单产码组合记录
 type MatchCodeGroup struct {
 	GroupID   primitive.ObjectID `bson:"group_id" json:"group_id"`     // 组ID
-	CreatedAt time.Time          `bson:"created_at" json:"created_at"` // 创建时间
-	UpdatedAt time.Time          `bson:"updated_at" json:"updated_at"` // 更新时间
+	CreatedAt int64              `bson:"created_at" json:"created_at"` // 创建时间
+	UpdatedAt int64              `bson:"updated_at" json:"updated_at"` // 更新时间
 
 	// 配单信息
 	MatchStatus           constant.MerOrderSubStat `bson:"match_status" json:"match_status"`                         // 配单状态
@@ -66,15 +65,15 @@ type MatchCodeGroup struct {
 	SupplierName          string                   `bson:"supplier_name" json:"supplier_name"`                       // 供应商名称
 	SystemOrderSn         string                   `bson:"system_order_sn" json:"system_order_sn"`                   // 供应商订单的系统订单号
 	RechargeAccount       string                   `bson:"recharge_account" json:"recharge_account"`                 // 充值账号
-	SupplierOrderCreateAt time.Time                `bson:"supplier_order_create_at" json:"supplier_order_create_at"` // 供应商订单创建时间
+	SupplierOrderCreateAt int64                    `bson:"supplier_order_create_at" json:"supplier_order_create_at"` // 供应商订单创建时间
 	MatchError            string                   `bson:"match_error" json:"match_error"`                           // 配单错误信息
-	MatchedAt             time.Time                `bson:"matched_at" json:"matched_at"`                             // 配单完成时间
+	MatchedAt             int64                    `bson:"matched_at" json:"matched_at"`                             // 配单完成时间
 	TradeNo               string                   `bson:"trade_no" json:"trade_no"`                                 // 三方请求交易号
 	// 产码信息
 	CodeStatus  constant.MerOrderSubStat `bson:"code_status" json:"code_status"`   // 产码状态
 	CodeValue   string                   `bson:"code_value" json:"code_value"`     // 产码值
 	CodeError   string                   `bson:"code_error" json:"code_error"`     // 产码错误信息
-	GeneratedAt time.Time                `bson:"generated_at" json:"generated_at"` // 产码完成时间
+	GeneratedAt int64                    `bson:"generated_at" json:"generated_at"` // 产码完成时间
 	ApiRequest  map[string]interface{}   `bson:"api_request,omitempty" json:"api_request,omitempty"`
 	ApiResponse map[string]interface{}   `bson:"api_response,omitempty" json:"api_response,omitempty"`
 }

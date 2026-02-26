@@ -33,6 +33,8 @@ type OrderQueryTask struct {
 	Amount          string `json:"amount"`
 
 	// 查单策略（从 Interface 快照）
+	ApiSecret            string `json:"api_secret"`
+	ApiKey               string `json:"api_key"`
 	QueryUrl             string `json:"query_url"`
 	QueryInterval        int    `json:"query_interval"`         // 查单间隔（秒）
 	QueryMaxTimes        int    `json:"query_max_times"`        // 最大查单次数

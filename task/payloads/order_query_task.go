@@ -33,10 +33,12 @@ type OrderQueryTask struct {
 	Amount          string `json:"amount"`
 
 	// 查单策略（从 Interface 快照）
-	QueryUrl      string `json:"query_url"`
-	QueryInterval int    `json:"query_interval"`  // 查单间隔（秒）
-	QueryMaxTimes int    `json:"query_max_times"` // 最大查单次数
-	PaySeconds    int    `json:"pay_seconds"`     // 支付有效期（秒）
+	QueryUrl             string `json:"query_url"`
+	QueryInterval        int    `json:"query_interval"`         // 查单间隔（秒）
+	QueryMaxTimes        int    `json:"query_max_times"`        // 最大查单次数
+	PaySeconds           int    `json:"pay_seconds"`            // 支付有效期（秒）
+	OfficialSerialNumber string `json:"official_serial_number"` // 官方流水号
+	UpstreamOrderSn      string `json:"upstream_order_sn"`      //三方网关订单号
 
 	// 运行时
 	QueryCount int   `json:"query_count"` // 已查单次数

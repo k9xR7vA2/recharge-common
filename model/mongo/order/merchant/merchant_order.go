@@ -40,9 +40,10 @@ type MerchantOrder struct {
 	PaymentMethod constant.PaymentMethod `bson:"payment_method" json:"payment_method"` // 支付方法 1h5
 	CashUrl       string                 `bson:"cash_url" json:"cash_url"`             // 收银地址
 
-	MatchAt        string `bson:"match_at" json:"match_at"`                 // 配单成功时间
-	MakeCodeNumber uint   `bson:"make_code_number" json:"make_code_number"` // 产码次数
-	MakeCodeAt     string `bson:"make_code_at" json:"make_code_at"`         // 产码成功时间
+	UpstreamOrderSn string `bson:"upstream_order_sn" json:"upstream_order_sn"` //三方网关订单号
+	MatchAt         string `bson:"match_at" json:"match_at"`                   // 配单成功时间
+	MakeCodeNumber  uint   `bson:"make_code_number" json:"make_code_number"`   // 产码次数
+	MakeCodeAt      string `bson:"make_code_at" json:"make_code_at"`           // 产码成功时间
 
 	// 配单产码历史记录，按时间倒序
 	MatchCodeHistory []*MatchCodeGroup `bson:"match_code_history" json:"match_code_history"`

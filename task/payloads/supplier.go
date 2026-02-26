@@ -33,7 +33,7 @@ type SupplierOrderCallbackTask struct {
 	SupplierAppID   string                `json:"supplier_app_id"`
 	SupplierID      uint                  `json:"supplier_id"`
 	TenantID        uint                  `json:"tenant_id"`
-	OrderDate       string                `json:"order_date"` //下单日期，20060102
+	OrderDate       int64                 `json:"order_date"` //下单日期，20060102
 	NotifyStatus    constant.NotifyStatus `json:"status"`
 	BusinessType    constant.BusinessType `json:"business_type"`
 }

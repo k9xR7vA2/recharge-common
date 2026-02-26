@@ -3,7 +3,6 @@ package payloads
 
 import (
 	"github.com/small-cat1/recharge-common/constant"
-	"time"
 )
 
 type OrderQueryTask struct {
@@ -17,14 +16,14 @@ type OrderQueryTask struct {
 	MerchantAppID         string `json:"merchant_app_id"`
 
 	// 供货商订单
-	SupplierID            uint      `json:"supplier_id"`
-	SupplierName          string    `json:"supplier_name"`
-	SupplierOrderSn       string    `json:"supplier_order_sn"`
-	SupplierSystemOrderSn string    `json:"supplier_system_order_sn"`
-	SupplierNotifyURL     string    `json:"supplier_notify_url"`
-	SupplierAppID         string    `json:"supplier_app_id"`
-	SupplierOrderAmount   string    `json:"supplier_order_amount"`
-	SupplierOrderCreateAt time.Time `json:"supplier_order_create_at"`
+	SupplierID            uint   `json:"supplier_id"`
+	SupplierName          string `json:"supplier_name"`
+	SupplierOrderSn       string `json:"supplier_order_sn"`
+	SupplierSystemOrderSn string `json:"supplier_system_order_sn"`
+	SupplierNotifyURL     string `json:"supplier_notify_url"`
+	SupplierAppID         string `json:"supplier_app_id"`
+	SupplierOrderAmount   string `json:"supplier_order_amount"`
+	SupplierOrderCreateAt int64  `json:"supplier_order_create_at"`
 
 	// 查单
 	InterfaceID     uint   `json:"interface_id"`      // 接口ID → 实时查配置

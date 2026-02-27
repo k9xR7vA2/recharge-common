@@ -92,6 +92,7 @@ const (
 	TenantAccountLogs        = "tenant_account_logs"
 	SupplierOrderTablePrefix = "supplier_order_" // 供货商订单表前缀
 	MerchantOrderTablePrefix = "merchant_order_" // 商户订单表前缀
+	QueryLogCollectionPrefix = "query_log_"      //查单日志订单表前缀
 	PlatformRule             = "platform_rules"
 	Cookies                  = "cookies"
 

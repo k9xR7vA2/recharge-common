@@ -44,3 +44,4 @@ func (o SupplierOrderBase) GetRechargeStatus() constant.SupOrderStatus {
 	return o.RechargeStatus
 }                                                  //供货商订单充值状态
 func (o SupplierOrderBase) GetRechargeTimes() uint { return o.RechargeTimes }
+func (o SupplierOrderBase) GetExpiredAt() int64    { return o.ExpiredAt }

@@ -1,4 +1,3 @@
-// payloads/order_query_task.go
 package payloads
 
 import (

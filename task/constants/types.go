@@ -11,13 +11,8 @@ const (
 
 	// SupplierOrderExpireTask 过期处理任务
 	supplierOrderExpirePattern = "supplier:order:%s:expire"
-	expirationQueuePattern     = "expiration:%s"
 )
 
 func SupplierOrderExpireTask(bizType string) string {
 	return fmt.Sprintf(supplierOrderExpirePattern, bizType)
-}
-
-func ExpirationQueue(bizType string) string {
-	return fmt.Sprintf(expirationQueuePattern, bizType)
 }

@@ -22,11 +22,10 @@ type OrderBase struct {
 	Amount               string                `bson:"amount" json:"amount"`                                 // 充值金额
 	HandingFees          string                `bson:"handing_fees" json:"handing_fees"`                     // 手续费
 
-	RechargeURL   string `bson:"recharge_url" json:"recharge_url"`     // 充值地址
-	QueryUrl      string `bson:"query_url" json:"query_url"`           // 查单地址
-	RechargeTimes uint   `bson:"recharge_times" json:"recharge_times"` // 充值次数
-	PullAt        int64  `bson:"pull_at" json:"pull_at"`               // 充值时间
-	SuccessAt     int64  `bson:"success_at" json:"success_at"`         // 到账时间
+	RechargeURL string `bson:"recharge_url" json:"recharge_url"` // 充值地址
+	QueryUrl    string `bson:"query_url" json:"query_url"`       // 查单地址
+	PullAt      int64  `bson:"pull_at" json:"pull_at"`           // 充值时间
+	SuccessAt   int64  `bson:"success_at" json:"success_at"`     // 到账时间
 
 	NotifyURL     string                      `bson:"notify_url" json:"notify_url"`         // 回调地址
 	NotifyAt      int64                       `bson:"notify_at" json:"notify_at"`           // 回调时间
@@ -68,7 +67,6 @@ func (o OrderBase) GetRechargeAccount() string      { return o.RechargeAccount }
 func (o OrderBase) GetHandingFees() decimal.Decimal { return utils.FormatAmount(o.HandingFees) }
 func (o OrderBase) GetRechargeURL() string          { return o.RechargeURL }
 func (o OrderBase) GetQueryUrl() string             { return o.QueryUrl }
-func (o OrderBase) GetRechargeTimes() uint          { return o.RechargeTimes }
 
 // 回调相关
 func (o OrderBase) GetNotifyURL() string                         { return o.NotifyURL }     //回调地址

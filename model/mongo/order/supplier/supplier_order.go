@@ -12,9 +12,10 @@ type SupplierOrderBase struct {
 	SupplierName    string `bson:"supplier_name" json:"supplier_name"`         // 供货商名称
 	SupplierOrderSn string `bson:"supplier_order_sn" json:"supplier_order_sn"` // 供货商订单号
 
-	ProductID   uint   `bson:"product_id" json:"product_id"`     // 产品iD
-	ProductName string `bson:"product_name" json:"product_name"` // 产品名称
-	ProductCode string `bson:"product_code" json:"product_code"` // 产品编码
+	ProductID     uint   `bson:"product_id" json:"product_id"`         // 产品iD
+	ProductName   string `bson:"product_name" json:"product_name"`     // 产品名称
+	ProductCode   string `bson:"product_code" json:"product_code"`     // 产品编码
+	RechargeTimes uint   `bson:"recharge_times" json:"recharge_times"` // 充值次数
 
 	RechargeStatus constant.SupOrderStatus `bson:"recharge_status" json:"recharge_status"` // 订单状态(1等待充值，2充值中，3成功，4失败，5未使用，6账户黑名单,7撤单
 	ExpiredAt      int64                   `bson:"expired_at" json:"expired_at"`           // 过期时间
@@ -41,4 +42,5 @@ func (o SupplierOrderBase) GetProductName() string     { return o.ProductName } 
 func (o SupplierOrderBase) GetProductCode() string     { return o.ProductCode }     //产品编码
 func (o SupplierOrderBase) GetRechargeStatus() constant.SupOrderStatus {
 	return o.RechargeStatus
-} //供货商订单充值状态
+}                                                  //供货商订单充值状态
+func (o SupplierOrderBase) GetRechargeTimes() uint { return o.RechargeTimes }

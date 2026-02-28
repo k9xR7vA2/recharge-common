@@ -15,3 +15,6 @@ type SupplierIndiaMobileOrder struct {
 
 func (o *SupplierIndiaMobileOrder) GetAppID() string  { return o.AppID }
 func (o *SupplierIndiaMobileOrder) GetPlanID() string { return o.PlanID }
+func (o SupplierIndiaMobileOrder) GetChargeSpeed() constant.ChargeSpeed {
+	return o.ChargeSpeed
+}

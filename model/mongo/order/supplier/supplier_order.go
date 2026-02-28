@@ -27,7 +27,6 @@ type RechargeLog struct {
 	Round       int    `json:"round" bson:"round"`             // 第几轮处理（从1开始）
 	Operation   string `json:"operation" bson:"operation"`     // 操作类型：create/match/recharge/query/success/fail
 	Message     string `json:"message" bson:"message"`         // 描述信息
-	Status      int    `json:"status" bson:"status"`           // 1-进行中 2-成功 3-失败
 	RequestURL  string `json:"request_url" bson:"request_url"` // 请求地址
 	RequestBody string `json:"request_body" bson:"request_body"`
 	Response    string `json:"response" bson:"response"`

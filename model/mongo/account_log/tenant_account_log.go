@@ -30,7 +30,3 @@ type TenantBalanceLog struct {
 	Remark     string    `json:"remark" bson:"remark"`
 	CreatedAt  time.Time `json:"created_at" bson:"created_at"`
 }
-
-func (TenantBalanceLog) TableName() string {
-	return "as_tenant_balance_logs"
-}

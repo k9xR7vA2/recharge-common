@@ -29,21 +29,11 @@ type OrderQueryTask struct {
 	InterfaceID     uint   `json:"interface_id"`      // 接口ID → 实时查配置
 	UpstreamOrderSn string `json:"upstream_order_sn"` // 三方网关订单号
 	Amount          string `json:"amount"`
-	//// 三方查单信息
-	//TradeNo         string `json:"trade_no"`   // 三方交易号
-	//ChannelID       uint   `json:"channel_id"` // 通道ID，worker 用来查最新的接口配置
-	//RechargeAccount string `json:"recharge_account"`
-	//Amount          string `json:"amount"`
-	//
-	//// 查单策略（从 Interface 快照）
-	//ApiSecret            string `json:"api_secret"`
-	//ApiKey               string `json:"api_key"`
-	//QueryUrl             string `json:"query_url"`
-	//QueryInterval        int    `json:"query_interval"`         // 查单间隔（秒）
-	//QueryMaxTimes        int    `json:"query_max_times"`        // 最大查单次数
-	//PaySeconds           int    `json:"pay_seconds"`            // 支付有效期（秒）
-	//OfficialSerialNumber string `json:"official_serial_number"` // 官方流水号
-	//UpstreamOrderSn      string `json:"upstream_order_sn"`      //三方网关订单号
+
+	// 重新入池判断所需（创建查单任务时从供货商订单中带入）
+	ChargeSpeed            constant.ChargeSpeed `json:"charge_speed"`              // 充值速度：1快充 2慢充
+	SupplierOrderExpiredAt int64                `json:"supplier_order_expired_at"` // 供货商订单过期时间(毫秒时间戳)
+	RechargeTimes          uint                 `json:"recharge_times"`            // 当前充值次数
 
 	// 运行时
 	QueryCount int   `json:"query_count"` // 已查单次数

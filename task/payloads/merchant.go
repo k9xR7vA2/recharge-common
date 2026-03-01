@@ -5,8 +5,10 @@ import (
 )
 
 type MerchantOrderCallbackTask struct {
+	TenantID        uint                  `json:"tenant_id"`
+	BusinessType    constant.BusinessType `json:"business_type"`
+	OrderTime       int64                 `json:"order_time"`
 	PayTime         int64                 `json:"pay_time"`
-	NotifyStatus    constant.NotifyStatus `json:"status"`
 	SystemOrderSn   string                `json:"system_order_sn"`
 	Amount          string                `json:"amount"`
 	NotifyUrl       string                `json:"notify_url"`

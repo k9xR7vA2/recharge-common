@@ -1,7 +1,7 @@
 package options
 
 import (
-	"github.com/small-cat1/recharge-common/orderpool/entities"
+	"github.com/k9xR7vA2/recharge-common/orderpool/entities"
 )
 
 type IMobileHandlerOptions interface {

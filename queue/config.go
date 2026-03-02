@@ -2,9 +2,9 @@ package queue
 
 import (
 	"github.com/hibiken/asynq"
-	"github.com/small-cat1/recharge-common/queue/errorhandler"
-	"github.com/small-cat1/recharge-common/queue/logger"
-	"github.com/small-cat1/recharge-common/queue/retry"
+	"github.com/k9xR7vA2/recharge-common/queue/errorhandler"
+	"github.com/k9xR7vA2/recharge-common/queue/logger"
+	"github.com/k9xR7vA2/recharge-common/queue/retry"
 )
 
 type AsynqConfig struct {

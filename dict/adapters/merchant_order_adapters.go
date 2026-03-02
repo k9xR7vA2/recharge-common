@@ -1,8 +1,8 @@
 package adapters
 
 import (
-	"github.com/small-cat1/recharge-common/constant"
-	"github.com/small-cat1/recharge-common/dict/types"
+	"github.com/k9xR7vA2/recharge-common/constant"
+	"github.com/k9xR7vA2/recharge-common/dict/types"
 )
 
 // MerOrderMainStatDict 商户订单主状态字典

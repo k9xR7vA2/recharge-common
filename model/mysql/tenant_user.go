@@ -2,7 +2,7 @@ package mysql
 
 import (
 	"github.com/gofrs/uuid/v5"
-	"github.com/small-cat1/recharge-common/constant"
+	"github.com/k9xR7vA2/recharge-common/constant"
 )
 
 type Login interface {

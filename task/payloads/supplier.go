@@ -2,7 +2,7 @@ package payloads
 
 import (
 	"fmt"
-	"github.com/small-cat1/recharge-common/constant"
+	"github.com/k9xR7vA2/recharge-common/constant"
 	"time"
 )
 

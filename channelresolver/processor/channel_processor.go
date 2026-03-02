@@ -2,7 +2,7 @@ package processor
 
 import (
 	"errors"
-	"github.com/small-cat1/recharge-common/channelresolver/types"
+	"github.com/k9xR7vA2/recharge-common/channelresolver/types"
 	"sort"
 )
 

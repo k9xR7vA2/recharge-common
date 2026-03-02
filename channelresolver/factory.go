@@ -2,9 +2,9 @@ package channelresolver
 
 import (
 	"fmt"
-	"github.com/small-cat1/recharge-common/channelresolver/processor"
-	"github.com/small-cat1/recharge-common/channelresolver/types"
-	"github.com/small-cat1/recharge-common/constant"
+	"github.com/k9xR7vA2/recharge-common/channelresolver/processor"
+	"github.com/k9xR7vA2/recharge-common/channelresolver/types"
+	"github.com/k9xR7vA2/recharge-common/constant"
 )
 
 type ChannelProcessorFactory struct{}

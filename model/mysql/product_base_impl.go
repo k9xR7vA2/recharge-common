@@ -2,7 +2,7 @@ package mysql
 
 import (
 	"encoding/json"
-	constant "github.com/small-cat1/recharge-common/constant"
+	constant "github.com/k9xR7vA2/recharge-common/constant"
 	"gorm.io/datatypes"
 	"time"
 )

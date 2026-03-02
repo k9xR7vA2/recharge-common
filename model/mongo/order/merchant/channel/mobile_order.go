@@ -1,7 +1,7 @@
 package channel
 
 import (
-	"github.com/small-cat1/recharge-common/model/mongo/order/merchant"
+	"github.com/k9xR7vA2/recharge-common/model/mongo/order/merchant"
 )
 
 // MerchantMobileOrder 商户基础订单

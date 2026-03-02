@@ -1,6 +1,6 @@
 package options
 
-import "github.com/small-cat1/recharge-common/orderpool/entities"
+import "github.com/k9xR7vA2/recharge-common/orderpool/entities"
 
 // ---------- 分组参数结构体 ----------
 

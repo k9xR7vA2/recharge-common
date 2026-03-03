@@ -86,7 +86,7 @@ func (s SupOrderStatus) CanCancel() bool {
 // IsFinalStatus 检查是否为最终状态
 func (s SupOrderStatus) IsFinalStatus() bool {
 	switch s {
-	case SupOrderStatusSuccess, SupOrderStatusFailed,
+	case SupOrderStatusSuccess, SupOrderStatusFailed, SupOrderStatusUnused,
 		SupOrderStatusCancelled, SupOrderStatusBlacklisted:
 		return true
 	default:

@@ -3,6 +3,7 @@ package supplier
 import (
 	"context"
 	"fmt"
+	"github.com/k9xR7vA2/recharge-common/stats/base"
 	"time"
 
 	"github.com/k9xR7vA2/recharge-common/model/mongo/stats"
@@ -35,7 +36,7 @@ type FlushTenant struct {
 
 // Flush 将指定 UTC 小时的 Redis 数据 upsert 到 MongoDB
 // 幂等：相同小时多次调用结果一致（$set 覆盖）
-func Flush(ctx context.Context, rdb redis.UniversalClient, mongoClient *qmgo.Client, input FlushInput, logger Logger) error {
+func Flush(ctx context.Context, rdb redis.UniversalClient, mongoClient *qmgo.Client, input FlushInput, logger base.Logger) error {
 	targetHour := input.TargetHourUTC
 	if targetHour == 0 {
 		targetHour = prevHourInt(time.Now().UTC())
@@ -128,16 +129,16 @@ func buildFlushDocs(
 }
 
 // readHashDoc 从 Redis 读取 Hash，若有数据则填充文档并返回
-func readHashDoc(ctx context.Context, rdb redis.UniversalClient, key string, base stats.SupplierOrderHourlyStat) (stats.SupplierOrderHourlyStat, bool) {
+func readHashDoc(ctx context.Context, rdb redis.UniversalClient, key string, baseStats stats.SupplierOrderHourlyStat) (stats.SupplierOrderHourlyStat, bool) {
 	vals, err := rdb.HGetAll(ctx, key).Result()
 	if err != nil || len(vals) == 0 {
 		return stats.SupplierOrderHourlyStat{}, false
 	}
-	base.TotalOrders = parseInt(vals[fieldTotal])
-	base.SuccessOrders = parseInt(vals[fieldSuccess])
-	base.SuccessAmount = parseInt(vals[fieldSuccessAmount])
-	base.TotalAmount = parseInt(vals[fieldTotalAmount])
-	return base, true
+	baseStats.TotalOrders = base.ParseInt(vals[fieldTotal])
+	baseStats.SuccessOrders = base.ParseInt(vals[fieldSuccess])
+	baseStats.SuccessAmount = base.ParseInt(vals[fieldSuccessAmount])
+	baseStats.TotalAmount = base.ParseInt(vals[fieldTotalAmount])
+	return baseStats, true
 }
 
 // upsertStat 幂等写入一条统计文档到 MongoDB

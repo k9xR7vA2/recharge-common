@@ -1,8 +1,7 @@
 package supplier
 
 import (
-	"fmt"
-	"strconv"
+	"github.com/k9xR7vA2/recharge-common/stats/base"
 )
 
 // ---- 读取侧查询参数 ----
@@ -94,10 +93,10 @@ type hashAgg struct {
 }
 
 func (a *hashAgg) merge(vals map[string]string) {
-	a.total += parseInt(vals[fieldTotal])
-	a.success += parseInt(vals[fieldSuccess])
-	a.successAmount += parseInt(vals[fieldSuccessAmount])
-	a.totalAmount += parseInt(vals[fieldTotalAmount])
+	a.total += base.ParseInt(vals[fieldTotal])
+	a.success += base.ParseInt(vals[fieldSuccess])
+	a.successAmount += base.ParseInt(vals[fieldSuccessAmount])
+	a.totalAmount += base.ParseInt(vals[fieldTotalAmount])
 }
 
 func (a *hashAgg) toStatNumbers() StatNumbers {
@@ -105,35 +104,11 @@ func (a *hashAgg) toStatNumbers() StatNumbers {
 		TotalOrders:   a.total,
 		SuccessOrders: a.success,
 		FailOrders:    a.total - a.success,
-		SuccessAmount: fenToYuan(a.successAmount),
-		TotalAmount:   fenToYuan(a.totalAmount),
+		SuccessAmount: base.FenToYuan(a.successAmount),
+		TotalAmount:   base.FenToYuan(a.totalAmount),
 	}
 	if a.total > 0 {
 		s.SuccessRate = float64(a.success) / float64(a.total) * 100
 	}
 	return s
-}
-
-// ---- 金额工具 ----
-
-// amountToFen 将面额字符串（"50"）转为分（5000）
-func amountToFen(amount string) (int64, error) {
-	v, err := strconv.ParseInt(amount, 10, 64)
-	if err != nil {
-		return 0, fmt.Errorf("amountToFen: invalid amount %q: %w", amount, err)
-	}
-	return v * 100, nil
-}
-
-// fenToYuan 分转元，保留2位精度
-func fenToYuan(fen int64) float64 {
-	return float64(fen) / 100.0
-}
-
-func parseInt(s string) int64 {
-	if s == "" {
-		return 0
-	}
-	v, _ := strconv.ParseInt(s, 10, 64)
-	return v
 }

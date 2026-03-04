@@ -8,7 +8,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-// 商户话费订单
+// 商户订单
 type MerchantOrder struct {
 	order.OrderBase `bson:",inline"`
 	MerchantID      uint   `bson:"merchant_id" json:"merchant_id"`             // 商户ID

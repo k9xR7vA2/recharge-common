@@ -3,6 +3,7 @@ package supplier
 import (
 	"context"
 	"fmt"
+	"github.com/k9xR7vA2/recharge-common/stats/base"
 	"time"
 
 	"github.com/k9xR7vA2/recharge-common/model/mongo/stats"
@@ -42,10 +43,10 @@ func boolPtr(b bool) *bool { return &b }
 type SupplierStatService struct {
 	rdb    redis.UniversalClient
 	mongo  *qmgo.Client
-	logger Logger
+	logger base.Logger
 }
 
-func NewSupplierStatService(rdb redis.UniversalClient, mongoClient *qmgo.Client, logger Logger) *SupplierStatService {
+func NewSupplierStatService(rdb redis.UniversalClient, mongoClient *qmgo.Client, logger base.Logger) *SupplierStatService {
 	return &SupplierStatService{rdb: rdb, mongo: mongoClient, logger: logger}
 }
 

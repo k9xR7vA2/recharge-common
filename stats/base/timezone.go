@@ -1,4 +1,4 @@
-package supplier
+package base
 
 import (
 	"fmt"

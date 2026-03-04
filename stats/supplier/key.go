@@ -31,7 +31,7 @@ func hourInt(t time.Time) int64 {
 
 // ---- Key 生成函数（5个层级）----
 
-// keyL1Tenant 层级1：租户汇总
+// KeyL1Tenant  层级1：租户汇总
 // stats:sup:{tenantID}:{businessType}:t:hr:{hour}
 func keyL1Tenant(tenantID uint, businessType, hour string) string {
 	return fmt.Sprintf("stats:sup:%d:%s:t:hr:%s", tenantID, businessType, hour)

@@ -29,7 +29,7 @@ type OrderQueryTask struct {
 	InterfaceID     uint   `json:"interface_id"`      // 接口ID → 实时查配置
 	UpstreamOrderSn string `json:"upstream_order_sn"` // 三方网关订单号
 	Amount          string `json:"amount"`
-
+	ProductCode     string `json:"product_code"`
 	// 重新入池判断所需（创建查单任务时从供货商订单中带入）
 	ChargeSpeed            constant.ChargeSpeed `json:"charge_speed"`              // 充值速度：1快充 2慢充
 	SupplierOrderExpiredAt int64                `json:"supplier_order_expired_at"` // 供货商订单过期时间(毫秒时间戳)

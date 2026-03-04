@@ -3,6 +3,7 @@ package supplier
 import (
 	"context"
 	"fmt"
+	"github.com/k9xR7vA2/recharge-common/stats/base"
 	"time"
 
 	"github.com/k9xR7vA2/recharge-common/model/mongo/stats"
@@ -27,7 +28,7 @@ func GetTenantTotal(ctx context.Context, rdb redis.UniversalClient, query TodayQ
 // GetAllSupplierStats 层级2：批量查询所有供货商今日统计（首页供货商列表）
 // supplierIDs 由调用方从 DB 查出后传入
 func GetAllSupplierStats(ctx context.Context, rdb redis.UniversalClient, query TodayQuery, supplierIDs []uint) ([]SupplierStatResult, error) {
-	hourRange, err := TodayHourRange(query.Timezone)
+	hourRange, err := base.TodayHourRange(query.Timezone)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +72,7 @@ func GetAllSupplierStats(ctx context.Context, rdb redis.UniversalClient, query T
 // GetAllProductStats 层级3：批量查询某供货商下所有产品今日统计
 // productCodes 由调用方从 DB 查出后传入
 func GetAllProductStats(ctx context.Context, rdb redis.UniversalClient, query SupplierQuery, productCodes []string) ([]ProductStatResult, error) {
-	hourRange, err := TodayHourRange(query.Timezone)
+	hourRange, err := base.TodayHourRange(query.Timezone)
 	if err != nil {
 		return nil, err
 	}
@@ -116,7 +117,7 @@ func GetAllProductStats(ctx context.Context, rdb redis.UniversalClient, query Su
 // GetAmountStats 层级4：查询某产品所有面额今日统计（产品详情页，按供货商维度）
 // amounts 由调用方从产品配置中取出后传入
 func GetAmountStats(ctx context.Context, rdb redis.UniversalClient, query ProductQuery, amounts []string) ([]AmountStatResult, error) {
-	hourRange, err := TodayHourRange(query.Timezone)
+	hourRange, err := base.TodayHourRange(query.Timezone)
 	if err != nil {
 		return nil, err
 	}
@@ -176,7 +177,7 @@ func GetProductOnlyStat(ctx context.Context, rdb redis.UniversalClient, query Pr
 
 // GetAllProductOnlyStats 层级5：批量查询多个产品今日统计（产品管理页面板，跨供货商）
 func GetAllProductOnlyStats(ctx context.Context, rdb redis.UniversalClient, query TodayQuery, productCodes []string) ([]ProductStatResult, error) {
-	hourRange, err := TodayHourRange(query.Timezone)
+	hourRange, err := base.TodayHourRange(query.Timezone)
 	if err != nil {
 		return nil, err
 	}
@@ -222,7 +223,7 @@ func GetAllProductOnlyStats(ctx context.Context, rdb redis.UniversalClient, quer
 
 // GetHistoryStats 从 MongoDB 查历史统计（管理后台，按时区日期查询）
 func GetHistoryStats(ctx context.Context, mongoClient *qmgo.Client, query HistoryQuery) ([]stats.SupplierOrderHourlyStat, error) {
-	hourRange, err := DateHourRange(query.Date, query.Timezone)
+	hourRange, err := base.DateHourRange(query.Date, query.Timezone)
 	if err != nil {
 		return nil, err
 	}
@@ -302,7 +303,7 @@ func ShouldReadFromRedis(dateStr, timezone string) (bool, error) {
 
 // readHourRange 封装单 key 场景下按小时范围遍历读取的公共逻辑
 func readHourRange(ctx context.Context, rdb redis.UniversalClient, timezone string, keyFn func(hour string) string) (hashAgg, error) {
-	hourRange, err := TodayHourRange(timezone)
+	hourRange, err := base.TodayHourRange(timezone)
 	if err != nil {
 		return hashAgg{}, err
 	}

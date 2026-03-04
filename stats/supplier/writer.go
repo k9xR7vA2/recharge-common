@@ -3,6 +3,7 @@ package supplier
 import (
 	"context"
 	"fmt"
+	"github.com/k9xR7vA2/recharge-common/stats/base"
 	"time"
 
 	"github.com/redis/go-redis/v9"
@@ -28,7 +29,7 @@ func RecordOrderCreated(ctx context.Context, rdb redis.UniversalClient, input Re
 	}
 
 	hour := hourStr(time.Unix(input.OrderTime, 0))
-	amtFen, err := amountToFen(input.Amount)
+	amtFen, err := base.AmountToFen(input.Amount)
 	if err != nil {
 		return fmt.Errorf("stats/writer.RecordOrderCreated: %w", err)
 	}
@@ -60,7 +61,7 @@ func RecordOrderResult(ctx context.Context, rdb redis.UniversalClient, input Rec
 	}
 
 	hour := hourStr(time.Unix(input.OrderTime, 0))
-	amtFen, err := amountToFen(input.Amount)
+	amtFen, err := base.AmountToFen(input.Amount)
 	if err != nil {
 		return fmt.Errorf("stats/writer.RecordOrderResult: %w", err)
 	}

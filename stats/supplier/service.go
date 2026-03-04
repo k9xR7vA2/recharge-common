@@ -51,8 +51,15 @@ func NewSupplierStatService(rdb redis.UniversalClient, mongoClient *qmgo.Client,
 
 // ---- 写入 ----
 
-// Record 记录一笔订单终态（tenant_notify 调用）
-func (s *SupplierStatService) Record(ctx context.Context, input RecordInput) error {
+// RecordCreated 下单成功时调用（tenant_api domain 层，保存订单后）
+// 只累加 total，不影响 success
+func (s *SupplierStatService) RecordCreated(ctx context.Context, input RecordInput) error {
+	return RecordOrderCreated(ctx, s.rdb, input)
+}
+
+// RecordResult 订单终态时调用（tenant_notify，查单成功或失败）
+// 成功累加 success；失败不写（fail = total - success）
+func (s *SupplierStatService) RecordResult(ctx context.Context, input RecordInput) error {
 	return RecordOrderResult(ctx, s.rdb, input)
 }
 

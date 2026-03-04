@@ -5,19 +5,6 @@ import (
 	"strconv"
 )
 
-// ---- 写入侧输入 ----
-
-// RecordInput 记录一笔订单终态到统计的输入参数
-type RecordInput struct {
-	TenantID     uint
-	BusinessType string // "mobile" / "india_mobile"
-	SupplierID   uint
-	ProductCode  string
-	Amount       string // "50"（字符串面额，整数字符串）
-	IsSuccess    bool
-	OrderTime    int64 // 订单终态时间（Unix 秒），用于定位 UTC 小时
-}
-
 // ---- 读取侧查询参数 ----
 
 // TodayQuery 今日统计查询基础参数

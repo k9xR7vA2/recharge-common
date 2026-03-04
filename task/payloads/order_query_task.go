@@ -9,11 +9,14 @@ type OrderQueryTask struct {
 	BusinessType constant.BusinessType `json:"business_type"`
 
 	// 商户订单
-	MerchantSystemOrderSn  string `json:"merchant_system_order_sn"`
-	MerchantOrderSn        string `json:"merchant_order_sn"`
-	MerchantNotifyURL      string `json:"merchant_notify_url"`
-	MerchantAppID          string `json:"merchant_app_id"`
-	MerchantOrderCreatedAt int64  `json:"merchant_order_created_at"`
+	MerchantID             uint                 `json:"merchant_id"`
+	ChannelCode            string               `json:"channel_code"`
+	ChannelType            constant.ChannelType `json:"channel_type"`
+	MerchantSystemOrderSn  string               `json:"merchant_system_order_sn"`
+	MerchantOrderSn        string               `json:"merchant_order_sn"`
+	MerchantNotifyURL      string               `json:"merchant_notify_url"`
+	MerchantAppID          string               `json:"merchant_app_id"`
+	MerchantOrderCreatedAt int64                `json:"merchant_order_created_at"`
 
 	// 供货商订单
 	SupplierID            uint   `json:"supplier_id"`

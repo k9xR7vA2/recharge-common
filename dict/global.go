@@ -64,6 +64,9 @@ func registerAllDicts() {
 	// 供货商订单状态
 	GlobalManager.Register(&adapters.SupOrderPoolStatDict{}) // 供货商订单池状态
 	GlobalManager.Register(&adapters.SupOrderStatusDict{})   // 供货商订单状态
+
+	GlobalManager.Register(&adapters.TimezoneDict{}) // 时区dict
+
 	// TODO: 在这里继续注册其他字典
 	// GlobalManager.Register(&YourNewDict{})
 }

@@ -29,5 +29,5 @@ type PlatformRule struct {
 }
 
 func (PlatformRule) TableName() string {
-	return "platform_rules"
+	return "as_platform_rules"
 }

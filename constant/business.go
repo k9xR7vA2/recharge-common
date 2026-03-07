@@ -10,7 +10,6 @@ const (
 	CardBusiness     BusinessType = "card"         // CardBusiness 卡密
 	OilBusiness      BusinessType = "oil"          // 加油业务
 	IndiaMobile      BusinessType = "india_mobile" // 印度话费
-
 )
 
 func (b BusinessType) String() string {

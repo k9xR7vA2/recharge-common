@@ -1,9 +1,9 @@
 package order
 
 import (
-	"github.com/shopspring/decimal"
 	"github.com/k9xR7vA2/recharge-common/constant"
 	"github.com/k9xR7vA2/recharge-common/utils"
+	"github.com/shopspring/decimal"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -21,6 +21,7 @@ type OrderBase struct {
 	RechargeAccount      string                `bson:"recharge_account" json:"recharge_account"`             // 充值账号
 	Amount               string                `bson:"amount" json:"amount"`                                 // 充值金额
 	HandingFees          string                `bson:"handing_fees" json:"handing_fees"`                     // 手续费
+	IsTest               bool                  `bson:"is_test" json:"is_test"`                               // 是否测试单
 
 	RechargeURL string `bson:"recharge_url" json:"recharge_url"` // 充值地址
 	QueryUrl    string `bson:"query_url" json:"query_url"`       // 查单地址

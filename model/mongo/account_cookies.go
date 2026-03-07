@@ -37,15 +37,12 @@ type AccountCookie struct {
 	CountResetDate  string `bson:"count_reset_date" json:"countResetDate"`   // "2025-03-06"
 	CountResetMonth string `bson:"count_reset_month" json:"countResetMonth"` // "2025-03"
 
-	// 并发锁
-	IsLocked bool       `bson:"is_locked"        json:"isLocked"`
-	LockedBy string     `bson:"locked_by"        json:"lockedBy"`
-	LockedAt *time.Time `bson:"locked_at"        json:"lockedAt"`
-
 	// 状态
 	Status        constant.CookieStatus `bson:"status"           json:"status"`
 	CooldownUntil *time.Time            `bson:"cooldown_until"   json:"cooldownUntil"`
 
-	CreatedAt time.Time `bson:"created_at"       json:"createdAt"`
-	UpdatedAt time.Time `bson:"updated_at"       json:"updatedAt"`
+	ExpiredAt int64 `bson:"expired_at"`
+	CreatedAt int64 `bson:"created_at"`
+	UpdatedAt int64 `bson:"updated_at"`
+	IsDeleted bool  `bson:"is_deleted"`
 }

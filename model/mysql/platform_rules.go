@@ -6,7 +6,6 @@ import "time"
 // 表名: platform_rules
 type PlatformRule struct {
 	ID       uint   `gorm:"primarykey"                    json:"id"`
-	TenantID string `gorm:"column:tenant_id;not null"     json:"tenantId"`
 	Platform string `gorm:"column:platform;not null"      json:"platform"`
 
 	// 额度规则

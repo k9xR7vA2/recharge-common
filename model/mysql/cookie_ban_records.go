@@ -9,17 +9,17 @@ import (
 // 表名: cookie_ban_records
 type CookieBanRecord struct {
 	ID       uint             `gorm:"primarykey"                json:"id"`
-	TenantID string           `gorm:"column:tenant_id;not null" json:"tenantId"`
-	CookieID string           `gorm:"column:cookie_id;not null" json:"cookieId"` // MongoDB ObjectId 字符串
+	TenantID string           `gorm:"column:tenant_id;not null" json:"tenant_id"`
+	CookieID string           `gorm:"column:cookie_id;not null" json:"cookie_id"` // MongoDB ObjectId 字符串
 	Platform string           `gorm:"column:platform;not null"  json:"platform"`
-	BanType  constant.BanType `gorm:"column:ban_type;not null"  json:"banType"`
+	BanType  constant.BanType `gorm:"column:ban_type;not null"  json:"ban_type"`
 
-	TriggerAt     *time.Time `gorm:"column:trigger_at"     json:"triggerAt"`
-	DetectMsg     string     `gorm:"column:detect_msg;type:text" json:"detectMsg"` // 触发时的响应信息
-	CooldownUntil *time.Time `gorm:"column:cooldown_until" json:"cooldownUntil"`
-	ResolvedAt    *time.Time `gorm:"column:resolved_at"    json:"resolvedAt"` // NULL=未恢复
+	TriggerAt     *time.Time `gorm:"column:trigger_at"     json:"trigger_at"`
+	DetectMsg     string     `gorm:"column:detect_msg;type:text" json:"detect_msg"` // 触发时的响应信息
+	CooldownUntil *time.Time `gorm:"column:cooldown_until" json:"cooldown_until"`
+	ResolvedAt    *time.Time `gorm:"column:resolved_at"    json:"resolved_at"` // NULL=未恢复
 
-	CreatedAt time.Time `gorm:"column:created_at" json:"createdAt"`
+	CreatedAt time.Time `gorm:"column:created_at" json:"created_at"`
 }
 
 func (CookieBanRecord) TableName() string {

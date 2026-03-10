@@ -1,20 +1,13 @@
 package logger
 
-// Logger 公共库日志接口，业务项目实现
-type Logger interface {
-	Debug(args ...interface{})
-	Info(args ...interface{})
-	Warn(args ...interface{})
-	Error(args ...interface{})
-	Fatal(args ...interface{})
-}
+import "github.com/k9xR7vA2/recharge-common/logger"
 
 // AsynqLogger 适配公共库 Logger 接口到 asynq Logger 接口
 type AsynqLogger struct {
-	log Logger
+	log logger.Logger
 }
 
-func NewAsynqLogger(log Logger) *AsynqLogger {
+func NewAsynqLogger(log logger.Logger) *AsynqLogger {
 	return &AsynqLogger{log: log}
 }
 

@@ -3,7 +3,7 @@ package retry
 import (
 	"context"
 	"github.com/hibiken/asynq"
-	"github.com/k9xR7vA2/recharge-common/queue/logger"
+	"github.com/k9xR7vA2/recharge-common/logger"
 )
 
 type ErrorHandler struct {

@@ -2,7 +2,7 @@ package queue
 
 import (
 	"github.com/hibiken/asynq"
-	"github.com/k9xR7vA2/recharge-common/queue/logger"
+	"github.com/k9xR7vA2/recharge-common/logger"
 )
 
 type IHandlerRegister interface {

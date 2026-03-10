@@ -2,6 +2,7 @@ package queue
 
 import (
 	"github.com/hibiken/asynq"
+	logger2 "github.com/k9xR7vA2/recharge-common/logger"
 	"github.com/k9xR7vA2/recharge-common/queue/errorhandler"
 	"github.com/k9xR7vA2/recharge-common/queue/logger"
 	"github.com/k9xR7vA2/recharge-common/queue/retry"
@@ -20,7 +21,7 @@ type ServerConfig struct {
 	Concurrency    int
 	Queues         map[string]int
 	RetryDelayFunc *retry.Handler
-	Log            logger.Logger
+	Log            logger2.Logger
 	ErrorStorage   errorhandler.ErrorStorage
 }
 

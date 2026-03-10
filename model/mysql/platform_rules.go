@@ -2,7 +2,7 @@ package mysql
 
 import "time"
 
-// PlatformRule 平台使用规则，存在 MySQL 公共库，tenant_id 隔离
+// PlatformRule 平台规则配置，管理后台维护
 // 表名: platform_rules
 type PlatformRule struct {
 	ID       uint   `gorm:"primarykey"                    json:"id"`

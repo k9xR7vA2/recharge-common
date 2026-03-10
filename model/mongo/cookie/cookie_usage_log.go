@@ -2,10 +2,9 @@ package cookie
 
 import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
-	"time"
 )
 
-// CookieUsageLog MongoDB Cookie使用记录
+// CookieUsageLog 不可变操作流水，排查/分析用
 type CookieUsageLog struct {
 	ID           primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
 	CookieID     primitive.ObjectID `json:"cookie_id" bson:"cookie_id"` // 关联Cookie
@@ -16,5 +15,5 @@ type CookieUsageLog struct {
 	ErrorMessage string             `json:"error_message,omitempty" bson:"error_message,omitempty"`
 	ResponseTime int                `json:"response_time" bson:"response_time"` // 响应时间ms
 	IPAddress    string             `json:"ip_address,omitempty" bson:"ip_address,omitempty"`
-	CreatedAt    time.Time          `json:"created_at" bson:"created_at"`
+	CreatedAt    int64              `json:"created_at" bson:"created_at"`
 }

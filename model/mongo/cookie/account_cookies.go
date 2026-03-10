@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-// AccountCookie 精简后的Cookie表，只存储业务数据
+// AccountCookie Cookie 主体 + 风控状态，权威来源
 type AccountCookie struct {
 	ID       primitive.ObjectID    `bson:"_id,omitempty" json:"id"`
 	Platform constant.PlatformType `bson:"platform"      json:"platform"`
@@ -14,27 +14,21 @@ type AccountCookie struct {
 
 	// 溯源（可追回登录现场）
 	LoginRecordID primitive.ObjectID `bson:"login_record_id" json:"loginRecordId"`
-	// Cookie 数据
-	LoginCookies  string `bson:"login_cookies"  json:"loginCookies"` // AES加密
-	CookieVersion int64  `bson:"cookie_version" json:"cookieVersion"`
+	LoginCookies  string             `bson:"login_cookies"  json:"loginCookies"` // AES加密
+	CookieVersion int64              `bson:"cookie_version" json:"cookieVersion"`
 
 	// 账号辅助信息
 	AccountAlias string `bson:"account_alias" json:"accountAlias"`
 	ProxyIP      string `bson:"proxy_ip"      json:"proxyIp"`
 	UserAgent    string `bson:"user_agent"    json:"userAgent"`
 
-	// 使用计数
-	TodayUsed       int    `bson:"today_used"        json:"today_used"`
-	MonthUsed       int    `bson:"month_used"        json:"month_used"`
-	TotalUsed       int    `bson:"total_used"        json:"total_used"`
-	CountResetDate  string `bson:"count_reset_date"  json:"count_reset_date"`
-	CountResetMonth string `bson:"count_reset_month" json:"count_reset_month"`
-
 	// 风控
-	HealthScore    int        `bson:"health_score"     json:"health_score"`
-	LoginFailCount int        `bson:"login_fail_count" json:"login_fail_count"`
-	RiskTags       []string   `bson:"risk_tags"        json:"risk_tags"`
-	CooldownUntil  *time.Time `bson:"cooldown_until"   json:"cooldown_until"`
+	HealthScore   int        `bson:"health_score"     json:"health_score"`
+	RiskTags      []string   `bson:"risk_tags"        json:"risk_tags"`
+	FailCount     int        `bson:"fail_count"    json:"fail_count"` // 使用失败次数（触发风控用）
+	CooldownUntil *time.Time `bson:"cooldown_until"   json:"cooldown_until"`
+	SuspendUntil  *time.Time `bson:"suspend_until" json:"suspend_until"` // 封控到期时间
+	NextProbeAt   *time.Time `bson:"next_probe_at" json:"next_probe_at"` // 下次探测时间
 
 	// 状态
 	Status constant.CookieStatus `bson:"status"    json:"status"`

@@ -2,7 +2,7 @@ package mysql
 
 import "time"
 
-// CookieDailyStats 运营统计日快照，存 MySQL
+// CookieDailyStats 运营日报快照，定时任务生成，存 MySQL
 // 表名: cookie_daily_stats
 type CookieDailyStats struct {
 	ID       uint   `gorm:"primarykey"                json:"id"`

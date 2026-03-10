@@ -23,11 +23,12 @@ type LoginRecord struct {
 	Cost float64 `bson:"cost" json:"cost"` // 本次登录成本
 
 	// 登录请求现场
-	LoginRequest  string `bson:"login_request"  json:"loginRequest"`
-	LoginHeaders  string `bson:"login_headers"  json:"loginHeaders"`
-	LoginResponse string `bson:"login_response" json:"loginResponse"`
-	IPAddress     string `bson:"ip_address"     json:"ipAddress"`
-	UserAgent     string `bson:"user_agent"     json:"userAgent"`
+	LoginFailCount int    `bson:"login_fail_count" json:"login_fail_count"`
+	LoginRequest   string `bson:"login_request"  json:"loginRequest"`
+	LoginHeaders   string `bson:"login_headers"  json:"loginHeaders"`
+	LoginResponse  string `bson:"login_response" json:"loginResponse"`
+	IPAddress      string `bson:"ip_address"     json:"ipAddress"`
+	UserAgent      string `bson:"user_agent"     json:"userAgent"`
 
 	// 结果
 	Status     int    `bson:"status"     json:"status"` // 1成功 2失败 3超时

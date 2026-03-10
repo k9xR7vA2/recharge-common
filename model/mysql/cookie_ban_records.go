@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-// CookieBanRecord 封控历史事件，存 MySQL
+// CookieBanRecord 封控历史事件，运营复盘/永久废弃判断，存 MySQL
 // 表名: cookie_ban_records
 type CookieBanRecord struct {
 	ID       uint             `gorm:"primarykey"                json:"id"`

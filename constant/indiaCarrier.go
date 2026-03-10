@@ -5,7 +5,6 @@ type IndiaCarrierType int
 const (
 	Airtel IndiaCarrierType = iota + 1
 	Jio
-
 	VI
 )
 

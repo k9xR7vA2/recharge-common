@@ -4,7 +4,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-// AccountStats 账号使用统计
+// AccountStats 日/周期使用计数，高频更新独立存
 type AccountStats struct {
 	ID       primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
 	CookieID primitive.ObjectID `json:"cookie_id" bson:"cookie_id"` // 关联Cookie

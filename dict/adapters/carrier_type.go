@@ -59,5 +59,10 @@ func (d *IndiaCarrierTypeDict) GetOptions() []types.DictOption {
 			Value: constant.Jio.Int(),
 			Code:  constant.Jio.Code(),
 		},
+		{
+			Label: constant.VI.String(),
+			Value: constant.VI.Int(),
+			Code:  constant.VI.Code(),
+		},
 	}
 }

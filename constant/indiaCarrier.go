@@ -15,20 +15,15 @@ func (s IndiaCarrierType) String() string {
 		return "Airtel"
 	case Jio:
 		return "Jio"
+	case VI:
+		return "Vi"
 	default:
 		return "Unknown"
 	}
 }
 
 func (s IndiaCarrierType) Int() int {
-	switch s {
-	case Airtel:
-		return 1
-	case Jio:
-		return 2
-	default:
-		return 0
-	}
+	return int(s)
 }
 
 // Code  实现 Stringer 接口，返回运营商编码的字符串描述

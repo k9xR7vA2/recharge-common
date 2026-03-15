@@ -29,3 +29,31 @@ func (s CookieStatus) String() string {
 		return "未知"
 	}
 }
+
+func (s CookieStatus) IsValid() bool {
+	switch s {
+	case CookieStatusNormal, CookieStatusCooldown, CookieStatusSuspected,
+		CookieStatusSuspended, CookieStatusBanned, CookieStatusExpired:
+		return true
+	}
+	return false
+}
+
+func (s CookieStatus) Code() string {
+	switch s {
+	case CookieStatusNormal:
+		return "normal"
+	case CookieStatusCooldown:
+		return "cooldown"
+	case CookieStatusSuspected:
+		return "suspected"
+	case CookieStatusSuspended:
+		return "suspended"
+	case CookieStatusBanned:
+		return "banned"
+	case CookieStatusExpired:
+		return "expired"
+	default:
+		return "unknown"
+	}
+}

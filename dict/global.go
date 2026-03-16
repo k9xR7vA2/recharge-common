@@ -67,7 +67,7 @@ func registerAllDicts() {
 	//
 	GlobalManager.Register(&adapters.TimezoneDict{})     // 时区dict
 	GlobalManager.Register(&adapters.PlatformTypeDict{}) // cookie平台
-
+	GlobalManager.Register(&adapters.CookieStatusDict{}) //cookie status
 	// TODO: 在这里继续注册其他字典
 	// GlobalManager.Register(&YourNewDict{})
 }

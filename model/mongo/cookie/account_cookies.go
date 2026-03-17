@@ -42,3 +42,7 @@ type AccountCookie struct {
 	UpdatedAt   int64 `bson:"updated_at"    json:"updated_at"`
 	IsDeleted   bool  `bson:"is_deleted"    json:"is_deleted"`
 }
+
+func (AccountCookie) CollName() string {
+	return "cookies"
+}

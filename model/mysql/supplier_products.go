@@ -19,9 +19,9 @@ type SupplierProduct struct {
 	Status         constant.TenantBusinessStatus `gorm:"column:status;type:tinyint;not null;default:1;comment:状态 1:启用 2:禁用,3未绑定" json:"status"`
 	CreatedAt      *time.Time                    `json:"created_at"`
 	UpdatedAt      *time.Time                    `json:"updated_at"`
-	Product        Product                       `gorm:"-;foreignKey:ID;references:ProductID" json:"product,omitempty"`
-	Tenant         Tenant                        `gorm:"-;foreignKey:TenantID;references:TenantID" json:"tenant,omitempty"`
-	Supplier       Supplier                      `gorm:"-;foreignKey:SupplierID;references:TenantID" json:"supplier,omitempty"`
+	Product        Product                       `gorm:"->;foreignKey:ID;references:ProductID" json:"product,omitempty"`
+	Tenant         Tenant                        `gorm:"->;foreignKey:TenantID;references:TenantID" json:"tenant,omitempty"`
+	Supplier       Supplier                      `gorm:"->;foreignKey:SupplierID;references:TenantID" json:"supplier,omitempty"`
 }
 
 // TableName get sql table name.获取数据库表名

@@ -10,6 +10,7 @@ const (
 	CardBusiness     BusinessType = "card"         // CardBusiness 卡密
 	OilBusiness      BusinessType = "oil"          // 加油业务
 	IndiaMobile      BusinessType = "india_mobile" // 印度话费
+	IndiaDTH         BusinessType = "india_dth"    // 印度 DTH (卫星电视) 充值
 )
 
 func (b BusinessType) String() string {
@@ -26,6 +27,8 @@ func (b BusinessType) String() string {
 		return "oil"
 	case IndiaMobile:
 		return "india_mobile"
+	case IndiaDTH:
+		return "india_dth"
 	default:
 		return "未知业务"
 	}
@@ -46,6 +49,8 @@ func (b BusinessType) ShowName() string {
 		return "加油"
 	case IndiaMobile:
 		return "印度话费"
+	case IndiaDTH:
+		return "印度DTH"
 	default:
 		return "未知业务"
 	}
@@ -54,7 +59,7 @@ func (b BusinessType) ShowName() string {
 // IsValid 验证匹配规则是否有效
 func (b BusinessType) IsValid() bool {
 	switch b {
-	case MobileBusiness, ElectricBusiness, GameBusiness, OilBusiness, CardBusiness, IndiaMobile:
+	case MobileBusiness, ElectricBusiness, GameBusiness, OilBusiness, CardBusiness, IndiaMobile, IndiaDTH:
 		return true
 	default:
 		return false
@@ -76,5 +81,6 @@ func GetAllBusinessTypes() []struct {
 		{Label: CardBusiness.ShowName(), Value: CardBusiness},
 		{Label: OilBusiness.ShowName(), Value: OilBusiness},
 		{Label: IndiaMobile.ShowName(), Value: IndiaMobile},
+		{Label: IndiaDTH.ShowName(), Value: IndiaDTH},
 	}
 }

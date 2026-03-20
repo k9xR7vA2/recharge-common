@@ -4,13 +4,14 @@ package constant
 type BusinessType string
 
 const (
-	MobileBusiness   BusinessType = "mobile"       // MobileBusiness 话费
-	ElectricBusiness BusinessType = "electric"     // ElectricBusiness 电费
-	GameBusiness     BusinessType = "game"         // GameBusiness 游戏
-	CardBusiness     BusinessType = "card"         // CardBusiness 卡密
-	OilBusiness      BusinessType = "oil"          // 加油业务
-	IndiaMobile      BusinessType = "india_mobile" // 印度话费
-	IndiaDTH         BusinessType = "india_dth"    // 印度 DTH (卫星电视) 充值
+	MobileBusiness   BusinessType = "mobile"         // MobileBusiness 话费
+	ElectricBusiness BusinessType = "electric"       // ElectricBusiness 电费
+	GameBusiness     BusinessType = "game"           // GameBusiness 游戏
+	CardBusiness     BusinessType = "card"           // CardBusiness 卡密
+	OilBusiness      BusinessType = "oil"            // 加油业务
+	IndiaMobile      BusinessType = "india_mobile"   // 印度话费
+	IndiaElectric    BusinessType = "india_electric" // 印度电费
+	IndiaDTH         BusinessType = "india_dth"      // 印度 DTH (卫星电视) 充值
 )
 
 func (b BusinessType) String() string {
@@ -27,6 +28,8 @@ func (b BusinessType) String() string {
 		return "oil"
 	case IndiaMobile:
 		return "india_mobile"
+	case IndiaElectric:
+		return "india_electric"
 	case IndiaDTH:
 		return "india_dth"
 	default:
@@ -49,6 +52,8 @@ func (b BusinessType) ShowName() string {
 		return "加油"
 	case IndiaMobile:
 		return "印度话费"
+	case IndiaElectric:
+		return "印度电费"
 	case IndiaDTH:
 		return "印度DTH"
 	default:
@@ -59,7 +64,11 @@ func (b BusinessType) ShowName() string {
 // IsValid 验证匹配规则是否有效
 func (b BusinessType) IsValid() bool {
 	switch b {
-	case MobileBusiness, ElectricBusiness, GameBusiness, OilBusiness, CardBusiness, IndiaMobile, IndiaDTH:
+	case MobileBusiness,
+		ElectricBusiness,
+		GameBusiness,
+		OilBusiness, CardBusiness,
+		IndiaMobile, IndiaElectric, IndiaDTH:
 		return true
 	default:
 		return false
@@ -81,6 +90,7 @@ func GetAllBusinessTypes() []struct {
 		{Label: CardBusiness.ShowName(), Value: CardBusiness},
 		{Label: OilBusiness.ShowName(), Value: OilBusiness},
 		{Label: IndiaMobile.ShowName(), Value: IndiaMobile},
+		{Label: IndiaElectric.ShowName(), Value: IndiaElectric},
 		{Label: IndiaDTH.ShowName(), Value: IndiaDTH},
 	}
 }

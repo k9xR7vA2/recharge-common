@@ -16,6 +16,7 @@ type MobileAttributes struct {
 	AreaCode     AreaScope   `json:"area_code"`
 	ProvinceCode []int       `json:"province_code"` // 支持的省份列表 [200,210,220]
 	IsCheckIsp   int         `json:"is_check_isp"`
+	ValidTime    int         `json:"valid_time"`
 }
 
 func ParseMobileProductAttrs(data datatypes.JSON) (*MobileAttributes, error) {
@@ -39,7 +40,9 @@ func ParseMobileProductAttrs(data datatypes.JSON) (*MobileAttributes, error) {
 			return nil, err
 		}
 	}
-
+	if attr.ValidTime <= 0 {
+		return nil, errors.New("订单有效期参数不正确")
+	}
 	return &attr, err
 }
 
@@ -108,6 +111,7 @@ type IndiaMobileAttributes struct {
 	ChargeSpeed ChargeSpeed      `json:"charge_speed"`
 	Carrier     IndiaCarrierType `json:"carrier"`
 	HasSku      int              `json:"has_sku"`
+	ValidTime   int              `json:"valid_time"`
 }
 
 func ParseIndiaMobileProductAttrs(data datatypes.JSON) (*IndiaMobileAttributes, error) {
@@ -132,6 +136,9 @@ func ParseIndiaMobileProductAttrs(data datatypes.JSON) (*IndiaMobileAttributes, 
 	}
 	if flg == false {
 		return nil, errors.New("sku参数错误")
+	}
+	if attr.ValidTime <= 0 {
+		return nil, errors.New("订单有效期参数不正确")
 	}
 	return &attr, err
 }

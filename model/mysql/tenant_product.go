@@ -2,6 +2,7 @@ package mysql
 
 import (
 	"github.com/k9xR7vA2/recharge-common/constant"
+	"gorm.io/datatypes"
 	"time"
 )
 
@@ -11,6 +12,7 @@ type TenantProduct struct {
 	TenantID     uint                          `json:"tenant_id" gorm:"not null;comment:租户ID"`
 	ProductID    uint                          `json:"product_id" gorm:"not null;comment:产品ID"`
 	Status       constant.TenantBusinessStatus `json:"status" gorm:"not null;default:1;comment:状态 1:启用 2:禁用,3未绑定"` //1:启用 2:禁用,3未绑定
+	Amount       datatypes.JSON                `json:"amount" gorm:"column:amount;type:json;not null;comment:金额"`
 	Remark       string                        `json:"remark" gorm:"size:255;comment:备注说明"`
 	CreatedAt    time.Time                     `json:"created_at"`
 	UpdatedAt    time.Time                     `json:"updated_at"`

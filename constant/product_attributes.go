@@ -19,6 +19,12 @@ type MobileAttributes struct {
 	ValidTime    int         `json:"valid_time"`
 }
 
+// MobileAttributes 实现接口
+func (a *MobileAttributes) GetCarrier() int             { return int(a.Carrier) }
+func (a *MobileAttributes) GetChargeSpeed() ChargeSpeed { return a.ChargeSpeed }
+func (a *MobileAttributes) GetIsCheckIsp() int          { return a.IsCheckIsp }
+func (a *MobileAttributes) GetValidTime() int           { return a.ValidTime }
+
 func ParseMobileProductAttrs(data datatypes.JSON) (*MobileAttributes, error) {
 	var attr MobileAttributes
 	err := json.Unmarshal(data, &attr)
@@ -113,6 +119,12 @@ type IndiaMobileAttributes struct {
 	HasSku      int              `json:"has_sku"`
 	ValidTime   int              `json:"valid_time"`
 }
+
+// IndiaMobileAttributes 实现接口
+func (a *IndiaMobileAttributes) GetCarrier() int             { return int(a.Carrier) }
+func (a *IndiaMobileAttributes) GetChargeSpeed() ChargeSpeed { return a.ChargeSpeed }
+func (a *IndiaMobileAttributes) GetIsCheckIsp() int          { return a.IsCheckIsp }
+func (a *IndiaMobileAttributes) GetValidTime() int           { return a.ValidTime }
 
 func ParseIndiaMobileProductAttrs(data datatypes.JSON) (*IndiaMobileAttributes, error) {
 	var attr IndiaMobileAttributes

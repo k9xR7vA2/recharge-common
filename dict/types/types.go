@@ -2,10 +2,11 @@ package types
 
 // DictOption 前端字典选项标准格式
 type DictOption struct {
-	Label     string            `json:"label"`                // 显示文本
-	Value     interface{}       `json:"value"`                // 选项值
-	Code      string            `json:"code"`                 // 编码（可选）
-	ExtParams map[string]string `json:"ext_params,omitempty"` // 新增
+	Label        string            `json:"label"`                // 显示文本
+	Value        interface{}       `json:"value"`                // 选项值
+	Code         string            `json:"code"`                 // 编码（可选）
+	RechargeMode string            `json:"recharge_mode"`        // 新增
+	ExtParams    map[string]string `json:"ext_params,omitempty"` // 新增
 }
 
 // DictResponse 字典响应标准格式

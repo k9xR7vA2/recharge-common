@@ -21,9 +21,10 @@ func (d *BusinessTypeDict) GetOptions() []types.DictOption {
 	options := make([]types.DictOption, 0, len(ts))
 	for _, t := range ts {
 		options = append(options, types.DictOption{
-			Label: t.Label,
-			Value: string(t.Value),
-			Code:  string(t.Value),
+			Label:        t.Label,
+			Value:        string(t.Value),
+			Code:         string(t.Value),
+			RechargeMode: string(t.Value.RechargeMode()), // 新增
 		})
 	}
 	return options

@@ -1,5 +1,13 @@
 package constant
 
+// RechargeMode 充值模式
+type RechargeMode string
+
+const (
+	RechargeModeAPI     RechargeMode = "api"     // 下单API模式（话费、卡密、加油等）
+	RechargeModeAccount RechargeMode = "account" // 账号池模式（电费、DTH、游戏等）
+)
+
 // BusinessType 业务类型
 type BusinessType string
 
@@ -13,6 +21,21 @@ const (
 	IndiaElectric    BusinessType = "india_electric" // 印度电费
 	IndiaDTH         BusinessType = "india_dth"      // 印度 DTH (卫星电视) 充值
 )
+
+// RechargeMode 返回该业务类型的充值模式
+func (b BusinessType) RechargeMode() RechargeMode {
+	switch b {
+	case ElectricBusiness, OilBusiness, IndiaElectric, IndiaDTH, GameBusiness:
+		return RechargeModeAccount // 账号池模式
+	default:
+		return RechargeModeAPI // 下单API模式
+	}
+}
+
+// IsAccountMode 是否为账号池模式
+func (b BusinessType) IsAccountMode() bool {
+	return b.RechargeMode() == RechargeModeAccount
+}
 
 func (b BusinessType) String() string {
 	switch b {

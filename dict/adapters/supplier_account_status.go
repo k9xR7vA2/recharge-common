@@ -3,7 +3,6 @@ package adapters
 import (
 	"github.com/k9xR7vA2/recharge-common/constant"
 	"github.com/k9xR7vA2/recharge-common/dict/types"
-	"strconv"
 )
 
 type SupplierAccountStatusDict struct{}
@@ -22,8 +21,8 @@ func (d *SupplierAccountStatusDict) GetOptions() []types.DictOption {
 	for _, s := range statuses {
 		options = append(options, types.DictOption{
 			Label:   s.Label,
-			Value:   strconv.Itoa(int(s.Value)),
-			Code:    strconv.Itoa(int(s.Value)),
+			Value:   s.Value,
+			Code:    s.Code,
 			TagType: s.TagType, // DictOption 需补充该字段，见下方说明
 		})
 	}

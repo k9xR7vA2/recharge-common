@@ -50,6 +50,12 @@ func (s SupplierAccountStatus) Code() string {
 	}
 }
 
+func (s SupplierAccountStatus) CanDelete() bool {
+	return s == SupplierAccountStatusPending ||
+		s == SupplierAccountStatusRejected ||
+		s == SupplierAccountStatusDisabled
+}
+
 // TagType 对应前端 el-tag 的 type
 func (s SupplierAccountStatus) TagType() string {
 	switch s {

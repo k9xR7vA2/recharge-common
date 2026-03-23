@@ -30,6 +30,7 @@ type SupplierAccount struct {
 	ApprovedBy      string                         `json:"approved_by"      gorm:"type:varchar(50);comment:审核人"`
 	CreatedAt       time.Time                      `json:"created_at"`
 	UpdatedAt       time.Time                      `json:"updated_at"`
+	CompletedAt     *time.Time                     `json:"completed_at" gorm:"comment:充值完成时间"` // 新增
 	DeletedAt       gorm.DeletedAt                 `json:"-"                gorm:"index"`
 	Supplier        Supplier                       `gorm:"foreignKey:SupplierID;references:SupplierID" json:"supplier,omitempty"`
 	Tenant          Tenant                         `gorm:"->;foreignKey:TenantID;references:TenantID" json:"tenant,omitempty"`

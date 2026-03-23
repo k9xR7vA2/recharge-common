@@ -31,6 +31,8 @@ type SupplierAccount struct {
 	CreatedAt       time.Time                      `json:"created_at"`
 	UpdatedAt       time.Time                      `json:"updated_at"`
 	DeletedAt       gorm.DeletedAt                 `json:"-"                gorm:"index"`
+	Supplier        Supplier                       `gorm:"foreignKey:SupplierID;references:SupplierID" json:"supplier,omitempty"`
+	Tenant          Tenant                         `gorm:"->;foreignKey:TenantID;references:TenantID" json:"tenant,omitempty"`
 }
 
 func (SupplierAccount) TableName() string { return "as_supplier_accounts" }

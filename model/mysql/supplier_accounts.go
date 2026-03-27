@@ -11,6 +11,7 @@ type SupplierAccount struct {
 	SupplierID      uint                           `json:"supplier_id"      gorm:"not null;comment:供货商ID"`
 	TenantID        uint                           `json:"tenant_id"        gorm:"not null;comment:租户ID"`
 	BusinessType    constant.BusinessType          `json:"business_type"    gorm:"type:varchar(20);not null;comment:业务类型 electric/oil/dth"`
+	ProductID       uint                           `json:"product_id" gorm:"not null;comment:产品ID"`
 	ProductCode     string                         `json:"product_code"     gorm:"type:varchar(50);not null;comment:产品编码"`
 	Account         string                         `json:"account"          gorm:"type:varchar(100);not null;comment:充值账号（电表号/车牌/DTH号）"`
 	AccountName     string                         `json:"account_name"     gorm:"type:varchar(100);comment:账号归属人姓名"`
@@ -36,6 +37,7 @@ type SupplierAccount struct {
 	DeletedAt       gorm.DeletedAt                 `json:"-"                gorm:"index"`
 	Supplier        Supplier                       `gorm:"foreignKey:SupplierID;references:SupplierID" json:"supplier,omitempty"`
 	Tenant          Tenant                         `gorm:"->;foreignKey:TenantID;references:TenantID" json:"tenant,omitempty"`
+	Product         Product                        `gorm:"foreignKey:ProductID;references:ID" json:"product,omitempty"`
 }
 
 func (SupplierAccount) TableName() string { return "as_supplier_accounts" }

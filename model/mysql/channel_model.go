@@ -1,9 +1,7 @@
 package mysql
 
 import (
-	"encoding/json"
 	"github.com/k9xR7vA2/recharge-common/constant"
-	"gorm.io/datatypes"
 	"time"
 )
 
@@ -18,18 +16,12 @@ type Channel struct {
 	Status        constant.TenantBusinessStatus `json:"status" gorm:"column:status;type:tinyint;not null;default:1;comment:状态: 1-启用2-禁用"`
 	Payment       constant.PaymentType          `json:"payment" gorm:"column:payment;type:tinyint;not null;default:1;comment:支付方式"`
 	Device        constant.DeviceType           `json:"device" gorm:"column:device;type:tinyint;not null;default:1;comment:设备"`
-	AmountType    uint                          `json:"amount_type" gorm:"not null;default:1;comment:金额类型: 1固定, 2区间, 3动态"`
-	Amount        datatypes.JSON                `json:"amount" gorm:"column:amount;type:json;not null;comment:金额"`
 	PaymentMethod constant.PaymentMethod        `json:"payment_method" gorm:"column:payment_method;type:varchar(100);not null;comment:支付方法"`
-	Attributes    datatypes.JSON                `json:"attributes" gorm:"column:attributes;type:json;not null;comment:JSON格式的特定属性"` // JSON格式的特定属性
-
-	CreatedAt time.Time   `json:"created_at"`
-	UpdatedAt time.Time   `json:"updated_at"`
-	Interface AsInterface `json:"interface,omitempty" gorm:"foreignKey:InterfaceID;references:InterfaceID" `
-
+	CreatedAt     time.Time                     `json:"created_at"`
+	UpdatedAt     time.Time                     `json:"updated_at"`
+	Interface     AsInterface                   `json:"interface,omitempty" gorm:"foreignKey:InterfaceID;references:InterfaceID" `
 	// 添加多对多关系
-	Tenants []Tenant `json:"tenants,omitempty" gorm:"many2many:as_tenant_channels;foreignKey:ID;joinForeignKey:ChannelID;References:TenantID;joinReferences:TenantID"`
-
+	Tenants        []Tenant        `json:"tenants,omitempty" gorm:"many2many:as_tenant_channels;foreignKey:ID;joinForeignKey:ChannelID;References:TenantID;joinReferences:TenantID"`
 	TenantChannels []TenantChannel `json:"tenant_channels,omitempty" gorm:"foreignKey:ChannelID;references:ID"`
 	Product        Product         `gorm:"foreignKey:ProductID;references:ID" json:"product,omitempty"`
 }
@@ -39,12 +31,6 @@ func (Channel) TableName() string {
 	return "as_channels"
 }
 
-func (g Channel) GetAmounts() []int {
-	var amounts []int
-	_ = json.Unmarshal(g.Amount, &amounts)
-	return amounts
-}
-
 type MobileAttrs struct {
 	Carrier      constant.CarrierType `json:"carrier"`
 	AreaCode     constant.AreaScope   `json:"area_code"`
@@ -52,25 +38,7 @@ type MobileAttrs struct {
 	ChargeSpeed  constant.ChargeSpeed `json:"charge_speed"`
 }
 
-func (g Channel) GetMobileAttrs() (*MobileAttrs, error) {
-	var attr MobileAttrs
-	err := json.Unmarshal(g.Attributes, &attr)
-	if err != nil {
-		return nil, err
-	}
-	return &attr, nil
-}
-
 type IndiaMobileAttrs struct {
 	Carrier     constant.IndiaCarrierType `json:"carrier"`
 	ChargeSpeed constant.ChargeSpeed      `json:"charge_speed"`
-}
-
-func (g Channel) GetIndiaMobileAttrs() (*IndiaMobileAttrs, error) {
-	var attr IndiaMobileAttrs
-	err := json.Unmarshal(g.Attributes, &attr)
-	if err != nil {
-		return nil, err
-	}
-	return &attr, nil
 }

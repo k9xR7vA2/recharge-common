@@ -154,3 +154,28 @@ func ParseIndiaMobileProductAttrs(data datatypes.JSON) (*IndiaMobileAttributes, 
 	}
 	return &attr, err
 }
+
+// IndiaDthAttributes IndiaDTH卫星电视属性
+type IndiaDthAttributes struct {
+	Operator  []IndiaDthOperatorType `json:"operator"`   // 改为切片，支持多运营商
+	ValidTime int                    `json:"valid_time"` // 订单有效期
+}
+
+func ParseDthProductAttrs(data datatypes.JSON) (*IndiaDthAttributes, error) {
+	var attr IndiaDthAttributes
+	if err := json.Unmarshal(data, &attr); err != nil {
+		return nil, err
+	}
+	if len(attr.Operator) == 0 {
+		return nil, errors.New("至少选择一个DTH运营商")
+	}
+	for _, op := range attr.Operator {
+		if !op.IsValid() {
+			return nil, fmt.Errorf("DTH运营商类型不正确: %d", op)
+		}
+	}
+	if attr.ValidTime <= 0 {
+		return nil, errors.New("订单有效期参数不正确")
+	}
+	return &attr, nil
+}

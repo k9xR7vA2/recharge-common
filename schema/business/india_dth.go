@@ -2,18 +2,17 @@ package business
 
 import (
 	"github.com/k9xR7vA2/recharge-common/constant"
-	"github.com/k9xR7vA2/recharge-common/schema"
+	"github.com/k9xR7vA2/recharge-common/schema/types" // ← 改这里
 )
 
-var IndiaDTH = schema.BusinessSchema{
+var IndiaDTH = types.BusinessSchema{
 	BusinessType: constant.IndiaDTH,
-	Fields: []schema.RawField{
-		// ── product scene ──
+	Fields: []types.RawField{
 		{
 			Key:      "operator",
 			Label:    "支持运营商",
-			Type:     schema.FieldTypeCheckbox,
-			Scene:    schema.SceneProduct,
+			Type:     types.FieldTypeCheckbox, // ← schema.xxx 全改 types.xxx
+			Scene:    types.SceneProduct,
 			Required: true,
 			DictKey:  "india_dth_operator",
 			TagType:  "success",
@@ -21,19 +20,18 @@ var IndiaDTH = schema.BusinessSchema{
 		{
 			Key:      "valid_time",
 			Label:    "订单有效期",
-			Type:     schema.FieldTypeInputNumber,
-			Scene:    schema.SceneProduct,
+			Type:     types.FieldTypeInputNumber,
+			Scene:    types.SceneProduct,
 			Required: true,
-			Min:      schema.Ptr(1),
+			Min:      types.Ptr(1),
 			Unit:     "秒",
 			TagType:  "info",
 		},
-		// ── account scene ──
 		{
 			Key:      "operator",
 			Label:    "运营商",
-			Type:     schema.FieldTypeSelect,
-			Scene:    schema.SceneAccount,
+			Type:     types.FieldTypeSelect,
+			Scene:    types.SceneAccount,
 			Required: true,
 			DictKey:  "india_dth_operator",
 		},

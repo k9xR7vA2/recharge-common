@@ -2,6 +2,7 @@ package mysql
 
 import (
 	"github.com/k9xR7vA2/recharge-common/constant"
+	"gorm.io/datatypes"
 	"gorm.io/gorm"
 	"time"
 )
@@ -27,6 +28,7 @@ type SupplierAccount struct {
 	Status          constant.SupplierAccountStatus `json:"status"           gorm:"type:tinyint;not null;default:1;comment:1待审核 2审核通过 3充值中 4已完成 5已拒绝 6禁用"`
 	RejectReason    string                         `json:"reject_reason"    gorm:"type:varchar(255);comment:拒绝原因"`
 	Remark          string                         `json:"remark"           gorm:"type:varchar(255);comment:备注"`
+	ExtraInfo       datatypes.JSON                 `json:"extra_info" gorm:"type:json;comment:扩展信息"`
 	SupplierOrderSn string                         `json:"supplier_order_sn" gorm:"type:varchar(64);uniqueIndex;comment:供货商订单号"`
 	NotifyUrl       string                         `json:"notify_url"       gorm:"type:varchar(255);comment:回调通知地址"`
 	ApprovedAt      *time.Time                     `json:"approved_at"      gorm:"comment:审核时间"`

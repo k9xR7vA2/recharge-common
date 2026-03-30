@@ -3,32 +3,39 @@ package schema
 import (
 	"github.com/k9xR7vA2/recharge-common/constant"
 	"github.com/k9xR7vA2/recharge-common/dict"
+	"github.com/k9xR7vA2/recharge-common/schema/types"
 )
 
-func GetSchema(businessType constant.BusinessType) []SchemaField {
+// GetProductSchema 平台后台产品表单用：ProductFields + SystemFields
+func GetProductSchema(businessType constant.BusinessType) []types.SchemaField {
 	initRegistry()
-	return buildFields(registry[businessType])
+	bs := registry[businessType]
+	all := append(bs.ProductFields, bs.SystemFields...)
+	return buildFields(all)
 }
 
-func GetSchemaByScene(businessType constant.BusinessType, scene SceneType) []SchemaField {
+// GetPublicSchema 租户/供货商产品展示用：只有 ProductFields
+func GetPublicSchema(businessType constant.BusinessType) []types.SchemaField {
 	initRegistry()
-	var result []SchemaField
-	for _, f := range buildFields(registry[businessType]) {
-		if f.Scene == scene {
-			result = append(result, f)
-		}
+	return buildFields(registry[businessType].ProductFields)
+}
+
+// GetAccountSchema 账号表单用：AccountFields，API模式返回 nil
+func GetAccountSchema(businessType constant.BusinessType) []types.SchemaField {
+	initRegistry()
+	if !businessType.IsAccountMode() {
+		return nil
 	}
-	return result
+	return buildFields(registry[businessType].AccountFields)
 }
 
-func buildFields(raws []RawField) []SchemaField {
-	result := make([]SchemaField, 0, len(raws))
+func buildFields(raws []types.RawField) []types.SchemaField {
+	result := make([]types.SchemaField, 0, len(raws))
 	for _, r := range raws {
-		field := SchemaField{
+		field := types.SchemaField{
 			Key:      r.Key,
 			Label:    r.Label,
 			Type:     r.Type,
-			Scene:    r.Scene,
 			Required: r.Required,
 			Options:  r.Options,
 			Min:      r.Min,
@@ -36,12 +43,11 @@ func buildFields(raws []RawField) []SchemaField {
 			Unit:     r.Unit,
 			TagType:  r.TagType,
 		}
-		// 有 DictKey 的从字典动态取 options
 		if r.DictKey != "" {
 			if d := dict.GetDict(r.DictKey); d != nil {
-				opts := make([]SchemaOption, len(d.Options))
+				opts := make([]types.SchemaOption, len(d.Options))
 				for i, o := range d.Options {
-					opts[i] = SchemaOption{Label: o.Label, Value: o.Value}
+					opts[i] = types.SchemaOption{Label: o.Label, Value: o.Value}
 				}
 				field.Options = opts
 			}
@@ -50,12 +56,3 @@ func buildFields(raws []RawField) []SchemaField {
 	}
 	return result
 }
-
-//```
-//
-//---
-//
-//## 新增业务类型只需两步
-//```
-//1. 新建 schema/business/xxx.go，定义字段
-//2. registry.go 的列表里加一行

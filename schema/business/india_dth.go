@@ -7,31 +7,33 @@ import (
 
 var IndiaDTH = types.BusinessSchema{
 	BusinessType: constant.IndiaDTH,
-	Fields: []types.RawField{
+	// 账号池模式
+	ProductFields: []types.RawField{
 		{
 			Key:      "operator",
 			Label:    "支持运营商",
-			Type:     types.FieldTypeCheckbox, // ← schema.xxx 全改 types.xxx
-			Scene:    types.SceneProduct,
+			Type:     types.FieldTypeCheckbox,
 			Required: true,
 			DictKey:  "india_dth_operator",
 			TagType:  "success",
 		},
+	},
+	SystemFields: []types.RawField{
 		{
 			Key:      "valid_time",
 			Label:    "订单有效期",
 			Type:     types.FieldTypeInputNumber,
-			Scene:    types.SceneProduct,
 			Required: true,
 			Min:      types.Ptr(1),
 			Unit:     "秒",
 			TagType:  "info",
 		},
+	},
+	AccountFields: []types.RawField{
 		{
 			Key:      "operator",
 			Label:    "运营商",
 			Type:     types.FieldTypeSelect,
-			Scene:    types.SceneAccount,
 			Required: true,
 			DictKey:  "india_dth_operator",
 		},

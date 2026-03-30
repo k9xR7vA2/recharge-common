@@ -8,7 +8,7 @@ import (
 )
 
 var (
-	registry = map[constant.BusinessType][]types.RawField{} // ← 改
+	registry = map[constant.BusinessType]types.BusinessSchema{}
 	once     sync.Once
 )
 
@@ -18,8 +18,9 @@ func initRegistry() {
 			business.Mobile,
 			business.IndiaMobile,
 			business.IndiaDTH,
+			// 新增业务类型在这里加一行
 		} {
-			registry[bs.BusinessType] = bs.Fields
+			registry[bs.BusinessType] = bs
 		}
 	})
 }

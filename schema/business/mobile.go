@@ -7,12 +7,12 @@ import (
 
 var Mobile = types.BusinessSchema{
 	BusinessType: constant.MobileBusiness,
-	Fields: []types.RawField{
+	// API模式，无 AccountFields
+	ProductFields: []types.RawField{
 		{
 			Key:      "carrier",
 			Label:    "运营商",
 			Type:     types.FieldTypeRadio,
-			Scene:    types.SceneProduct,
 			Required: true,
 			DictKey:  "carrier_type",
 			TagType:  "success",
@@ -21,7 +21,6 @@ var Mobile = types.BusinessSchema{
 			Key:      "charge_speed",
 			Label:    "充值速度",
 			Type:     types.FieldTypeRadio,
-			Scene:    types.SceneProduct,
 			Required: true,
 			DictKey:  "charge_speed",
 			TagType:  "warning",
@@ -30,7 +29,6 @@ var Mobile = types.BusinessSchema{
 			Key:      "area_code",
 			Label:    "区域范围",
 			Type:     types.FieldTypeRadio,
-			Scene:    types.SceneProduct,
 			Required: true,
 			DictKey:  "area_code",
 			TagType:  "primary",
@@ -39,7 +37,6 @@ var Mobile = types.BusinessSchema{
 			Key:      "is_check_isp",
 			Label:    "携号转网检测",
 			Type:     types.FieldTypeRadio,
-			Scene:    types.SceneProduct,
 			Required: true,
 			Options: []types.SchemaOption{
 				{Label: "是", Value: 1},
@@ -47,11 +44,12 @@ var Mobile = types.BusinessSchema{
 			},
 			TagType: "warning",
 		},
+	},
+	SystemFields: []types.RawField{
 		{
 			Key:      "valid_time",
 			Label:    "订单有效期",
 			Type:     types.FieldTypeInputNumber,
-			Scene:    types.SceneProduct,
 			Required: true,
 			Min:      types.Ptr(1),
 			Unit:     "秒",

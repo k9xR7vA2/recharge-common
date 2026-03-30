@@ -3,7 +3,6 @@ package types
 import "github.com/k9xR7vA2/recharge-common/constant"
 
 type FieldType string
-type SceneType string
 
 const (
 	FieldTypeRadio       FieldType = "radio"
@@ -13,16 +12,10 @@ const (
 	FieldTypeInputNumber FieldType = "input-number"
 )
 
-const (
-	SceneProduct SceneType = "product"
-	SceneAccount SceneType = "account"
-)
-
 type SchemaField struct {
 	Key      string         `json:"key"`
 	Label    string         `json:"label"`
 	Type     FieldType      `json:"type"`
-	Scene    SceneType      `json:"scene"`
 	Required bool           `json:"required"`
 	Options  []SchemaOption `json:"options,omitempty"`
 	Min      *float64       `json:"min,omitempty"`
@@ -40,7 +33,6 @@ type RawField struct {
 	Key      string
 	Label    string
 	Type     FieldType
-	Scene    SceneType
 	Required bool
 	DictKey  string
 	Options  []SchemaOption
@@ -50,9 +42,12 @@ type RawField struct {
 	TagType  string
 }
 
+// BusinessSchema 一个业务类型的完整定义
 type BusinessSchema struct {
-	BusinessType constant.BusinessType // 用 string 避免再引入 constant，或直接用 constant
-	Fields       []RawField
+	BusinessType  constant.BusinessType
+	ProductFields []RawField // 业务属性：平台+租户+供货商可见，平台可编辑
+	SystemFields  []RawField // 系统配置：仅平台可见可编辑
+	AccountFields []RawField // 账号属性：账号池模式专用，nil表示API模式
 }
 
 func Ptr(v float64) *float64 { return &v }

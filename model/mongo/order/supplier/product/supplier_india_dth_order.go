@@ -17,3 +17,6 @@ func (o *SupplierIndiaDTHOrder) GetAppID() string { return o.AppID }
 func (o *SupplierIndiaDTHOrder) GetOperator() constant.IndiaDthOperatorType {
 	return o.Operator
 }
+func (o *SupplierIndiaDTHOrder) GetChargeSpeed() constant.ChargeSpeed {
+	return constant.Fast
+}

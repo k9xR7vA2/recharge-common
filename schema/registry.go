@@ -3,7 +3,7 @@ package schema
 import (
 	"github.com/k9xR7vA2/recharge-common/constant"
 	"github.com/k9xR7vA2/recharge-common/schema/business"
-	"github.com/k9xR7vA2/recharge-common/schema/types" // ← 加这个
+	"github.com/k9xR7vA2/recharge-common/schema/types"
 	"sync"
 )
 

@@ -2,7 +2,7 @@ package business
 
 import (
 	"github.com/k9xR7vA2/recharge-common/constant"
-	"github.com/k9xR7vA2/recharge-common/schema/types" // ← 改这里
+	"github.com/k9xR7vA2/recharge-common/schema/types"
 )
 
 var IndiaDTH = types.BusinessSchema{

@@ -45,15 +45,4 @@ var Mobile = types.BusinessSchema{
 			TagType: "warning",
 		},
 	},
-	SystemFields: []types.RawField{
-		{
-			Key:      "valid_time",
-			Label:    "订单有效期",
-			Type:     types.FieldTypeInputNumber,
-			Required: true,
-			Min:      types.Ptr(1),
-			Unit:     "秒",
-			TagType:  "info",
-		},
-	},
 }

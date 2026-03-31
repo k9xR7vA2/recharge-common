@@ -2,6 +2,7 @@ package mysql
 
 import (
 	"github.com/k9xR7vA2/recharge-common/constant"
+	"github.com/shopspring/decimal"
 	"gorm.io/datatypes"
 	"gorm.io/gorm"
 	"time"
@@ -23,6 +24,7 @@ type SupplierAccount struct {
 	LockAmount      uint                           `json:"lock_amount" gorm:"type:int unsigned;not null;default:0;comment:冻结中金额"`
 	SplitCharge     int                            `json:"split_charge"      gorm:"type:tinyint;not null;default:1;comment:是否允许拆分充值 1允许 2不允许"`
 	Source          int                            `json:"source"           gorm:"type:tinyint;not null;default:1;comment:来源 1供货商导入 2核销员录入"`
+	SettlementRate  decimal.Decimal                `json:"settlement_rate" gorm:"type:decimal(10,2);not null;default:0;comment:结算费率，从供货商产品复制"`
 	VerifierID      *uint                          `json:"verifier_id"      gorm:"comment:核销员ID（source=2时有值）"`
 	VerifierName    string                         `json:"verifier_name"    gorm:"type:varchar(50);comment:核销员姓名"`
 	Status          constant.SupplierAccountStatus `json:"status"           gorm:"type:tinyint;not null;default:1;comment:1待审核 2审核通过 3充值中 4已完成 5已拒绝 6禁用"`

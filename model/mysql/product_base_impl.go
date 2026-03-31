@@ -14,6 +14,7 @@ type Product struct {
 	BusinessType constant.BusinessType         `json:"business_type" gorm:"column:business_type;type:varchar(100);not null;comment:业务类型"`
 	Status       constant.TenantBusinessStatus `json:"status" gorm:"column:status;type:tinyint;not null;default:1;comment:状态:1正常,2下架"`
 	HasSku       int                           `json:"has_sku" gorm:"column:has_sku;type:tinyint;not null;default:2;comment:是否有SKU: 1有, 2没有"`
+	ValidTime    uint                          `json:"valid_time" gorm:"column:valid_time;type:int unsigned;not null;default:0;comment:订单有效期(秒)"`
 	AmountType   uint                          `json:"amount_type" gorm:"not null;default:1;comment:金额类型: 1固定, 2区间, 3动态"`
 	Amount       datatypes.JSON                `json:"amount" gorm:"column:amount;type:json;not null;comment:金额"`
 	Attributes   datatypes.JSON                `json:"attributes" gorm:"column:attributes;type:json;comment:业务属性"`

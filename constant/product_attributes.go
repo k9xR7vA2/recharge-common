@@ -16,14 +16,12 @@ type MobileAttributes struct {
 	AreaCode     AreaScope   `json:"area_code"`
 	ProvinceCode []int       `json:"province_code"` // 支持的省份列表 [200,210,220]
 	IsCheckIsp   int         `json:"is_check_isp"`
-	ValidTime    int         `json:"valid_time"`
 }
 
 // MobileAttributes 实现接口
 func (a *MobileAttributes) GetCarrier() int             { return int(a.Carrier) }
 func (a *MobileAttributes) GetChargeSpeed() ChargeSpeed { return a.ChargeSpeed }
 func (a *MobileAttributes) GetIsCheckIsp() int          { return a.IsCheckIsp }
-func (a *MobileAttributes) GetValidTime() int           { return a.ValidTime }
 
 func ParseMobileProductAttrs(data datatypes.JSON) (*MobileAttributes, error) {
 	var attr MobileAttributes
@@ -45,9 +43,6 @@ func ParseMobileProductAttrs(data datatypes.JSON) (*MobileAttributes, error) {
 		if err != nil {
 			return nil, err
 		}
-	}
-	if attr.ValidTime <= 0 {
-		return nil, errors.New("订单有效期参数不正确")
 	}
 	return &attr, err
 }
@@ -116,15 +111,12 @@ type IndiaMobileAttributes struct {
 	IsCheckIsp  int              `json:"is_check_isp"`
 	ChargeSpeed ChargeSpeed      `json:"charge_speed"`
 	Carrier     IndiaCarrierType `json:"carrier"`
-	HasSku      int              `json:"has_sku"`
-	ValidTime   int              `json:"valid_time"`
 }
 
 // IndiaMobileAttributes 实现接口
 func (a *IndiaMobileAttributes) GetCarrier() int             { return int(a.Carrier) }
 func (a *IndiaMobileAttributes) GetChargeSpeed() ChargeSpeed { return a.ChargeSpeed }
 func (a *IndiaMobileAttributes) GetIsCheckIsp() int          { return a.IsCheckIsp }
-func (a *IndiaMobileAttributes) GetValidTime() int           { return a.ValidTime }
 
 func ParseIndiaMobileProductAttrs(data datatypes.JSON) (*IndiaMobileAttributes, error) {
 	var attr IndiaMobileAttributes
@@ -138,27 +130,12 @@ func ParseIndiaMobileProductAttrs(data datatypes.JSON) (*IndiaMobileAttributes, 
 	if !attr.ChargeSpeed.IsValid() {
 		return nil, errors.New("充值速度不正确！")
 	}
-	skuFlag := []int{1, 2}
-	flg := false
-	for _, v := range skuFlag {
-		if v == attr.HasSku {
-			flg = true
-			break
-		}
-	}
-	if flg == false {
-		return nil, errors.New("sku参数错误")
-	}
-	if attr.ValidTime <= 0 {
-		return nil, errors.New("订单有效期参数不正确")
-	}
 	return &attr, err
 }
 
 // IndiaDthAttributes IndiaDTH卫星电视属性
 type IndiaDthAttributes struct {
-	Operator  []IndiaDthOperatorType `json:"operator"`   // 改为切片，支持多运营商
-	ValidTime int                    `json:"valid_time"` // 订单有效期
+	Operator []IndiaDthOperatorType `json:"operator"` // 改为切片，支持多运营商
 }
 
 func ParseDthProductAttrs(data datatypes.JSON) (*IndiaDthAttributes, error) {
@@ -173,9 +150,6 @@ func ParseDthProductAttrs(data datatypes.JSON) (*IndiaDthAttributes, error) {
 		if !op.IsValid() {
 			return nil, fmt.Errorf("DTH运营商类型不正确: %d", op)
 		}
-	}
-	if attr.ValidTime <= 0 {
-		return nil, errors.New("订单有效期参数不正确")
 	}
 	return &attr, nil
 }

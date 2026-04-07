@@ -27,7 +27,8 @@ type OrderQueryTask struct {
 	SupplierAppID         string `json:"supplier_app_id"`
 	SupplierOrderAmount   string `json:"supplier_order_amount"`
 	SupplierOrderCreateAt int64  `json:"supplier_order_create_at"`
-
+	// 供货商账号（DTH 充值账号释放额度用）
+	SupplierAccountID uint `json:"supplier_account_id"` // 充值账号ID
 	// 查单
 	InterfaceID     uint   `json:"interface_id"`      // 接口ID → 实时查配置
 	UpstreamOrderSn string `json:"upstream_order_sn"` // 三方网关订单号

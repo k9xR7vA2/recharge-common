@@ -21,7 +21,7 @@ type SupplierAccount struct {
 	Region          string                         `json:"region"           gorm:"type:varchar(100);comment:所属地区"`
 	Amount          uint                           `json:"amount" gorm:"type:int unsigned;not null;default:0;comment:总待充金额"`
 	ChargedAmount   uint                           `json:"charged_amount" gorm:"type:int unsigned;not null;default:0;comment:已充成功金额"`
-	LockAmount      uint                           `json:"lock_amount" gorm:"type:int unsigned;not null;default:0;comment:冻结中金额"`
+	LockedAmount    uint                           `json:"locked_amount" gorm:"type:int unsigned;not null;default:0;comment:冻结中金额"`
 	SplitCharge     int                            `json:"split_charge"      gorm:"type:tinyint;not null;default:1;comment:是否允许拆分充值 1允许 2不允许"`
 	Source          int                            `json:"source"           gorm:"type:tinyint;not null;default:1;comment:来源 1供货商导入 2核销员录入"`
 	SettlementRate  decimal.Decimal                `json:"settlement_rate" gorm:"type:decimal(10,2);not null;default:0;comment:结算费率，从供货商产品复制"`

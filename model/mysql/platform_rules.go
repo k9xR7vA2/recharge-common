@@ -6,7 +6,6 @@ import "time"
 // 表名: platform_rules
 type PlatformRule struct {
 	ID          uint   `gorm:"primarykey"                    json:"id"`
-	Platform    string `gorm:"column:platform;not null"      json:"platform"`
 	ChannelCode string `gorm:"column:channel_code;type:varchar(50);comment:通道编码" json:"channel_code" `
 	// 额度规则
 	DailyOrderMax   int `gorm:"column:daily_order_max;default:3"      json:"daily_order_max"`

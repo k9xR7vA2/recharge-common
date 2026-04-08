@@ -5,9 +5,9 @@ import "time"
 // PlatformRule 平台规则配置，管理后台维护
 // 表名: platform_rules
 type PlatformRule struct {
-	ID       uint   `gorm:"primarykey"                    json:"id"`
-	Platform string `gorm:"column:platform;not null"      json:"platform"`
-
+	ID          uint   `gorm:"primarykey"                    json:"id"`
+	Platform    string `gorm:"column:platform;not null"      json:"platform"`
+	ChannelCode string `gorm:"column:channel_code;type:varchar(50);comment:通道编码" json:"channel_code" `
 	// 额度规则
 	DailyOrderMax   int `gorm:"column:daily_order_max;default:3"      json:"daily_order_max"`
 	MonthlyOrderMax int `gorm:"column:monthly_order_max;default:30"   json:"monthly_order_max"`

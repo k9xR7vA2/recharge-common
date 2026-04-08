@@ -8,11 +8,11 @@ import (
 // CookieBanRecord 封控历史事件，运营复盘/永久废弃判断，存 MySQL
 // 表名: cookie_ban_records
 type CookieBanRecord struct {
-	ID       uint             `gorm:"primarykey"                json:"id"`
-	TenantID string           `gorm:"column:tenant_id;not null" json:"tenant_id"`
-	CookieID string           `gorm:"column:cookie_id;not null" json:"cookie_id"` // MongoDB ObjectId 字符串
-	Platform string           `gorm:"column:platform;not null"  json:"platform"`
-	BanType  constant.BanType `gorm:"column:ban_type;not null"  json:"ban_type"`
+	ID          uint             `gorm:"primarykey"                json:"id"`
+	TenantID    string           `gorm:"column:tenant_id;not null" json:"tenant_id"`
+	CookieID    string           `gorm:"column:cookie_id;not null" json:"cookie_id"` // MongoDB ObjectId 字符串
+	ChannelCode string           `gorm:"column:channel_code;type:varchar(50);comment:通道编码" json:"channel_code" `
+	BanType     constant.BanType `gorm:"column:ban_type;not null"  json:"ban_type"`
 
 	TriggerAt     *time.Time `gorm:"column:trigger_at"     json:"trigger_at"`
 	DetectMsg     string     `gorm:"column:detect_msg;type:text" json:"detect_msg"` // 触发时的响应信息

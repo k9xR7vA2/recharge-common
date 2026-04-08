@@ -5,10 +5,10 @@ import "time"
 // CookieDailyStats 运营日报快照，定时任务生成，存 MySQL
 // 表名: cookie_daily_stats
 type CookieDailyStats struct {
-	ID       uint   `gorm:"primarykey"                json:"id"`
-	TenantID string `gorm:"column:tenant_id;not null" json:"tenant_id"`
-	Platform string `gorm:"column:platform;not null"  json:"platform"`
-	StatDate string `gorm:"column:stat_date;not null" json:"stat_date"` // "2025-03-06"
+	ID          uint   `gorm:"primarykey"                json:"id"`
+	TenantID    string `gorm:"column:tenant_id;not null" json:"tenant_id"`
+	ChannelCode string `gorm:"column:channel_code;type:varchar(50);comment:通道编码" json:"channel_code" `
+	StatDate    string `gorm:"column:stat_date;not null" json:"stat_date"` // "2025-03-06"
 
 	// 存量与流量
 	CarryOver int `gorm:"column:carry_over;default:0" json:"carry_over"` // 昨日结转可用数

@@ -66,7 +66,6 @@ func registerAllDicts() {
 	GlobalManager.Register(&adapters.SupOrderStatusDict{})   // 供货商订单状态
 	//
 	GlobalManager.Register(&adapters.TimezoneDict{})              // 时区dict
-	GlobalManager.Register(&adapters.PlatformTypeDict{})          // cookie平台
 	GlobalManager.Register(&adapters.CookieStatusDict{})          //cookie status
 	GlobalManager.Register(&adapters.SupplierAccountStatusDict{}) //充值账户状态
 	GlobalManager.Register(&adapters.IndiaDthOperatorDict{})      //India dth 运营商

@@ -1,16 +1,15 @@
 package cookie
 
 import (
-	"github.com/k9xR7vA2/recharge-common/constant"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 // LoginRecord 登录记录表，跟踪每次登录行为
 // 集合名: login_records
 type LoginRecord struct {
-	ID       primitive.ObjectID    `bson:"_id,omitempty" json:"id"`
-	Platform constant.PlatformType `bson:"platform"      json:"platform"`
-	Phone    string                `bson:"phone"         json:"phone"`
+	ID          primitive.ObjectID `bson:"_id,omitempty" json:"id"`
+	ChannelCode string             `bson:"channel_code" json:"channel_code"`
+	Phone       string             `bson:"phone"         json:"phone"`
 
 	// 关联成功后的 Cookie（失败为空）
 	CookieID *primitive.ObjectID `bson:"cookie_id,omitempty" json:"cookieId,omitempty"`

@@ -8,9 +8,9 @@ import (
 
 // AccountCookie Cookie 主体 + 风控状态，权威来源
 type AccountCookie struct {
-	ID       primitive.ObjectID    `bson:"_id,omitempty" json:"id"`
-	Platform constant.PlatformType `bson:"platform"      json:"platform"`
-	Phone    string                `bson:"phone"         json:"phone"`
+	ID          primitive.ObjectID `bson:"_id,omitempty" json:"id"`
+	ChannelCode string             `bson:"channel_code" json:"channel_code"`
+	Phone       string             `bson:"phone"         json:"phone"`
 
 	// 溯源（可追回登录现场）
 	LoginRecordID primitive.ObjectID `bson:"login_record_id" json:"loginRecordId"`

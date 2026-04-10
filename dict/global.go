@@ -69,7 +69,7 @@ func registerAllDicts() {
 	GlobalManager.Register(&adapters.CookieStatusDict{})          //cookie status
 	GlobalManager.Register(&adapters.SupplierAccountStatusDict{}) //充值账户状态
 	GlobalManager.Register(&adapters.IndiaDthOperatorDict{})      //India dth 运营商
-
+	GlobalManager.Register(&adapters.IndiaElectricOperatorDict{}) //India 电费 运营商
 	// TODO: 在这里继续注册其他字典
 	// GlobalManager.Register(&YourNewDict{})
 }

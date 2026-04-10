@@ -18,6 +18,7 @@ func initRegistry() {
 			business.Mobile,
 			business.IndiaMobile,
 			business.IndiaDTH,
+			business.IndiaElectric,
 			// 新增业务类型在这里加一行
 		} {
 			registry[bs.BusinessType] = bs

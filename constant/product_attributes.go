@@ -4,11 +4,9 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/k9xR7vA2/recharge-common/dict"
 	"gorm.io/datatypes"
 	"strconv"
 	"strings"
-	"sync"
 )
 
 // MobileAttributes 话费属性
@@ -156,24 +154,13 @@ func ParseDthProductAttrs(data datatypes.JSON) (*IndiaDthAttributes, error) {
 	return &attr, nil
 }
 
-var indiaElectricOperatorIds map[int]bool
-var indiaElectricOnce sync.Once
-
 func getIndiaElectricOperatorIds() map[int]bool {
-	indiaElectricOnce.Do(func() {
-		indiaElectricOperatorIds = make(map[int]bool)
-		d := dict.GetDict("india_electric_operator")
-		for _, item := range d.Options {
-			switch v := item.Value.(type) {
-			case int:
-				indiaElectricOperatorIds[v] = true
-			case float64:
-				indiaElectricOperatorIds[int(v)] = true
-			case int64:
-				indiaElectricOperatorIds[int(v)] = true
-			}
-		}
-	})
+	var indiaElectricOperatorIds map[int]bool
+	opts := GetAllElectricOperators()
+	indiaElectricOperatorIds = make(map[int]bool)
+	for _, item := range opts {
+		indiaElectricOperatorIds[item.Value] = true
+	}
 	return indiaElectricOperatorIds
 }
 

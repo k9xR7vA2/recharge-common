@@ -1,6 +1,9 @@
 package adapters
 
-import "github.com/k9xR7vA2/recharge-common/dict/types"
+import (
+	"github.com/k9xR7vA2/recharge-common/constant"
+	"github.com/k9xR7vA2/recharge-common/dict/types"
+)
 
 type IndiaElectricOperatorDict struct{}
 
@@ -13,96 +16,13 @@ func (d *IndiaElectricOperatorDict) GetName() string {
 }
 
 func (d *IndiaElectricOperatorDict) GetOptions() []types.DictOption {
-	return []types.DictOption{
-		{Label: "TTD Electricity", Value: 22119},
-		{Label: "Andhra Pradesh Central Power Distribution Corporation Limited", Value: 22355},
-		{Label: "Arunachal Pradesh Department of Power", Value: 636},
-		{Label: "Assam Power (APDCL NON-RAPDR)", Value: 571},
-		{Label: "APDCL - Smart Prepaid Recharge", Value: 21479},
-		{Label: "North Bihar Power (NBPDCL)", Value: 610},
-		{Label: "South Bihar Power (SBPDCL)", Value: 611},
-		{Label: "Chhattisgarh State Power (CSPDCL)", Value: 613},
-		{Label: "Chandigarh Electricity Department", Value: 633},
-		{Label: "BSES Rajdhani", Value: 581},
-		{Label: "BSES Yamuna", Value: 582},
-		{Label: "Tata Power - Delhi", Value: 603},
-		{Label: "New Delhi Municipal Council (NDMC) - Electricity", Value: 635},
-		{Label: "BSES Rajdhani Prepaid Meter Recharge", Value: 22684},
-		{Label: "BSES Yamuna Prepaid Meter Recharge", Value: 22685},
-		{Label: "Dadra and Nagar Haveli and Daman and Diu Power Distribution Corporation Limited", Value: 20501},
-		{Label: "Goa Electricity Department", Value: 574},
-		{Label: "Gift Power Company Limited", Value: 642},
-		{Label: "Vaghani Energy Limited", Value: 21019},
-		{Label: "DGVCL", Value: 21362},
-		{Label: "MGVCL", Value: 21363},
-		{Label: "UGVCL", Value: 21371},
-		{Label: "PGVCL", Value: 21372},
-		{Label: "AEML SEEPZ Limited", Value: 23083},
-		{Label: "Himachal Pradesh State Electricity (HPSEBL)", Value: 620},
-		{Label: "Dakshin Haryana Bijli Vitran Nigam (DHBVN)", Value: 567},
-		{Label: "Uttar Haryana Bijli Vitran Nigam (UHBVN)", Value: 569},
-		{Label: "Jammu and Kashmir Power Development Department", Value: 638},
-		{Label: "Ladakh Power Development Department (LPDD)", Value: 22536},
-		{Label: "Jammu Power Distribution Corporation (JPDCL)", Value: 22548},
-		{Label: "Jharkhand Bijli Vitran Nigam (JBVNL)", Value: 570},
-		{Label: "Jamshedpur Utilities (JUSCO)", Value: 591},
-		{Label: "JBVNL Prepaid Meter Recharge", Value: 20882},
-		{Label: "Kerala State Electricity Board Ltd. (KSEBL)", Value: 575},
-		{Label: "Thrissur Corporation Electricity Department", Value: 644},
-		{Label: "Kanan Devan Hills Plantations Company Private Limited", Value: 645},
-		{Label: "Kinesco Power and Utilities Pvt Ltd", Value: 22582},
-		{Label: "Chamundeshwari Electricity (CESCOM)", Value: 563},
-		{Label: "Hubli Electricity (HESCOM)", Value: 572},
-		{Label: "Gulbarga Electricity (GESCOM)", Value: 616},
-		{Label: "Mangalore Electricity (MESCOM - RAPDR)", Value: 618},
-		{Label: "Bangalore Electricity (BESCOM)", Value: 634},
-		{Label: "Mangalore Electricity (MESCOM - Non RAPDR)", Value: 639},
-		{Label: "Hukkeri Rural Electric CoOperative Society Ltd", Value: 20790},
-		{Label: "Lakshadweep Electricity Department", Value: 643},
-		{Label: "Meghalaya Power", Value: 602},
-		{Label: "MePDCL Smart Prepaid Meter Recharge", Value: 21000},
-		{Label: "BEST Mumbai", Value: 580},
-		{Label: "Mahavitaran Maharashtra State Electricity (MSEDCL)", Value: 593},
-		{Label: "Tata Power - Mumbai", Value: 601},
-		{Label: "Adani Electricity Mumbai Limited", Value: 625},
-		{Label: "Malegaon Power Supply Ltd", Value: 23576},
-		{Label: "Manipur State Power Distribution Company Limited", Value: 22572},
-		{Label: "M.P. Madhya Kshetra Vidyut Vitaran (MPMKVVCL - URBAN)", Value: 578},
-		{Label: "M.P. Madhya Kshetra Vidyut Vitaran (MPMKVVCL - RURAL)", Value: 579},
-		{Label: "M.P. Paschim Kshetra Vidyut Vitaran (MPPKVVCL)", Value: 592},
-		{Label: "M.P. Poorv Kshetra Vidyut Vitaran (MPPKVVCL - Jabalpur)", Value: 629},
-		{Label: "Power and Electricity Department - Mizoram - 10 digit BP number", Value: 22587},
-		{Label: "Nagaland Department of Power", Value: 617},
-		{Label: "TP Northern Odisha Distribution Ltd (TPNODL)", Value: 607},
-		{Label: "TP Southern Odisha Distribution Ltd (TPSODL)", Value: 608},
-		{Label: "TP Western Odisha Distribution Ltd (TPWODL)", Value: 612},
-		{Label: "TP Central Odisha Distribution Ltd (TPCODL)", Value: 647},
-		{Label: "TPSODL-Smart Prepaid Meter Recharge", Value: 20458},
-		{Label: "TPWODL-Smart Prepaid Meter Recharge", Value: 21471},
-		{Label: "Punjab State Power (PSPCL)", Value: 568},
-		{Label: "Puducherry Electricity Department", Value: 621},
-		{Label: "Jaipur Vidyut Nigam (JVVNL)", Value: 595},
-		{Label: "Ajmer Vidyut Vitran Nigam Limited (AVVNL)", Value: 614},
-		{Label: "Jodhpur Vidyut Vitran Nigam (JDVVNL)", Value: 615},
-		{Label: "Bharatpur Electricity Services Ltd. (BESL)", Value: 622},
-		{Label: "Bikaner Electricity Supply Limited (BkESL)", Value: 623},
-		{Label: "Kota Electricity Distribution Limited (KEDL)", Value: 624},
-		{Label: "TP Ajmer Distribution Ltd (TPADL)", Value: 626},
-		{Label: "Sikkim Power - RURAL", Value: 630},
-		{Label: "Tamil Nadu Electricity Board (TNEB)", Value: 565},
-		{Label: "Tripura Electricity (TSECL)", Value: 604},
-		{Label: "Uttarakhand Power Corporation Limited (UPCL)", Value: 637},
-		{Label: "Noida Power (NPCL)", Value: 594},
-		{Label: "TP Renewables Microgrid Ltd.", Value: 894},
-		{Label: "UPPCL-Postpaid and Smart Prepaid Meter Recharge", Value: 22593},
-		{Label: "UPPCLPM", Value: 23215},
-		{Label: "Calcutta Electric Supply Corporation (CESC)", Value: 583},
-		{Label: "West Bengal Electricity (WBSEDCL)", Value: 893},
-		{Label: "India Power Corporation Limited (IPCL)", Value: 20486},
-		{Label: "India Power Prepaid Meter", Value: 22969},
-		{Label: "Northern Power Distribution Company of Telangana Limited", Value: 22356},
-		{Label: "Southern Power Distribution Company of Telangana Limited", Value: 22357},
-		{Label: "The Co operative Electric Supply Society Ltd Sircilla", Value: 22673},
-		{Label: "Torrent Power", Value: 631},
+	ts := constant.GetAllElectricOperators()
+	options := make([]types.DictOption, 0, len(ts))
+	for _, t := range ts {
+		options = append(options, types.DictOption{
+			Label: t.Label,
+			Value: t.Value,
+		})
 	}
+	return options
 }

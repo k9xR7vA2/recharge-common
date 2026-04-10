@@ -16,4 +16,13 @@ var IndiaElectric = types.BusinessSchema{
 			DictKey:  "india_electric_operator", // 走字典
 		},
 	},
+	AccountFields: []types.RawField{
+		{
+			Key:      "operator_id",
+			Label:    "运营商",
+			Type:     types.FieldTypeSelect,
+			Required: true,
+			DictKey:  "india_electric_operator",
+		},
+	},
 }

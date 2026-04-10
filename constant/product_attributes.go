@@ -4,9 +4,11 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/k9xR7vA2/recharge-common/dict"
 	"gorm.io/datatypes"
 	"strconv"
 	"strings"
+	"sync"
 )
 
 // MobileAttributes 话费属性
@@ -149,6 +151,49 @@ func ParseDthProductAttrs(data datatypes.JSON) (*IndiaDthAttributes, error) {
 	for _, op := range attr.Operator {
 		if !op.IsValid() {
 			return nil, fmt.Errorf("DTH运营商类型不正确: %d", op)
+		}
+	}
+	return &attr, nil
+}
+
+var indiaElectricOperatorIds map[int]bool
+var indiaElectricOnce sync.Once
+
+func getIndiaElectricOperatorIds() map[int]bool {
+	indiaElectricOnce.Do(func() {
+		indiaElectricOperatorIds = make(map[int]bool)
+		d := dict.GetDict("india_electric_operator")
+		for _, item := range d.Options {
+			switch v := item.Value.(type) {
+			case int:
+				indiaElectricOperatorIds[v] = true
+			case float64:
+				indiaElectricOperatorIds[int(v)] = true
+			case int64:
+				indiaElectricOperatorIds[int(v)] = true
+			}
+		}
+	})
+	return indiaElectricOperatorIds
+}
+
+// IndiaElectricAttributes 印度电费属性
+type IndiaElectricAttributes struct {
+	OperatorIds []int `json:"operator_ids"`
+}
+
+func ParseIndiaElectricProductAttrs(data datatypes.JSON) (*IndiaElectricAttributes, error) {
+	var attr IndiaElectricAttributes
+	if err := json.Unmarshal(data, &attr); err != nil {
+		return nil, err
+	}
+	if len(attr.OperatorIds) == 0 {
+		return nil, errors.New("至少选择一个电费运营商")
+	}
+	validIds := getIndiaElectricOperatorIds()
+	for _, id := range attr.OperatorIds {
+		if !validIds[id] {
+			return nil, fmt.Errorf("运营商ID不合法: %d", id)
 		}
 	}
 	return &attr, nil

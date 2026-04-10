@@ -9,9 +9,9 @@ var IndiaElectric = types.BusinessSchema{
 	BusinessType: constant.IndiaElectric,
 	ProductFields: []types.RawField{
 		{
-			Key:      "operator_id",
+			Key:      "operator_ids",
 			Label:    "运营商",
-			Type:     types.FieldTypeSelect,
+			Type:     types.FieldTypeCheckbox,
 			Required: true,
 			DictKey:  "india_electric_operator", // 走字典
 		},

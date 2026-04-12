@@ -19,9 +19,9 @@ type SupplierAccount struct {
 	AccountName     string                         `json:"account_name"     gorm:"type:varchar(100);comment:账号归属人姓名"`
 	Contact         string                         `json:"contact"          gorm:"type:varchar(50);comment:联系方式"`
 	Region          string                         `json:"region"           gorm:"type:varchar(100);comment:所属地区"`
-	Amount          uint                           `json:"amount" gorm:"type:int unsigned;not null;default:0;comment:总待充金额"`
-	ChargedAmount   uint                           `json:"charged_amount" gorm:"type:int unsigned;not null;default:0;comment:已充成功金额"`
-	LockedAmount    uint                           `json:"locked_amount" gorm:"type:int unsigned;not null;default:0;comment:冻结中金额"`
+	Amount          decimal.Decimal                `json:"amount"         gorm:"type:decimal(14,2);not null;default:0;comment:总待充金额"`
+	ChargedAmount   decimal.Decimal                `json:"charged_amount" gorm:"type:decimal(14,2);not null;default:0;comment:已充成功金额"`
+	LockedAmount    decimal.Decimal                `json:"locked_amount"  gorm:"type:decimal(14,2);not null;default:0;comment:冻结中金额"`
 	SplitCharge     int                            `json:"split_charge"      gorm:"type:tinyint;not null;default:1;comment:是否允许拆分充值 1允许 2不允许"`
 	BillInfo        datatypes.JSON                 `json:"bill_info"     gorm:"type:json;comment:账单原始信息"`
 	Source          int                            `json:"source"           gorm:"type:tinyint;not null;default:1;comment:来源 1供货商导入 2核销员录入"`
@@ -46,11 +46,11 @@ type SupplierAccount struct {
 }
 
 type BillInfo struct {
-	BillAmount   uint   `json:"bill_amount"`   // 账单金额
-	BillNo       string `json:"bill_no"`       // 账单号
-	DueDate      string `json:"due_date"`      // 到期日
-	FetchedAt    int64  `json:"fetched_at"`    // 拉取时间
-	ConsumerName string `json:"consumer_name"` // 用户名
+	BillAmount   decimal.Decimal `json:"bill_amount"`
+	BillNo       string          `json:"bill_no"`       // 账单号
+	DueDate      string          `json:"due_date"`      // 到期日
+	FetchedAt    int64           `json:"fetched_at"`    // 拉取时间
+	ConsumerName string          `json:"consumer_name"` // 用户名
 }
 
 func (SupplierAccount) TableName() string { return "as_supplier_accounts" }

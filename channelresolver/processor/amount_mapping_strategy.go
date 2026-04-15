@@ -40,6 +40,10 @@ func (c *AmountMappingRuleConfig) Validate() error {
 	return nil
 }
 
+func (c *AmountMappingRuleConfig) ExtractAllChannelIDsSortedByWeight() ([]uint, error) {
+	return nil, errors.New("no valid channel with positive weight")
+}
+
 func (c *AmountMappingRuleConfig) ToNumeric() map[int]uint {
 	numericMapping := make(map[int]uint)
 	for k, v := range c.AmountChannelMap {

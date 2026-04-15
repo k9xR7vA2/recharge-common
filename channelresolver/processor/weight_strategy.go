@@ -84,6 +84,52 @@ func (c *WeightRuleConfig) ExtractChannelID(amount string) (uint, error) {
 	return 0, errors.New("failed to select channel based on weight")
 }
 
+// ExtractAllChannelIDsSortedByWeight 返回按权重降序排列的所有通道ID
+// 权重高的排前面，下单时优先尝试权重大的通道
+func (c *WeightRuleConfig) ExtractAllChannelIDsSortedByWeight() ([]uint, error) {
+	if len(c.ChannelWeights) == 0 {
+		return nil, errors.New("empty weight rule config")
+	}
+
+	type weightedChannel struct {
+		channelID uint
+		weight    int
+	}
+
+	candidates := make([]weightedChannel, 0, len(c.ChannelWeights))
+	for k, w := range c.ChannelWeights {
+		if w <= 0 {
+			continue
+		}
+		cid, err := strconv.Atoi(k)
+		if err != nil {
+			return nil, fmt.Errorf("无效的通道ID: %s", k)
+		}
+		candidates = append(candidates, weightedChannel{
+			channelID: uint(cid),
+			weight:    w,
+		})
+	}
+
+	if len(candidates) == 0 {
+		return nil, errors.New("no valid channel with positive weight")
+	}
+
+	// 权重降序，权重相同时 channelID 升序保证稳定
+	sort.Slice(candidates, func(i, j int) bool {
+		if candidates[i].weight != candidates[j].weight {
+			return candidates[i].weight > candidates[j].weight
+		}
+		return candidates[i].channelID < candidates[j].channelID
+	})
+
+	ids := make([]uint, len(candidates))
+	for i, c := range candidates {
+		ids[i] = c.channelID
+	}
+	return ids, nil
+}
+
 // GetSupportedAmounts 获取策略支持的所有金额
 func (c *WeightRuleConfig) GetSupportedAmounts() []int {
 	return nil

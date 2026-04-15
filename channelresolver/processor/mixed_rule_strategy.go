@@ -145,3 +145,7 @@ func (c *MixedRuleConfig) GetAllChannelIDs() []int {
 	sort.Ints(channelIDs) // 排序以便结果一致
 	return channelIDs
 }
+
+func (c *MixedRuleConfig) ExtractAllChannelIDsSortedByWeight() ([]uint, error) {
+	return nil, errors.New("no valid channel with positive weight")
+}

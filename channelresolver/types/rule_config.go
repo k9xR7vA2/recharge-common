@@ -3,6 +3,7 @@ package types
 type RuleConfig interface {
 	Validate() error
 	ExtractChannelID(amount string) (uint, error)
+	ExtractAllChannelIDsSortedByWeight() ([]uint, error)
 	GetSupportedAmounts() []int // 返回策略支持的所有金额
 	GetAllChannelIDs() []int
 }

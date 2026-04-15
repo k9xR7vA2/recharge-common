@@ -24,8 +24,8 @@ type CookieRule struct {
 	ProbeIntervalSec int  `gorm:"column:probe_interval_sec;default:3600" json:"probe_interval_sec"`
 
 	// 刷新规则
-	RefreshEnabled  bool `gorm:"column:refresh_enabled;default:true" json:"refresh_enabled"`
-	RefreshInterval int  `gorm:"column:refresh_interval;default:28"  json:"refresh_interval"`
+	RefreshEnabled     bool `gorm:"column:refresh_enabled;default:true" json:"refresh_enabled"`
+	RefreshIntervalSec int  `gorm:"column:refresh_interval_sec;default:72000"  json:"refresh_interval_sec"`
 
 	CreatedAt time.Time `gorm:"column:created_at" json:"created_at"`
 	UpdatedAt time.Time `gorm:"column:updated_at" json:"updated_at"`

@@ -3,7 +3,6 @@ package cookie
 import (
 	"github.com/k9xR7vA2/recharge-common/constant"
 	"go.mongodb.org/mongo-driver/bson/primitive"
-	"time"
 )
 
 // AccountCookie Cookie 主体 + 风控状态，权威来源
@@ -23,12 +22,12 @@ type AccountCookie struct {
 	UserAgent    string `bson:"user_agent"    json:"userAgent"`
 
 	// 风控
-	HealthScore   int        `bson:"health_score"     json:"health_score"`
-	RiskTags      []string   `bson:"risk_tags"        json:"risk_tags"`
-	FailCount     int        `bson:"fail_count"    json:"fail_count"` // 使用失败次数（触发风控用）
-	CooldownUntil *time.Time `bson:"cooldown_until"   json:"cooldown_until"`
-	SuspendUntil  *time.Time `bson:"suspend_until" json:"suspend_until"` // 封控到期时间
-	NextProbeAt   *time.Time `bson:"next_probe_at" json:"next_probe_at"` // 下次探测时间
+	HealthScore   int      `bson:"health_score"     json:"health_score"`
+	RiskTags      []string `bson:"risk_tags"        json:"risk_tags"`
+	FailCount     int      `bson:"fail_count"    json:"fail_count"` // 使用失败次数（触发风控用）
+	CooldownUntil int64    `bson:"cooldown_until"   json:"cooldown_until"`
+	SuspendUntil  int64    `bson:"suspend_until" json:"suspend_until"` // 封控到期时间
+	NextProbeAt   int64    `bson:"next_probe_at" json:"next_probe_at"` // 下次探测时间
 
 	// 状态
 	Status constant.CookieStatus `bson:"status"    json:"status"`

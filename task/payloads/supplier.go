@@ -36,4 +36,6 @@ type SupplierOrderCallbackTask struct {
 	OrderDate       int64                 `json:"order_date"` //下单日期，20060102
 	NotifyStatus    constant.NotifyStatus `json:"status"`
 	BusinessType    constant.BusinessType `json:"business_type"`
+	UpstreamOrderNo string                `json:"upstream_order_no"`
+	UpstreamTxnID   string                `json:"upstream_txn_id"`
 }

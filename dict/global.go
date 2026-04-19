@@ -65,12 +65,13 @@ func registerAllDicts() {
 	GlobalManager.Register(&adapters.SupOrderPoolStatDict{}) // 供货商订单池状态
 	GlobalManager.Register(&adapters.SupOrderStatusDict{})   // 供货商订单状态
 	//
-	GlobalManager.Register(&adapters.TimezoneDict{})              // 时区dict
-	GlobalManager.Register(&adapters.CookieStatusDict{})          //cookie status
-	GlobalManager.Register(&adapters.SupplierAccountStatusDict{}) //充值账户状态
-	GlobalManager.Register(&adapters.IndiaDthOperatorDict{})      //India dth 运营商
-	GlobalManager.Register(&adapters.IndiaElectricOperatorDict{}) //India 电费 运营商
-	GlobalManager.Register(&adapters.AmountTypeDict{})            //产品金额类型
+	GlobalManager.Register(&adapters.TimezoneDict{})               // 时区dict
+	GlobalManager.Register(&adapters.CookieStatusDict{})           //cookie status
+	GlobalManager.Register(&adapters.SupplierAccountStatusDict{})  //充值账户状态
+	GlobalManager.Register(&adapters.IndiaDthOperatorDict{})       //India dth 运营商
+	GlobalManager.Register(&adapters.IndiaElectricOperatorDict{})  //India 电费 运营商
+	GlobalManager.Register(&adapters.AmountTypeDict{})             //产品金额类型
+	GlobalManager.Register(&adapters.AccountLogBusinessTypeDict{}) //流水日志操作类型字典
 
 	// TODO: 在这里继续注册其他字典
 	// GlobalManager.Register(&YourNewDict{})

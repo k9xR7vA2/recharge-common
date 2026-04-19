@@ -13,10 +13,6 @@ const (
 	MerchantTotalOrder   = "merchant_total_order"
 	MerchantSuccessOrder = "merchant_success_order"
 
-	// 业务类型
-	BusinessTypeDeposit       = 1 // 预付账户加款
-	BusinessTypePrepaidDeduct = 2 // 预付账户扣款
-	BusinessTypeOrderDeduct   = 3 // 订单扣款（优先预付，不足用信用）
 	// 结算相关
 	BusinessTypeSettlementAdmin = 21 // 后台结算
 

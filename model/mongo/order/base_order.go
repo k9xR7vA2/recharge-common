@@ -18,6 +18,7 @@ type OrderBase struct {
 	BusinessType         constant.BusinessType `bson:"business_type"  json:"business_type"`                  // 业务类型
 	SystemOrderSn        string                `bson:"system_order_sn" json:"system_order_sn"`               // 系统订单号
 	OfficialSerialNumber string                `bson:"official_serial_number" json:"official_serial_number"` // 官方流水号
+	TransactionID        string                `bson:"transaction_id" json:"transaction_id"`                 // 交易ID
 	RechargeAccount      string                `bson:"recharge_account" json:"recharge_account"`             // 充值账号
 	Amount               string                `bson:"amount" json:"amount"`                                 // 充值金额
 	HandingFees          string                `bson:"handing_fees" json:"handing_fees"`                     // 手续费

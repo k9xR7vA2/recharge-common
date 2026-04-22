@@ -14,11 +14,11 @@ type BillQueryRecord struct {
 	CookieID primitive.ObjectID `bson:"cookie_id"        json:"cookieId"` // 使用的 cookie，缓存命中时为空
 
 	// 结果
-	Source      string  `bson:"source"           json:"source"` // cache / third_party
-	Success     bool    `bson:"success"          json:"success"`
-	ErrorCode   string  `bson:"error_code"       json:"errorCode"` // 失败时记录错误码
-	BillFetchId string  `bson:"bill_fetch_id"    json:"billFetchId"`
-	BillAmount  float64 `bson:"bill_amount"      json:"billAmount"`
+	Source      string `bson:"source"           json:"source"` // cache / third_party
+	Success     bool   `bson:"success"          json:"success"`
+	ErrorCode   string `bson:"error_code"       json:"errorCode"` // 失败时记录错误码
+	BillFetchId string `bson:"bill_fetch_id"    json:"billFetchId"`
+	BillAmount  string `bson:"bill_amount"      json:"billAmount"`
 
 	// 时间（UTC）
 	CreatedAt int64 `bson:"created_at"       json:"createdAt"`

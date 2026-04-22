@@ -22,12 +22,13 @@ type AccountCookie struct {
 	UserAgent    string `bson:"user_agent"    json:"userAgent"`
 
 	// 风控
-	HealthScore   int      `bson:"health_score"     json:"health_score"`
-	RiskTags      []string `bson:"risk_tags"        json:"risk_tags"`
-	FailCount     int      `bson:"fail_count"    json:"fail_count"` // 使用失败次数（触发风控用）
-	CooldownUntil int64    `bson:"cooldown_until"   json:"cooldown_until"`
-	SuspendUntil  int64    `bson:"suspend_until" json:"suspend_until"` // 封控到期时间
-	NextProbeAt   int64    `bson:"next_probe_at" json:"next_probe_at"` // 下次探测时间
+	HealthScore          int      `bson:"health_score"     json:"health_score"`
+	RiskTags             []string `bson:"risk_tags"        json:"risk_tags"`
+	FailCount            int      `bson:"fail_count"    json:"fail_count"` // 使用失败次数（触发风控用）
+	CooldownUntil        int64    `bson:"cooldown_until"   json:"cooldown_until"`
+	SuspendUntil         int64    `bson:"suspend_until" json:"suspend_until"`                  // 封控到期时间
+	NextProbeAt          int64    `bson:"next_probe_at" json:"next_probe_at"`                  // 下次探测时间
+	BillQueryBannedUntil int64    `bson:"bill_query_banned_until" json:"billQueryBannedUntil"` // 账单查询封禁到期时间（到期前不用于查询）
 
 	// 状态
 	Status constant.CookieStatus `bson:"status"    json:"status"`

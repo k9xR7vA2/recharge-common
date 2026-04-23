@@ -17,6 +17,7 @@ type Product struct {
 	ValidTime    uint                          `json:"valid_time" gorm:"column:valid_time;type:int unsigned;not null;default:0;comment:订单有效期(秒)"`
 	AmountType   constant.AmountType           `json:"amount_type" gorm:"not null;default:1;comment:金额类型: 1固定, 2区间, 3动态金额（套餐）4账单金额"`
 	Amount       datatypes.JSON                `json:"amount" gorm:"column:amount;type:json;not null;comment:金额"`
+	Schema       datatypes.JSON                `json:"schema"     gorm:"column:schema;type:json;comment:属性字段定义"`
 	Attributes   datatypes.JSON                `json:"attributes" gorm:"column:attributes;type:json;comment:业务属性"`
 	CreatedAt    time.Time                     `json:"created_at"`
 	UpdatedAt    time.Time                     `json:"updated_at"`

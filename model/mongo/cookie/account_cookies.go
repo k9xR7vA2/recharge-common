@@ -7,9 +7,10 @@ import (
 
 // AccountCookie Cookie 主体 + 风控状态，权威来源
 type AccountCookie struct {
-	ID          primitive.ObjectID `bson:"_id,omitempty" json:"id"`
-	ChannelCode string             `bson:"channel_code" json:"channel_code"`
-	Phone       string             `bson:"phone"         json:"phone"`
+	ID                primitive.ObjectID `bson:"_id,omitempty" json:"id"`
+	ChannelCode       string             `bson:"channel_code" json:"channel_code"`
+	TenantChannelCode string             `bson:"tenant_channel_code" json:"tenant_channel_code"`
+	Phone             string             `bson:"phone"         json:"phone"`
 
 	// 溯源（可追回登录现场）
 	LoginRecordID primitive.ObjectID `bson:"login_record_id" json:"loginRecordId"`

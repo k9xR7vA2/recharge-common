@@ -72,6 +72,7 @@ func registerAllDicts() {
 	GlobalManager.Register(&adapters.IndiaElectricOperatorDict{})  //India 电费 运营商
 	GlobalManager.Register(&adapters.AmountTypeDict{})             //产品金额类型
 	GlobalManager.Register(&adapters.AccountLogBusinessTypeDict{}) //流水日志操作类型字典
+	GlobalManager.Register(&adapters.GiftCardStatusDict{})         //礼品卡状态
 
 	// TODO: 在这里继续注册其他字典
 	// GlobalManager.Register(&YourNewDict{})

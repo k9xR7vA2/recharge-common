@@ -33,3 +33,7 @@ type GiftCard struct {
 	UpdatedAt int64 `bson:"updated_at"`
 	IsDeleted bool  `bson:"is_deleted"`
 }
+
+func (GiftCard) CollName() string {
+	return "gift_card"
+}

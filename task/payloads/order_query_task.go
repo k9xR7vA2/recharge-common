@@ -39,6 +39,7 @@ type OrderQueryTask struct {
 	SupplierOrderExpiredAt int64                `json:"supplier_order_expired_at"` // 供货商订单过期时间(毫秒时间戳)
 	RechargeTimes          uint                 `json:"recharge_times"`            // 当前充值次数
 
+	CookieID string `json:"cookie_id"` //下单cookieID,查单结束用来释放
 	// 运行时
 	QueryCount int   `json:"query_count"` // 已查单次数
 	CreatedAt  int64 `json:"created_at"`  // 任务创建时间

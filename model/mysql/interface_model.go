@@ -37,6 +37,7 @@ type InterfaceConfigParams struct {
 	ApiSecret     string `json:"api_secret"`
 	PayUrl        string `json:"pay_url"`        // 下单完整URL
 	QueryUrl      string `json:"query_url"`      // 查单完整URL
+	CardQuery     string `json:"card_query"`     //卡密url
 	QueryInterval int    `json:"query_interval"` // 查单频率（秒）
 }
 

@@ -18,11 +18,12 @@ type AccountCookie struct {
 	CookieVersion int64              `bson:"cookie_version" json:"cookieVersion"`
 
 	// 账号辅助信息
-	AccountAlias string `bson:"account_alias" json:"accountAlias"`
-	ProxyIP      string `bson:"proxy_ip"      json:"proxyIp"`
-	UserAgent    string `bson:"user_agent"    json:"userAgent"`
-	Email        string `bson:"email"         json:"email"`     // 新增：账号邮箱
-	AuthToken    string `bson:"auth_token"    json:"authToken"` // 新增：JWT token（AES加密）
+	AccountAlias       string `bson:"account_alias" json:"accountAlias"`
+	ProxyIP            string `bson:"proxy_ip"      json:"proxyIp"`
+	UserAgent          string `bson:"user_agent"    json:"userAgent"`
+	Email              string `bson:"email"         json:"email"`                       // 新增：账号邮箱
+	AuthToken          string `bson:"auth_token"    json:"authToken"`                   // 新增：JWT token（AES加密）
+	AuthorizationToken string `bson:"authorization_token"    json:"authorizationToken"` // Bearer token，（AES加密）
 
 	// 风控
 	HealthScore          int      `bson:"health_score"     json:"health_score"`

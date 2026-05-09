@@ -17,9 +17,15 @@ type Channel struct {
 	Payment       constant.PaymentType          `json:"payment" gorm:"column:payment;type:tinyint;not null;default:1;comment:支付方式"`
 	Device        constant.DeviceType           `json:"device" gorm:"column:device;type:tinyint;not null;default:1;comment:设备"`
 	PaymentMethod constant.PaymentMethod        `json:"payment_method" gorm:"column:payment_method;type:varchar(100);not null;comment:支付方法"`
-	CreatedAt     time.Time                     `json:"created_at"`
-	UpdatedAt     time.Time                     `json:"updated_at"`
-	Interface     AsInterface                   `json:"interface,omitempty" gorm:"foreignKey:InterfaceID;references:InterfaceID" `
+
+	// 预产码配置
+	PreCodeEnabled        int         `json:"pre_code_enabled" gorm:"column:pre_code_enabled;type:tinyint;not null;default:0;comment:是否支持预产码 0不支持 1支持"`
+	PreCodeMaxStock       int         `json:"pre_code_max_stock" gorm:"column:pre_code_max_stock;type:int;not null;default:500;comment:最大库存上限"`
+	PreCodeTtlMinutes     int         `json:"pre_code_ttl_minutes" gorm:"column:pre_code_ttl_minutes;type:int;not null;default:30;comment:码有效期(分钟)"`
+	PreCodeReplenishCount int         `json:"pre_code_replenish_count" gorm:"column:pre_code_replenish_count;type:int;not null;default:100;comment:每次补充数量"`
+	CreatedAt             time.Time   `json:"created_at"`
+	UpdatedAt             time.Time   `json:"updated_at"`
+	Interface             AsInterface `json:"interface,omitempty" gorm:"foreignKey:InterfaceID;references:InterfaceID" `
 	// 添加多对多关系
 	Tenants        []Tenant        `json:"tenants,omitempty" gorm:"many2many:as_tenant_channels;foreignKey:ID;joinForeignKey:ChannelID;References:TenantID;joinReferences:TenantID"`
 	TenantChannels []TenantChannel `json:"tenant_channels,omitempty" gorm:"foreignKey:ChannelID;references:ID"`

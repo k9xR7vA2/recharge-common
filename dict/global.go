@@ -73,6 +73,7 @@ func registerAllDicts() {
 	GlobalManager.Register(&adapters.AmountTypeDict{})             //产品金额类型
 	GlobalManager.Register(&adapters.AccountLogBusinessTypeDict{}) //流水日志操作类型字典
 	GlobalManager.Register(&adapters.GiftCardStatusDict{})         //礼品卡状态
+	GlobalManager.Register(&adapters.CodeStatusDict{})             //码的状态
 
 	// TODO: 在这里继续注册其他字典
 	// GlobalManager.Register(&YourNewDict{})

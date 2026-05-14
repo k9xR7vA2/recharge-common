@@ -12,7 +12,7 @@ const (
 	TnCallbackHighQueue      = "tn:callback-high-queue"
 	TnQueryHighQueue         = "tn:query-high-queue"
 	tnExpirationQueuePattern = "tn:expiration:%s"
-
+	TnPreCodeQueue           = "tn:pre-code-queue"
 	// SaasAdmin 专用
 	SaasPaymentExpiredQueue = "saas:payment-expired-queue"
 
@@ -45,6 +45,7 @@ func GetTenantNotifyQueueConfig() map[string]int {
 	queues := map[string]int{
 		TnCallbackHighQueue: 9,
 		TnQueryHighQueue:    7,
+		TnPreCodeQueue:      3,
 	}
 	for _, biz := range constant.GetAllBusinessTypes() {
 		queues[TnExpirationQueue(biz.Value.String())] = 5

@@ -8,6 +8,7 @@ const (
 	TenantSystemPermissionUpdate = "tenant:permission:update" //租户系统权限更新队列
 	PaymentOrderExpiredTask      = "payment:order:expired"    //系统充值订单过期队列
 	OrderQueryTask               = "payment:order:query"      // 新增：查单任务
+	PreCodeProduceTask           = "pre_code:produce"         // ✅ 产码任务
 
 	// SupplierOrderExpireTask 过期处理任务
 	supplierOrderExpirePattern = "supplier:order:%s:expire"

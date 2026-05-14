@@ -7,10 +7,10 @@ import (
 
 type PreGeneratedCode struct {
 	ID            primitive.ObjectID  `bson:"_id"`
-	TenantID      uint                `bson:"tenant_id"`
 	ChannelCode   string              `bson:"channel_code"`
 	ProductCode   string              `bson:"product_code"`
 	Amount        string              `bson:"amount"`
+	Payment       string              `bson:"payment"`
 	PaymentMethod string              `bson:"payment_method"` // ✅ 修复：补上字段名和类型
 	AccountID     primitive.ObjectID  `bson:"account_id"`     // ✅ 新增：cookie 账号 ID
 	Account       string              `bson:"account"`        // ✅ 新增：账号（手机号）

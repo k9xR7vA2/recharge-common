@@ -28,6 +28,9 @@ func (d *CodeStatusDict) GetOptions() []types.DictOption {
 		{
 			Label: constant.CodeStatusExpired.Label(),
 			Value: constant.CodeStatusExpired.Val(),
+		}, {
+			Label: constant.CodeStatusFailed.Label(),
+			Value: constant.CodeStatusFailed.Val(),
 		},
 	}
 }

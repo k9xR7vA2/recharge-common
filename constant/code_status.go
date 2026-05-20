@@ -6,6 +6,7 @@ const (
 	CodeStatusAvailable CodeStatus = "available"
 	CodeStatusUsed      CodeStatus = "used"
 	CodeStatusExpired   CodeStatus = "expired"
+	CodeStatusFailed    CodeStatus = "failed" // 产码失败
 )
 
 func (s CodeStatus) Val() string {
@@ -20,11 +21,13 @@ func (s CodeStatus) Label() string {
 		return "已使用"
 	case CodeStatusExpired:
 		return "已过期"
+	case CodeStatusFailed:
+		return "产码失败"
 	default:
 		return "未知状态"
 	}
 }
 
 func (s CodeStatus) IsValid() bool {
-	return s == CodeStatusAvailable || s == CodeStatusUsed || s == CodeStatusExpired
+	return s == CodeStatusAvailable || s == CodeStatusUsed || s == CodeStatusExpired || s == CodeStatusFailed
 }

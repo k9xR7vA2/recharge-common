@@ -23,7 +23,12 @@ type PreGeneratedCode struct {
 	ExpiredAt            int64               `bson:"expired_at"`             // 过期时间
 	UsedAt               int64               `bson:"used_at"`
 	CreatedAt            int64               `bson:"created_at"`
-	OrderSn              string              `bson:"order_sn"` // 使用时写入
+	OrderSn              string              `bson:"order_sn"` // 绑定merchantOrder
+	// ↓ 新增
+	TradeNo     string                 `bson:"trade_no,omitempty"`     // 三方请求交易号，用于追溯
+	ErrorMsg    string                 `bson:"error_msg,omitempty"`    // 失败原因
+	ApiRequest  map[string]interface{} `bson:"api_request,omitempty"`  // 三方请求体
+	ApiResponse map[string]interface{} `bson:"api_response,omitempty"` // 三方响应体
 }
 
 func (PreGeneratedCode) CollName() string {

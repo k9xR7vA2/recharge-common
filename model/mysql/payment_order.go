@@ -1,8 +1,8 @@
 package mysql
 
 import (
-	"github.com/shopspring/decimal"
 	"github.com/k9xR7vA2/recharge-common/constant"
+	"github.com/shopspring/decimal"
 	"time"
 )
 
@@ -22,7 +22,7 @@ type PaymentOrder struct {
 	ExpireAt        time.Time                   `gorm:"column:expire_at;type:datetime;index:idx_expire_at;not null;comment:过期时间" json:"expire_at"`
 
 	//Use
-	TenantUse TenantUser `json:"user,omitempty" gorm:"foreignKey:ID;references:UserID"`
+	TenantUse TenantUser `json:"user,omitempty" gorm:"foreignKey:UserID;references:ID"`
 	Tenant    Tenant     `json:"tenant,omitempty" gorm:"foreignKey:TenantID;references:TenantID"`
 }
 

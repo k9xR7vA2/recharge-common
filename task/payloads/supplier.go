@@ -39,3 +39,18 @@ type SupplierOrderCallbackTask struct {
 	UpstreamOrderNo string                `json:"upstream_order_no"`
 	UpstreamTxnID   string                `json:"upstream_txn_id"`
 }
+
+type SupplierAccountLogTask struct {
+	AccountID     uint   `json:"account_id"`
+	TenantID      uint   `json:"tenant_id"`
+	BusinessType  string `json:"business_type"`
+	SystemOrderSn string `json:"system_order_sn"`
+	Operation     string `json:"operation"` // lock / release / charge_success
+	Amount        string `json:"amount"`
+	LockedBefore  string `json:"locked_before"`
+	LockedAfter   string `json:"locked_after"`
+	ChargedBefore string `json:"charged_before"`
+	ChargedAfter  string `json:"charged_after"`
+	Remark        string `json:"remark,omitempty"`
+	CreatedAt     int64  `json:"created_at"`
+}

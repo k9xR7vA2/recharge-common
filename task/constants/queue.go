@@ -13,6 +13,8 @@ const (
 	TnQueryHighQueue         = "tn:query-high-queue"
 	tnExpirationQueuePattern = "tn:expiration:%s"
 	TnPreCodeQueue           = "tn:pre-code-queue"
+	TnAccountLogQueue        = "tn:account-log-queue" // 新增：供货商账号操作日志，低优先级不阻塞主流程
+
 	// SaasAdmin 专用
 	SaasPaymentExpiredQueue = "saas:payment-expired-queue"
 
@@ -46,6 +48,7 @@ func GetTenantNotifyQueueConfig() map[string]int {
 		TnCallbackHighQueue: 9,
 		TnQueryHighQueue:    7,
 		TnPreCodeQueue:      3,
+		TnAccountLogQueue:   2, // 权重最低，优先处理回调/查单
 	}
 	for _, biz := range constant.GetAllBusinessTypes() {
 		queues[TnExpirationQueue(biz.Value.String())] = 5

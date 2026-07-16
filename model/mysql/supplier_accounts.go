@@ -24,6 +24,7 @@ type SupplierAccount struct {
 	LockedAmount    decimal.Decimal                `json:"locked_amount"  gorm:"type:decimal(14,2);not null;default:0;comment:冻结中金额"`
 	SplitCharge     int                            `json:"split_charge"      gorm:"type:tinyint;not null;default:1;comment:是否允许拆分充值 1允许 2不允许"`
 	BillInfo        datatypes.JSON                 `json:"bill_info"     gorm:"type:json;comment:账单原始信息"`
+	VerifyInfo      datatypes.JSON                 `json:"verify_info"   gorm:"type:json;comment:验号结果信息"`
 	Source          int                            `json:"source"           gorm:"type:tinyint;not null;default:1;comment:来源 1供货商导入 2核销员录入"`
 	SettlementRate  decimal.Decimal                `json:"settlement_rate" gorm:"type:decimal(10,2);not null;default:0;comment:结算费率，从供货商产品复制"`
 	VerifierID      *uint                          `json:"verifier_id"      gorm:"comment:核销员ID（source=2时有值）"`

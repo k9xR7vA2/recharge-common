@@ -10,6 +10,7 @@ const (
 	SupplierAccountStatusDone       SupplierAccountStatus = 4 // 已完成
 	SupplierAccountStatusRejected   SupplierAccountStatus = 5 // 已拒绝
 	SupplierAccountStatusDisabled   SupplierAccountStatus = 6 // 禁用
+	SupplierAccountStatusCanceled   SupplierAccountStatus = 7 // 已撤销
 )
 
 func (s SupplierAccountStatus) ShowName() string {

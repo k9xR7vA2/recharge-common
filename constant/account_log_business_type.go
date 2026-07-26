@@ -8,6 +8,7 @@ const (
 	BusinessTypePrepaidDeduct AccountLogBusinessType = 2 // 预付账户扣款
 	BusinessTypeOrderDeduct   AccountLogBusinessType = 3 // 订单扣款
 	BusinessTypeRepay         AccountLogBusinessType = 4 // 供货商回款
+	BusinessTypeCancelRefund  AccountLogBusinessType = 5 // 撤销账号退款
 )
 
 func (t AccountLogBusinessType) Label() string {
@@ -20,6 +21,8 @@ func (t AccountLogBusinessType) Label() string {
 		return "订单扣款"
 	case BusinessTypeRepay:
 		return "供货商回款"
+	case BusinessTypeCancelRefund:
+		return "撤销账号退款"
 	default:
 		return "未知类型"
 	}
@@ -35,6 +38,8 @@ func (t AccountLogBusinessType) Code() string {
 		return "order_deduct"
 	case BusinessTypeRepay:
 		return "repay"
+	case BusinessTypeCancelRefund:
+		return "cancel_refund"
 	default:
 		return "unknown"
 	}
@@ -49,7 +54,8 @@ func (t AccountLogBusinessType) IsValid() bool {
 	case BusinessTypeDeposit,
 		BusinessTypePrepaidDeduct,
 		BusinessTypeOrderDeduct,
-		BusinessTypeRepay:
+		BusinessTypeRepay,
+		BusinessTypeCancelRefund:
 		return true
 	default:
 		return false

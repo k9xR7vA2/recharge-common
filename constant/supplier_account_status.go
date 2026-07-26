@@ -27,6 +27,8 @@ func (s SupplierAccountStatus) ShowName() string {
 		return "已拒绝"
 	case SupplierAccountStatusDisabled:
 		return "禁用"
+	case SupplierAccountStatusCanceled:
+		return "已撤销"
 	default:
 		return "未知状态"
 	}
@@ -46,6 +48,8 @@ func (s SupplierAccountStatus) Code() string {
 		return "rejected"
 	case SupplierAccountStatusDisabled:
 		return "disabled"
+	case SupplierAccountStatusCanceled:
+		return "canceled"
 	default:
 		return "unknown"
 	}
@@ -54,7 +58,8 @@ func (s SupplierAccountStatus) Code() string {
 func (s SupplierAccountStatus) CanDelete() bool {
 	return s == SupplierAccountStatusPending ||
 		s == SupplierAccountStatusRejected ||
-		s == SupplierAccountStatusDisabled
+		s == SupplierAccountStatusDisabled ||
+		s == SupplierAccountStatusCanceled
 }
 
 // TagType 对应前端 el-tag 的 type
@@ -72,6 +77,8 @@ func (s SupplierAccountStatus) TagType() string {
 		return "danger"
 	case SupplierAccountStatusDisabled:
 		return "danger"
+	case SupplierAccountStatusCanceled:
+		return "info"
 	default:
 		return "info"
 	}
@@ -84,7 +91,8 @@ func (s SupplierAccountStatus) IsValid() bool {
 		SupplierAccountStatusProcessing,
 		SupplierAccountStatusDone,
 		SupplierAccountStatusRejected,
-		SupplierAccountStatusDisabled:
+		SupplierAccountStatusDisabled,
+		SupplierAccountStatusCanceled:
 		return true
 	default:
 		return false
@@ -109,21 +117,28 @@ func GetAllSupplierAccountStatuses() []struct {
 			Value:   SupplierAccountStatusPending,
 			TagType: SupplierAccountStatusPending.TagType()},
 		{Label: SupplierAccountStatusApproved.ShowName(),
-			Code: SupplierAccountStatusApproved.Code(),
-
-			Value: SupplierAccountStatusApproved, TagType: SupplierAccountStatusApproved.TagType()},
+			Code:    SupplierAccountStatusApproved.Code(),
+			Value:   SupplierAccountStatusApproved,
+			TagType: SupplierAccountStatusApproved.TagType()},
 		{Label: SupplierAccountStatusProcessing.ShowName(),
-			Code: SupplierAccountStatusProcessing.Code(),
-
-			Value: SupplierAccountStatusProcessing, TagType: SupplierAccountStatusProcessing.TagType()},
+			Code:    SupplierAccountStatusProcessing.Code(),
+			Value:   SupplierAccountStatusProcessing,
+			TagType: SupplierAccountStatusProcessing.TagType()},
 		{Label: SupplierAccountStatusDone.ShowName(),
-			Code:  SupplierAccountStatusDone.Code(),
-			Value: SupplierAccountStatusDone, TagType: SupplierAccountStatusDone.TagType()},
+			Code:    SupplierAccountStatusDone.Code(),
+			Value:   SupplierAccountStatusDone,
+			TagType: SupplierAccountStatusDone.TagType()},
 		{Label: SupplierAccountStatusRejected.ShowName(),
-			Code:  SupplierAccountStatusRejected.Code(),
-			Value: SupplierAccountStatusRejected, TagType: SupplierAccountStatusRejected.TagType()},
+			Code:    SupplierAccountStatusRejected.Code(),
+			Value:   SupplierAccountStatusRejected,
+			TagType: SupplierAccountStatusRejected.TagType()},
 		{Label: SupplierAccountStatusDisabled.ShowName(),
-			Code:  SupplierAccountStatusDisabled.Code(),
-			Value: SupplierAccountStatusDisabled, TagType: SupplierAccountStatusDisabled.TagType()},
+			Code:    SupplierAccountStatusDisabled.Code(),
+			Value:   SupplierAccountStatusDisabled,
+			TagType: SupplierAccountStatusDisabled.TagType()},
+		{Label: SupplierAccountStatusCanceled.ShowName(),
+			Code:    SupplierAccountStatusCanceled.Code(),
+			Value:   SupplierAccountStatusCanceled,
+			TagType: SupplierAccountStatusCanceled.TagType()},
 	}
 }
